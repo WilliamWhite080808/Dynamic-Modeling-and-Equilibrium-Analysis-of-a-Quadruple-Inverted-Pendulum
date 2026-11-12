@@ -4,13 +4,16 @@ import numpy as np
 from .model import Plant,Parameters,wrap
 from .control import lqr
 
-def replay(plant,plan,dt=0.001,total=13,cancel=None):
+def replay(plant,plan,dt=0.001,total=13,cancel=None,control_period=None):
+    control_steps=4 if control_period is None else round(control_period/dt)
+    if control_steps<1 or (control_period is not None and not np.isclose(control_steps*dt,control_period,rtol=0,atol=1e-12)):raise ValueError('Control period must be a positive integer multiple of the integration step')
+    control_dt=control_steps*dt
     x=np.array(plan['initial']);d=plant.d;goal=np.array(plan.get('target_angles',[0.]*plant.n));K=lqr(plant,target=goal)[0][0];history=[];u=0
     max_cart=0.;max_force=0.;max_force_rate=0.;stable_since=None;settled=None;max_tracking=0.
     for k in range(round(total/dt)):
         if k%500==0 and cancel is not None and cancel.is_set():raise InterruptedError('已取消旧规划')
         t=k*dt
-        if k%4==0:
+        if k%control_steps==0:
             previous_force=u
             active=plan;elapsed=t;kind='track'
             if t<plan['duration'] and plan.get('segments'):
@@ -35,8 +38,8 @@ def replay(plant,plan,dt=0.001,total=13,cancel=None):
             if t>=plan['duration'] and abs(x[0])>plant.p.rail*.78:
                 sign=np.sign(x[0]);u-=sign*(65*(abs(x[0])-plant.p.rail*.78)+18*max(0,sign*x[d]))
             u=float(np.clip(u,-plant.p.max_force,plant.p.max_force))
-            if plan.get('force_rate'):u=float(np.clip(u,previous_force-plan['force_rate']*4*dt,previous_force+plan['force_rate']*4*dt))
-            max_force_rate=max(max_force_rate,abs(u-previous_force)/(4*dt))
+            if plan.get('force_rate'):u=float(np.clip(u,previous_force-plan['force_rate']*control_dt,previous_force+plan['force_rate']*control_dt))
+            max_force_rate=max(max_force_rate,abs(u-previous_force)/control_dt)
         x=plant.rk4(x,u,dt)
         max_cart=max(max_cart,abs(float(x[0])));max_force=max(max_force,abs(u))
         stable=np.max(abs(wrap(x[1:d]-goal)))<np.deg2rad(.5) and np.max(abs(x[d+1:]))<.03 and abs(x[0])<.03 and (not plan.get('strict_rest') or abs(x[d])<.03)
