@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {SignalBuffer,signalDefinitions,envelope} from '../web/telemetry.js';
+const b=new SignalBuffer(100);
+for(let i=0;i<1000;i++)b.push({time:i*.02,state:[i,1,2,3,4,5],force:2*i,energy:5-i});
+assert.equal(b.rows.length,100);assert.equal(b.nearest(19).state[0],950);
+const rows=b.window(19,19.2);assert.ok(rows.length>=10&&rows.every(r=>r.time<=19.2+1e-8));
+const d=signalDefinitions(2),r=b.rows.at(-1);
+assert.ok(Math.abs(d[1].series[0].get(r)-4*180/Math.PI)<1e-9);assert.equal(d[3].series[0].get(r),3);
+const spike=Array.from({length:2000},(_,i)=>({time:i,value:i===1001?999:i===1004?-777:0}));
+const reduced=envelope(spike,r=>r.value,100);assert.ok(reduced.some(p=>p[1]===999)&&reduced.some(p=>p[1]===-777));
+assert.ok(reduced.every((r,i)=>i===0||r[0]>reduced[i-1][0]));
+b.push({time:0,state:[0,0,0,0],force:0,energy:0});assert.equal(b.rows.length,1,'A user-authorized jump clears stale samples');
+console.log('Telemetry PASS: physical angular-velocity mapping, bounded sampling, time lookup, spike-preserving reduction and jump reset.');

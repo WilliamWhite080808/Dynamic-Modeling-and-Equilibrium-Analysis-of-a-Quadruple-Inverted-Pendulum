@@ -1,0 +1,7 @@
+{
+  "cases": 146,
+  "passed": true,
+  "wall_seconds": 70.91806689999066,
+  "output": "Arbitrary-state recovery: real Worker physics, no state reset, bounded cart force, no rail contact PASS.\n",
+  "error": ""
+}

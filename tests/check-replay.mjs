@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {ReplayPlayer} from '../web/replay.js';
+const clip=JSON.parse(fs.readFileSync(process.argv[2],'utf8')),p=new ReplayPlayer();p.load(clip);
+assert.deepEqual(p.snapshot().state,clip.frames[0].slice(1,-1));
+p.playing=false;p.advance(1);assert.equal(p.time,0);
+p.playing=true;p.speed=.5;p.advance(2);assert.equal(p.time,1);
+const frame=clip.frames[40];p.seek(frame[0]-clip.frames[0][0]);
+p.snapshot().state.forEach((v,i)=>assert.ok(Math.abs(v-frame[i+1])<1e-9));
+p.seek(1e6);assert.equal(p.time,p.duration);p.advance(1);assert.equal(p.playing,false);
+assert.deepEqual(p.snapshot().state,clip.frames.at(-1).slice(1,-1));
+assert.throws(()=>p.load({...clip,frames:[clip.frames[0],clip.frames[0]]}));
+console.log('Replay keeps exact recorded states, monotonic timestamps, pause, seek, speed and end state.');

@@ -1,0 +1,21 @@
+#!/bin/bash
+#PBS -N pendulum4
+#PBS -q medium
+#PBS -l nodes=1:ppn=8
+#PBS -l mem=32gb
+#PBS -l walltime=06:00:00
+#PBS -j oe
+#PBS -o pendulum4-pbs.log
+set -euo pipefail
+cd "$PBS_O_WORKDIR"
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+export NUMBA_NUM_THREADS=1
+export PYTHONUNBUFFERED=1
+export PENDULUM_CLUSTER_MODE=1
+./venv/bin/python -u -c 'from triple_pendulum import transitions; import socket; print("CASE_MODE",transitions.CLUSTER_MODE,socket.gethostname(),transitions.__file__,flush=True); assert transitions.CLUSTER_MODE' >> "solver-${PENDULUM_SHARD_INDEX:-0}.log" 2>&1
+SHARD="${PENDULUM_SHARD_INDEX:-0}"
+SHARDS="${PENDULUM_SHARDS:-1}"
+./venv/bin/python -c 'import os,json,socket,time; from pathlib import Path; shard=os.environ.get("PENDULUM_SHARD_INDEX","0"); data=dict(job_id=os.environ.get("PBS_JOBID"),host=socket.gethostname(),started_at=time.time(),workers=len(Path(os.environ["PBS_NODEFILE"]).read_text().splitlines()),pid=os.getpid(),shard=shard); Path("run-"+shard+".json").write_text(json.dumps(data)); print(json.dumps(data),flush=True)'
+./venv/bin/python -u -m triple_pendulum.precompute_equilibria --orders 4 --workers 8 --rounds 8 --start-round "${PENDULUM_START_ROUND:-0}" --shards "$SHARDS" --shard-index "$SHARD" >> "solver-$SHARD.log" 2>&1

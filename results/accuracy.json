@@ -1,0 +1,9 @@
+{
+  "comparison_duration": 1,
+  "rk4_dt": 0.001,
+  "DOP853_rtol": 1e-11,
+  "DOP853_atol": 1e-13,
+  "max_state_difference": 6.702347010723031e-11,
+  "energy_duration": 3,
+  "max_energy_error_J": 6.407230301874733e-11
+}
