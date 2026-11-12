@@ -1,4 +1,4 @@
-"""Certified directed equilibrium-to-equilibrium transitions for orders 1–4."""
+"""Certified directed equilibrium-to-equilibrium transitions for orders 1–5."""
 from pathlib import Path
 from itertools import product
 from copy import deepcopy
@@ -9,12 +9,12 @@ from . import repository
 
 ROOT=Path(__file__).resolve().parent.parent/'equilibrium_transitions'
 RATE=500.
-MAX_ORDER=4
+MAX_ORDER=5
 CLUSTER_MODE=os.environ.get('PENDULUM_CLUSTER_MODE')=='1'
 _initialized_root=None
 
 def patterns(n):
-    if n not in range(1,MAX_ORDER+1):raise ValueError('稳态互转仅开放 1～4 阶')
+    if n not in range(1,MAX_ORDER+1):raise ValueError('稳态互转仅开放 1～5 阶')
     return [''.join(p) for p in product('UD',repeat=n)]
 
 def equilibrium(plant,code):
@@ -31,7 +31,7 @@ def initialize():
         _initialized_root=ROOT;return
     path=ROOT/'status.json'
     if _initialized_root==ROOT and path.exists():return
-    if path.exists() and json.loads(path.read_text(encoding='utf8')).get('schema')==2:
+    if path.exists() and json.loads(path.read_text(encoding='utf8')).get('max_order',0)>=MAX_ORDER:
         _initialized_root=ROOT;return
     with repository.disk_lock():
         rows=json.loads(path.read_text(encoding='utf8'))['entries'] if path.exists() else {}
@@ -43,7 +43,7 @@ def initialize():
     _initialized_root=ROOT
 
 def _write(rows):
-    temp=ROOT/('status-'+uuid.uuid4().hex+'.tmp');temp.write_text(json.dumps(dict(schema=2,entries=rows),ensure_ascii=False,indent=2),encoding='utf8')
+    temp=ROOT/('status-'+uuid.uuid4().hex+'.tmp');temp.write_text(json.dumps(dict(schema=2,max_order=MAX_ORDER,entries=rows),ensure_ascii=False,indent=2),encoding='utf8')
     for i in range(30):
         try:temp.replace(ROOT/'status.json');return
         except PermissionError:
@@ -101,14 +101,20 @@ def catalog(n=None):
         except (OSError,ValueError):audit={}
     cruise={order:sum(r['status']=='ready' for r in all_rows if r['order']==order)==2**order*(2**order-1) for order in range(1,MAX_ORDER+1)}
     cruise[4]=cruise[4] and audit.get('passed',False) and audit.get('bank_sha256')==signature
+    fifth_signature=bank_signature(all_rows,order=5)
+    try:fifth_audit=json.loads((audit_path.parent/'fifth-order-worker-audit.json').read_text(encoding='utf8'))
+    except (OSError,ValueError):fifth_audit={}
+    cruise[5]=cruise[5] and fifth_audit.get('passed',False) and fifth_audit.get('bank_sha256')==fifth_signature
     remote_path=ROOT.parent/'results/fourth-order-remote.json'
     try:remote=json.loads(remote_path.read_text(encoding='utf8'))
     except (OSError,ValueError):remote=None
-    return dict(total=len(rows),ready=sum(r['status']=='ready' for r in rows),entries=rows,force_rate=RATE,cruise_ready=cruise,remote_compute=remote)
+    try:fifth_remote=json.loads((remote_path.parent/'fifth-order-remote.json').read_text(encoding='utf8'))
+    except (OSError,ValueError):fifth_remote=None
+    return dict(total=len(rows),ready=sum(r['status']=='ready' for r in rows),entries=rows,force_rate=RATE,cruise_ready=cruise,remote_compute=fifth_remote if n==5 else remote,remote_computes={4:remote,5:fifth_remote})
 
-def bank_signature(rows=None):
+def bank_signature(rows=None,order=4):
     if rows is None:rows=list(statuses().values())
-    fingerprints=[key(4,r['source'],r['target'])+':'+r.get('sha256','') for r in rows if r['order']==4]
+    fingerprints=[key(order,r['source'],r['target'])+':'+r.get('sha256','') for r in rows if r['order']==order]
     return hashlib.sha256('\n'.join(sorted(fingerprints)).encode()).hexdigest()
 
 def admit(plant,source,target,plan,report,history):

@@ -1,5 +1,6 @@
 {
   "schema": 2,
+  "max_order": 5,
   "entries": {
     "1-U-D": {
       "order": 1,
@@ -14572,6 +14573,7956 @@
       },
       "repository_id": "a33556900e3deb93b0e825b5",
       "updated_at": 1794465853.8601644
+    },
+    "5-UUUUU-UUUUD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UUUUD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUUUU-UUUDU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UUUDU",
+      "status": "computing",
+      "phase": "直接转场配点求解",
+      "remote_status": "computing",
+      "iterations": 0,
+      "attempt": 0
+    },
+    "5-UUUUU-UUUDD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UUUDD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUUUU-UUDUU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UUDUD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UUDDU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UUDDD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UDUUU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UDUUD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UDUDU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UDUDD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UDDUU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UDDUD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UDDDU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-UDDDD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DUUUU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DUUUD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DUUDU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DUUDD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DUDUU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DUDUD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DUDDU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DUDDD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DDUUU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DDUUD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DDUDU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DDUDD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DDDUU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DDDUD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DDDDU": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUU-DDDDD": {
+      "order": 5,
+      "source": "UUUUU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UUUUU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UUUDU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UUUDD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UUUDD",
+      "status": "computing",
+      "phase": "直接转场配点求解",
+      "remote_status": "computing",
+      "iterations": 0,
+      "attempt": 0
+    },
+    "5-UUUUD-UUDUU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UUDUU",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUUUD-UUDUD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UUDDU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UUDDD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UDUUU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UDUUD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UDUDU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UDUDD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UDDUU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UDDUD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UDDDU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-UDDDD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DUUUU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DUUUD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DUUDU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DUUDD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DUDUU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DUDUD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DUDDU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DUDDD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DDUUU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DDUUD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DDUDU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DDUDD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DDDUU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DDDUD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DDDDU": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUUD-DDDDD": {
+      "order": 5,
+      "source": "UUUUD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UUUUU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UUUUD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UUUDD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UUUDD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUUDU-UUDUU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UUDUD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UUDDU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UUDDD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UDUUU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UDUUD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UDUDU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UDUDD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UDDUU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UDDUD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UDDDU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-UDDDD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DUUUU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DUUUD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DUUDU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DUUDD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DUDUU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DUDUD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DUDDU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DUDDD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DDUUU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DDUUD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DDUDU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DDUDD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DDDUU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DDDUD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DDDDU": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDU-DDDDD": {
+      "order": 5,
+      "source": "UUUDU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UUUUU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UUUUD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UUUDU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UUDUU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UUDUD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UUDDU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UUDDU",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUUDD-UUDDD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UDUUU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UDUUD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UDUDU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UDUDD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UDDUU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UDDUD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UDDDU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-UDDDD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DUUUU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DUUUD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DUUDU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DUUDD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DUDUU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DUDUD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DUDDU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DUDDD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DDUUU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DDUUD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DDUDU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DDUDD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DDDUU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DDDUD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DDDDU": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUUDD-DDDDD": {
+      "order": 5,
+      "source": "UUUDD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UUUUU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UUUUD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UUUDU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UUUDD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UUDUD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UUDUD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUDUU-UUDDU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UUDDU",
+      "status": "computing",
+      "phase": "直接转场配点求解",
+      "remote_status": "computing",
+      "iterations": 0,
+      "attempt": 0
+    },
+    "5-UUDUU-UUDDD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UUDDD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUDUU-UDUUU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UDUUD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UDUDU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UDUDD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UDDUU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UDDUD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UDDDU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-UDDDD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DUUUU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DUUUD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DUUDU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DUUDD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DUDUU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DUDUD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DUDDU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DUDDD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DDUUU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DDUUD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DDUDU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DDUDD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DDDUU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DDDUD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DDDDU": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUU-DDDDD": {
+      "order": 5,
+      "source": "UUDUU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UUUUU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UUUUD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UUUDU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UUUDD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UUDUU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UUDDU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UUDDD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UUDDD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUDUD-UDUUU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UDUUD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UDUDU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UDUDD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UDDUU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UDDUD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UDDDU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-UDDDD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DUUUU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DUUUD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DUUDU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DUUDD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DUDUU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DUDUD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DUDDU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DUDDD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DDUUU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DDUUD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DDUDU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DDUDD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DDDUU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DDDUD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DDDDU": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDUD-DDDDD": {
+      "order": 5,
+      "source": "UUDUD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UUUUU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UUUUU",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUDDU-UUUUD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UUUDU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UUUDD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UUDUU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UUDUD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UUDDD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UUDDD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUDDU-UDUUU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UDUUD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UDUDU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UDUDD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UDDUU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UDDUD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UDDDU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-UDDDD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DUUUU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DUUUD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DUUDU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DUUDD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DUDUU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DUDUD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DUDDU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DUDDD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DDUUU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DDUUD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DDUDU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DDUDD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DDDUU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DDDUD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DDDDU": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDU-DDDDD": {
+      "order": 5,
+      "source": "UUDDU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UUUUU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UUUUD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UUUUD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UUDDD-UUUDU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UUUDD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UUDUU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UUDUD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UUDDU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UDUUU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UDUUD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UDUDU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UDUDD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UDDUU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UDDUD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UDDDU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-UDDDD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DUUUU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DUUUD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DUUDU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DUUDD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DUDUU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DUDUD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DUDDU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DUDDD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DDUUU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DDUUD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DDUDU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DDUDD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DDDUU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DDDUD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DDDDU": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UUDDD-DDDDD": {
+      "order": 5,
+      "source": "UUDDD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UUUUU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UUUUU",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UDUUU-UUUUD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UUUDU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UUUDU",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UDUUU-UUUDD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UUDUU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UUDUD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UUDDU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UUDDD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UDUUD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UDUUD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UDUUU-UDUDU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UDUDU",
+      "status": "computing",
+      "phase": "直接转场配点求解",
+      "remote_status": "computing",
+      "iterations": 0,
+      "attempt": 0
+    },
+    "5-UDUUU-UDUDD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UDUDD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UDUUU-UDDUU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UDDUD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UDDDU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-UDDDD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DUUUU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DUUUD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DUUDU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DUUDD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DUDUU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DUDUD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DUDDU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DUDDD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DDUUU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DDUUD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DDUDU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DDUDD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DDDUU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DDDUD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DDDDU": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUU-DDDDD": {
+      "order": 5,
+      "source": "UDUUU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UUUUU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UUUUD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UUUUD",
+      "status": "computing",
+      "phase": "直接转场配点求解",
+      "remote_status": "computing",
+      "iterations": 0,
+      "attempt": 0
+    },
+    "5-UDUUD-UUUDU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UUUDD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UUDUU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UUDUD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UUDDU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UUDDD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UDUUU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UDUDU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UDUDD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UDUDD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UDUUD-UDDUU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UDDUD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UDDDU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-UDDDD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DUUUU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DUUUD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DUUDU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DUUDD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DUDUU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DUDUD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DUDDU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DUDDD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DDUUU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DDUUD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DDUDU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DDUDD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DDDUU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DDDUD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DDDDU": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUUD-DDDDD": {
+      "order": 5,
+      "source": "UDUUD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UUUUU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UUUUD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UUUDU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UUUDU",
+      "status": "computing",
+      "phase": "直接转场配点求解",
+      "remote_status": "computing",
+      "iterations": 0,
+      "attempt": 0
+    },
+    "5-UDUDU-UUUDD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UUDUU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UUDUD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UUDDU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UUDDD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UDUUU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UDUUD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UDUDD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UDDUU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UDDUD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UDDDU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-UDDDD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DUUUU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DUUUD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DUUDU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DUUDD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DUDUU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DUDUD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DUDDU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DUDDD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DDUUU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DDUUD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DDUDU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DDUDD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DDDUU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DDDUD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DDDDU": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDU-DDDDD": {
+      "order": 5,
+      "source": "UDUDU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UUUUU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UUUUD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UUUDU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UUUDD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UUDUU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UUDUD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UUDDU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UUDDD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UDUUU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UDUUD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UDUDU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UDDUU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UDDUD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UDDDU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-UDDDD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DUUUU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DUUUD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DUUDU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DUUDD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DUDUU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DUDUD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DUDDU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DUDDD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DDUUU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DDUUD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DDUDU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DDUDD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DDDUU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DDDUD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DDDDU": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDUDD-DDDDD": {
+      "order": 5,
+      "source": "UDUDD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UUUUU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UUUUD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UUUDU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UUUDD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UUDUU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UUDUD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UUDDU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UUDDD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UDUUU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UDUUD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UDUDU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UDUDD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UDDUD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-UDDDU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UDDDU",
+      "status": "computing",
+      "phase": "直接转场配点求解",
+      "remote_status": "computing",
+      "iterations": 0,
+      "attempt": 0
+    },
+    "5-UDDUU-UDDDD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DUUUU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DUUUD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DUUDU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DUUDD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DUDUU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DUDUD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DUDDU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DUDDD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DDUUU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DDUUD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DDUDU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DDUDD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DDDUU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DDDUD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DDDDU": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUU-DDDDD": {
+      "order": 5,
+      "source": "UDDUU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UUUUU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UUUUD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UUUDU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UUUDD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UUDUU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UUDUD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UUDDU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UUDDD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UDUUU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UDUUD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UDUDU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UDUDD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UDDUU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UDDDU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-UDDDD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "UDDDD",
+      "status": "computing",
+      "phase": "离线直接转场优化",
+      "remote_status": "computing"
+    },
+    "5-UDDUD-DUUUU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DUUUD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DUUDU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DUUDD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DUDUU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DUDUD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DUDDU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DUDDD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DDUUU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DDUUD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DDUDU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DDUDD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DDDUU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DDDUD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DDDDU": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDUD-DDDDD": {
+      "order": 5,
+      "source": "UDDUD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UUUUU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UUUUD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UUUDU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UUUDD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UUDUU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UUDUD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UUDDU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UUDDD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UDUUU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UDUUD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UDUDU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UDUDD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UDDUU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UDDUD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-UDDDD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DUUUU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DUUUD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DUUDU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DUUDD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DUDUU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DUDUD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DUDDU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DUDDD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DDUUU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DDUUD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DDUDU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DDUDD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DDDUU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DDDUD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DDDDU": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDU-DDDDD": {
+      "order": 5,
+      "source": "UDDDU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UUUUU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UUUUD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UUUDU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UUUDD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UUDUU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UUDUD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UUDDU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UUDDD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UDUUU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UDUUD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UDUDU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UDUDD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UDDUU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UDDUD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-UDDDU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DUUUU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DUUUD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DUUDU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DUUDD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DUDUU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DUDUD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DUDDU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DUDDD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DDUUU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DDUUD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DDUDU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DDUDD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DDDUU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DDDUD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DDDDU": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-UDDDD-DDDDD": {
+      "order": 5,
+      "source": "UDDDD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UUUUU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UUUUD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UUUDU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UUUDD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UUDUU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UUDUD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UUDDU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UUDDD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UDUUU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UDUUD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UDUDU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UDUDD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UDDUU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UDDUD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UDDDU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-UDDDD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DUUUD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DUUDU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DUUDD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DUDUU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DUDUD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DUDDU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DUDDD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DDUUU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DDUUD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DDUDU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DDUDD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DDDUU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DDDUD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DDDDU": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUU-DDDDD": {
+      "order": 5,
+      "source": "DUUUU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UUUUU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UUUUD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UUUDU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UUUDD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UUDUU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UUDUD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UUDDU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UUDDD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UDUUU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UDUUD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UDUDU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UDUDD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UDDUU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UDDUD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UDDDU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-UDDDD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DUUUU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DUUDU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DUUDD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DUDUU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DUDUD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DUDDU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DUDDD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DDUUU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DDUUD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DDUDU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DDUDD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DDDUU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DDDUD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DDDDU": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUUD-DDDDD": {
+      "order": 5,
+      "source": "DUUUD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UUUUU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UUUUD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UUUDU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UUUDD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UUDUU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UUDUD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UUDDU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UUDDD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UDUUU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UDUUD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UDUDU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UDUDD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UDDUU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UDDUD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UDDDU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-UDDDD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DUUUU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DUUUD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DUUDD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DUDUU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DUDUD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DUDDU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DUDDD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DDUUU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DDUUD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DDUDU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DDUDD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DDDUU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DDDUD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DDDDU": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDU-DDDDD": {
+      "order": 5,
+      "source": "DUUDU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UUUUU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UUUUD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UUUDU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UUUDD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UUDUU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UUDUD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UUDDU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UUDDD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UDUUU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UDUUD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UDUDU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UDUDD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UDDUU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UDDUD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UDDDU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-UDDDD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DUUUU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DUUUD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DUUDU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DUDUU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DUDUD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DUDDU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DUDDD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DDUUU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DDUUD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DDUDU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DDUDD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DDDUU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DDDUD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DDDDU": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUUDD-DDDDD": {
+      "order": 5,
+      "source": "DUUDD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UUUUU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UUUUD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UUUDU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UUUDD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UUDUU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UUDUD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UUDDU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UUDDD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UDUUU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UDUUD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UDUDU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UDUDD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UDDUU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UDDUD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UDDDU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-UDDDD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DUUUU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DUUUD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DUUDU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DUUDD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DUDUD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DUDDU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DUDDD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DDUUU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DDUUD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DDUDU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DDUDD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DDDUU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DDDUD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DDDDU": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUU-DDDDD": {
+      "order": 5,
+      "source": "DUDUU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UUUUU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UUUUD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UUUDU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UUUDD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UUDUU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UUDUD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UUDDU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UUDDD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UDUUU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UDUUD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UDUDU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UDUDD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UDDUU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UDDUD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UDDDU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-UDDDD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DUUUU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DUUUD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DUUDU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DUUDD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DUDUU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DUDDU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DUDDD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DDUUU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DDUUD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DDUDU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DDUDD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DDDUU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DDDUD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DDDDU": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDUD-DDDDD": {
+      "order": 5,
+      "source": "DUDUD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UUUUU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UUUUD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UUUDU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UUUDD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UUDUU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UUDUD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UUDDU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UUDDD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UDUUU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UDUUD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UDUDU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UDUDD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UDDUU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UDDUD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UDDDU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-UDDDD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DUUUU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DUUUD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DUUDU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DUUDD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DUDUU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DUDUD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DUDDD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DDUUU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DDUUD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DDUDU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DDUDD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DDDUU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DDDUD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DDDDU": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDU-DDDDD": {
+      "order": 5,
+      "source": "DUDDU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UUUUU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UUUUD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UUUDU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UUUDD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UUDUU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UUDUD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UUDDU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UUDDD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UDUUU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UDUUD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UDUDU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UDUDD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UDDUU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UDDUD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UDDDU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-UDDDD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DUUUU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DUUUD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DUUDU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DUUDD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DUDUU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DUDUD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DUDDU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DDUUU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DDUUD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DDUDU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DDUDD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DDDUU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DDDUD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DDDDU": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DUDDD-DDDDD": {
+      "order": 5,
+      "source": "DUDDD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UUUUU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UUUUD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UUUDU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UUUDD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UUDUU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UUDUD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UUDDU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UUDDD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UDUUU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UDUUD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UDUDU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UDUDD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UDDUU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UDDUD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UDDDU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-UDDDD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DUUUU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DUUUD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DUUDU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DUUDD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DUDUU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DUDUD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DUDDU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DUDDD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DDUUD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DDUDU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DDUDD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DDDUU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DDDUD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DDDDU": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUU-DDDDD": {
+      "order": 5,
+      "source": "DDUUU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UUUUU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UUUUD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UUUDU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UUUDD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UUDUU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UUDUD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UUDDU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UUDDD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UDUUU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UDUUD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UDUDU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UDUDD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UDDUU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UDDUD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UDDDU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-UDDDD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DUUUU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DUUUD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DUUDU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DUUDD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DUDUU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DUDUD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DUDDU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DUDDD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DDUUU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DDUDU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DDUDD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DDDUU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DDDUD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DDDDU": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUUD-DDDDD": {
+      "order": 5,
+      "source": "DDUUD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UUUUU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UUUUD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UUUDU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UUUDD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UUDUU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UUDUD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UUDDU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UUDDD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UDUUU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UDUUD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UDUDU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UDUDD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UDDUU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UDDUD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UDDDU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-UDDDD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DUUUU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DUUUD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DUUDU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DUUDD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DUDUU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DUDUD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DUDDU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DUDDD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DDUUU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DDUUD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DDUDD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DDDUU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DDDUD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DDDDU": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDU-DDDDD": {
+      "order": 5,
+      "source": "DDUDU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UUUUU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UUUUD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UUUDU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UUUDD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UUDUU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UUDUD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UUDDU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UUDDD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UDUUU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UDUUD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UDUDU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UDUDD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UDDUU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UDDUD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UDDDU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-UDDDD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DUUUU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DUUUD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DUUDU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DUUDD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DUDUU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DUDUD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DUDDU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DUDDD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DDUUU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DDUUD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DDUDU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DDDUU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DDDUD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DDDDU": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDUDD-DDDDD": {
+      "order": 5,
+      "source": "DDUDD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UUUUU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UUUUD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UUUDU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UUUDD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UUDUU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UUDUD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UUDDU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UUDDD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UDUUU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UDUUD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UDUDU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UDUDD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UDDUU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UDDUD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UDDDU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-UDDDD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DUUUU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DUUUD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DUUDU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DUUDD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DUDUU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DUDUD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DUDDU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DUDDD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DDUUU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DDUUD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DDUDU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DDUDD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DDDUD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DDDDU": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUU-DDDDD": {
+      "order": 5,
+      "source": "DDDUU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UUUUU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UUUUD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UUUDU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UUUDD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UUDUU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UUDUD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UUDDU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UUDDD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UDUUU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UDUUD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UDUDU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UDUDD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UDDUU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UDDUD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UDDDU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-UDDDD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DUUUU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DUUUD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DUUDU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DUUDD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DUDUU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DUDUD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DUDDU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DUDDD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DDUUU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DDUUD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DDUDU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DDUDD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DDDUU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DDDDU": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDUD-DDDDD": {
+      "order": 5,
+      "source": "DDDUD",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UUUUU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UUUUD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UUUDU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UUUDD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UUDUU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UUDUD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UUDDU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UUDDD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UDUUU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UDUUD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UDUDU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UDUDD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UDDUU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UDDUD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UDDDU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-UDDDD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DUUUU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DUUUD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DUUDU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DUUDD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DUDUU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DUDUD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DUDDU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DUDDD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DDUUU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DDUUD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DDUDU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DDUDD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DDDUU": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DDDUD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDU-DDDDD": {
+      "order": 5,
+      "source": "DDDDU",
+      "target": "DDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UUUUU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UUUUD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UUUDU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UUUDD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UUDUU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UUDUD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UUDDU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UUDDD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UDUUU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UDUUD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UDUDU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UDUDD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UDDUU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UDDUD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UDDDU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-UDDDD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "UDDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DUUUU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DUUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DUUUD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DUUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DUUDU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DUUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DUUDD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DUUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DUDUU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DUDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DUDUD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DUDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DUDDU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DUDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DUDDD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DUDDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DDUUU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DDUUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DDUUD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DDUUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DDUDU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DDUDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DDUDD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DDUDD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DDDUU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DDDUU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DDDUD": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DDDUD",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
+    },
+    "5-DDDDD-DDDDU": {
+      "order": 5,
+      "source": "DDDDD",
+      "target": "DDDDU",
+      "status": "queued",
+      "phase": "等待远端计算",
+      "remote_status": "queued"
     }
   }
 }

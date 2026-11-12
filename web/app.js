@@ -20,7 +20,7 @@ let activeJob=null,replayActive=false,liveContext=null,liveSnapshot=null,replayF
 let goalPattern='UUU',inventoryGroups=[],selectedCard=null,selectedTarget='UUU';
 let bankRows=[],bankTotal=null;
 let transferBank=null,transferBusy=false,transferToken=0,pendingTransfer=null,activeTransfer=null,cruise=null,transferOrder=0,transferSummary='';
-const goalChoices=order=>order<=4?equilibriaFor(order):patternsFor(order);
+const goalChoices=order=>order<=5?equilibriaFor(order):patternsFor(order);
 const equilibriumCode=angles=>angles.map(a=>Math.cos(a)>0?'U':'D').join('');
 const targetLabel=code=>[...code].map(c=>c==='U'?'上':'下').join(' / ');
 const requestedOrder=Number(new URLSearchParams(location.search).get('order'));
@@ -77,7 +77,7 @@ async function initialize(preset='down',custom=null){
     const health=data.observability;
     setNotice(health.condition>1e9?'当前传感配置数值上接近不可观：请检查系统分析，并降低扰动或更换传感器。':'RK4 1 ms · 控制 250 Hz · 渲染与物理解耦。可以试着推它一下。',health.condition>1e9);
     updateBankStatus();
-    if(n<=4&&preset==='down'){
+    if(n<=5&&preset==='down'){
       await refreshTransfers();if(gen!==generation)return;
       fillTransferOptions('D'.repeat(n),goalPattern);
       if(transferCompatible(transferRow($('transfer-from').value,$('transfer-to').value)))playTransfer($('transfer-from').value,$('transfer-to').value);
@@ -191,7 +191,7 @@ function animate(now){if(replayActive){player.advance(Math.min((now-replayFrame)
 requestAnimationFrame(animate);
 
 $('orders').addEventListener('click',e=>{const order=+e.target.dataset.order;if(order){if(replayActive)exitReplay();n=order;const url=new URL(location.href);url.searchParams.set('order',order);globalThis.history.replaceState(null,'',url);initialize('down');}});
-['near','down','random'].forEach(p=>$(p).onclick=()=>initialize(p));$('reset').onclick=()=>{if(lastPlayback?.order===n&&n<=4)playTransfer(lastPlayback.source,lastPlayback.target);else initialize('down');};
+['near','down','random'].forEach(p=>$(p).onclick=()=>initialize(p));$('reset').onclick=()=>{if(lastPlayback?.order===n&&n<=5)playTransfer(lastPlayback.source,lastPlayback.target);else initialize('down');};
 $('pause').onclick=()=>{if(replayActive){player.playing=!player.playing;return;}if(snapshot?.stage==='unprepared'){initialize('down');return;}running=!running;settings({running});$('pause').textContent=running?'停止摆动':'继续摆动';};
 $('step').onclick=()=>{if(replayActive){player.playing=false;player.seek(player.time+player.clip.sample_dt);return;}running=false;settings({running:false});worker.postMessage({type:'step'});$('pause').textContent='继续摆动';};
 $('controller').onchange=()=>{cancelPlanning();settings({mode:$('controller').value});};
@@ -377,11 +377,11 @@ $('inventory-play').onclick=async()=>{
   finally{$('inventory-play').disabled=false;}
 };
 function updateBankStatus(){
-  const ready=bankRows.filter(r=>r.status==='ready').length,row=bankRows.find(r=>r.pattern===$('goal').value),base=n<=4&&$('goal').value==='D'.repeat(n);
+  const ready=bankRows.filter(r=>r.status==='ready').length,row=bankRows.find(r=>r.pattern===$('goal').value),base=n<=5&&$('goal').value==='D'.repeat(n);
   const labels={ready:'离线方案就绪',queued:'排队预计算',computing:'正在离线计算',retry_pending:'等待下一轮搜索'};
   const compatible=row?.parameters&&Object.entries(parameters).every(([k,v])=>row.parameters[k]===v);
   $('precomputed-status').textContent=`${n} 重：${ready} / ${2**n-1} 个默认方案就绪 · 当前目标${base?'为基态，可直接保持或由其他稳态转入':row?.status==='ready'&&!compatible?'参数已修改，需重新离线预优化':labels[row?.status]||'尚未预计算'}`;
-  for(const option of $('goal').options){const item=bankRows.find(r=>r.pattern===option.value);option.textContent=targetLabel(option.value)+(n<=4&&option.value==='D'.repeat(n)?'  · 基态':item?.status==='ready'?'  ✓ 预优化就绪':item?.status==='computing'?'  · 计算中':'  · 待预优化');}
+  for(const option of $('goal').options){const item=bankRows.find(r=>r.pattern===option.value);option.textContent=targetLabel(option.value)+(n<=5&&option.value==='D'.repeat(n)?'  · 基态':item?.status==='ready'?'  ✓ 预优化就绪':item?.status==='computing'?'  · 计算中':'  · 待预优化');}
   $('down').title=base?'保持完全下垂基态':row?.status==='ready'?'直接加载离线预优化方案，立即起摆':'该目标暂未通过离线验收，不会现场启动优化';
 
 }
@@ -423,14 +423,14 @@ function transferRow(source,target){return transferBank?.entries.find(row=>row.o
 function transferCompatible(row){return row?.status==='ready'&&Object.entries(parameters).every(([key,value])=>row.parameters?.[key]===value);}
 function transferResting(s){return !!s&&!s.planning&&!s.plan_active&&s.running&&s.stable>=1&&Math.abs(s.state[0])<.04&&Math.max(...s.state.slice(n+1).map(Math.abs))<.04;}
 function renderTransferMatrix(){
-  if(n>4)return;
+  if(n>5)return;
   syncTransferPickers();
   const choices=equilibriaFor(n),a=$('transfer-from').value,b=$('transfer-to').value;
-  $('transfer-matrix').classList.toggle('fourth-order-matrix',n===4);
+  $('transfer-matrix').classList.toggle('fourth-order-matrix',n>=4);
   $('transfer-matrix').innerHTML=`<table><thead><tr><th>起点 ↓ / 目标 →</th>${choices.map(code=>`<th title="${targetLabel(code)}">${poseArrows(code)}</th>`).join('')}</tr></thead><tbody>${choices.map(source=>`<tr><th title="${targetLabel(source)}">${poseArrows(source)}</th>${choices.map(target=>{const row=transferRow(source,target),ready=transferCompatible(row);return `<td><button data-transfer-source="${source}" data-transfer-target="${target}" class="${source===a&&target===b?'selected ':''}${ready?'ready':''}" aria-label="${targetLabel(source)} 转 ${targetLabel(target)}" ${source===target||!ready?'disabled':''} title="${source===target?'同一姿态，无需转场':ready?row.duration.toFixed(2)+' s · 峰值 '+row.verification.max_force.toFixed(1)+' N'+(row.route_waypoints?' · 连续衔接：'+row.route_waypoints.map(poseArrows).join(' → '):' · 直达'):'离线预计算中'}">${source===target?'—':ready?'▶':row?.status==='computing'?'◌':'·'}</button></td>`;}).join('')}</tr>`).join('')}</tbody></table>`;
 }
 async function startTransfer(destination){
-  if(n>4||!design||!snapshot||transferBusy)return;
+  if(n>5||!design||!snapshot||transferBusy)return;
   const source=equilibriumCode(design.target_angles);if(source===destination)return;
   if(!transferResting(snapshot))return;
   const row=transferRow(source,destination);
@@ -445,9 +445,9 @@ async function startTransfer(destination){
   }catch(error){if(gen===generation&&token===transferToken){transferBusy=false;pendingTransfer=null;cruise=null;goalOptions(n,source);setNotice(String(error.message||error),true);}}
 }
 async function playTransfer(source,destination,{tour=false}={}){
-  if(n>4||source===destination)return;
+  if(n>5||source===destination)return;
   const row=transferRow(source,destination);
-  if(!transferCompatible(row)){setNotice('该参数下的路径尚未就绪。可在参数设置中恢复默认参数后切换。',true);return;}
+  if(!transferCompatible(row)){setNotice('这条路径尚未完成离线验收，请选择有绿色标记的终点，或等待远端计算完成。',true);return;}
   if(replayActive){const order=n,p={...parameters};exitReplay();n=order;Object.assign(parameters,p);fillTransferOptions(source,destination);}
   cancelPlanning();if(!tour)cruise=null;activeTransfer=null;pendingTransfer=null;
   pendingSeek=null;seekDragging=false;clearTimeout(seekTimer);settings({running:false});
@@ -462,8 +462,8 @@ async function playTransfer(source,destination,{tour=false}={}){
   }catch(error){if(gen===generation&&token===transferToken){transferBusy=false;pendingTransfer=null;cruise=null;setNotice(error.message,true);}}
 }
 function updateTransferUI(s){
-  $('transfer-panel').classList.toggle('hidden',n>4);$('swingup-panel').classList.toggle('hidden',n<=4);
-  if(n>4){$('transfer-note').textContent='';return;}
+  $('transfer-panel').classList.toggle('hidden',n>5);$('swingup-panel').classList.toggle('hidden',n<=5);
+  if(n>5){$('transfer-note').textContent='';return;}
   if(transferOrder!==n)fillTransferOptions();
   const rows=transferBank?.entries.filter(row=>row.order===n)||[],ready=rows.filter(transferCompatible).length,total=2**n*(2**n-1);
   $('transfer-count').textContent=`${ready}/${total}`;$('transfer-total').textContent=transferBank?`${ready} / ${total} 已就绪`:'';
@@ -479,17 +479,17 @@ function updateTransferUI(s){
   const cruiseReady=n<4||transferBank?.cruise_ready?.[n]===true;
   $('transfer-cruise').textContent=cruise?`结束序列 ${cruise.completed}/${cruise.total}`:'↻ 序列演示';$('transfer-cruise').disabled=ready<total||!cruiseReady;
   $('transfer-cruise').title=cruiseReady?'依次演示全部有向路径':'全部路径通过连续串联验收后开放序列演示';
-  const remote=transferBank?.remote_compute,remoteRunning=remote?.jobs?.some(job=>job.state==='R'),remoteQueued=remote?.jobs?.some(job=>job.state==='Q');
+  const remote=transferBank?.remote_computes?.[n]??transferBank?.remote_compute,remoteRunning=remote?.jobs?.some(job=>job.state==='R'),remoteQueued=remote?.jobs?.some(job=>job.state==='Q');
   const computeMessages={auditing_upgrade:'新直达解后台验收中，当前方案照常可玩',auditing_tour:'正在验收全部路径连续序列演示',complete:'全部计算与串联验收完成',refining_direct:'全部可演示，继续优化更短直达路径',complete_with_routes:'全部转场与连续序列演示已通过验收',retry_sync:'等待远程连接恢复后同步',resubmitted:'剩余路径已自动提交续算',needs_search:'剩余路径需要进一步搜索',tour_needs_review:'单条路径已验收，连续序列演示待复验'};
   const computePhase=computeMessages[remote?.phase]||(remoteRunning?'远程并行求解中':remoteQueued?'远程作业排队中':remote?'等待下一批结果同步':'正在准备远程批量计算');
   const routed=rows.filter(r=>transferCompatible(r)&&r.route_waypoints).length;
-  const computeNote=n===4?`四阶 ${ready}/240 已通过本机验收${routed?'（'+(ready-routed)+' 条直达 · '+routed+' 条经中间姿态连续衔接）':''} · ${computePhase}`:'';
+  const computeNote=n>=4?`${labels[n]}阶 ${ready}/${total} 已通过本机验收${routed?'（'+(ready-routed)+' 条直达 · '+routed+' 条经中间姿态连续衔接）':''} · ${computePhase}`:'';
   $('route-progress').textContent=computeNote;
   $('transfer-note').textContent=replayActive?'正在轨迹复现历史路径；上方仍可直接切换新路径，点击后自动退出轨迹复现并跳到新起点。':activeTransfer?`${activeTransfer.waypoints?activeTransfer.waypoints.map(poseArrows).join(' → ')+' · 连续衔接':poseArrows(activeTransfer.source)+' → '+poseArrows(activeTransfer.target)} · ${s.stable>=.5?'稳态保持 · '+Math.max(0,STABLE_HOLD_SECONDS-s.stable).toFixed(1)+' s 后'+(cruise?'进入下一组合':'重新起摆'):s.plan_active?'运动进度 '+Math.min(100,(s.time-activeTransfer.start_time)/activeTransfer.duration*100).toFixed(0)+'%':'落稳中'} · 可随时切换其他路径`:
     transferBusy?'载入后自动跳到起点，无需等待当前姿态停稳。':transferSummary||computeNote||'切换起点或终点即开始运动；稳定保持 10 秒后自动重新起摆。';
 }
 async function refreshTransfers(){
-  try{const response=await fetch('/api/transitions');if(!response.ok)return;transferBank=await response.json();if(n<=4)renderTransferMatrix();}catch{}
+  try{const response=await fetch('/api/transitions');if(!response.ok)return;transferBank=await response.json();if(n<=5)renderTransferMatrix();}catch{}
 }
 for(const side of ['from','to'])$('transfer-'+side+'-options').onclick=e=>{
   const button=e.target.closest('[data-pose]');if(!button)return;
@@ -502,7 +502,7 @@ for(const side of ['from','to'])$('transfer-'+side+'-options').onclick=e=>{
 };
 $('transfer-cruise').onclick=()=>{
   if(cruise){cruise=null;settings({loop:true});setNotice('已结束序列演示，当前组合稳定保持 10 秒后重新起摆。');return;}
-  if(n>4||!design)return;const source=$('transfer-from').value,path=eulerTour(n,source);
+  if(n>5||!design)return;const source=$('transfer-from').value,path=eulerTour(n,source);
   cruise={path,total:path.length-1,completed:0};transferSummary='';playTransfer(source,path[1],{tour:true});
 };
 $('transfer-matrix').onclick=e=>{

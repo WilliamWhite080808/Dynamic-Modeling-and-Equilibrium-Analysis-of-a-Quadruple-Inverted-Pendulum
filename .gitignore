@@ -38,6 +38,7 @@ Thumbs.db
 !/results/equilibrium-worker-audit.json
 !/results/fourth-order-acceptance.json
 !/results/fourth-order-worker-audit.json
+!/results/fifth-order-worker-audit.json
 !/results/recovery-audit.json
 !/results/recovery-stress-audit.json
 !/results/recovery-worker-audit.json

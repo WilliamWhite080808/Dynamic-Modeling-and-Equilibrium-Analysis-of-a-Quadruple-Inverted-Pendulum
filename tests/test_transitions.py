@@ -30,7 +30,7 @@ def test_runtime_transfer_is_parameter_and_source_checked():
     np.testing.assert_allclose(jumped['plan']['initial'],transitions.equilibrium(p,'UD'))
     for changes in (dict(source='UU'),dict(target='UD'),dict(parameters=Parameters(n=2,mass=.7).dict()),dict(state=[float('nan')]*p.dim)):
         with pytest.raises(HTTPException):server.transition_plan(dict(parameters=p.p.dict(),source='UD',target='DD',state=state)|changes)
-    with pytest.raises(ValueError):transitions.patterns(5)
+    with pytest.raises(ValueError):transitions.patterns(6)
 
 def test_fourth_order_covers_all_240_directed_pairs():
     catalog=transitions.catalog(4);assert catalog['total']==240
@@ -54,7 +54,7 @@ def test_old_manifest_migration_preserves_certificates(tmp_path,monkeypatch):
     (root/'status.json').write_text(json.dumps(dict(schema=1,entries={'1-U-D':entry})),encoding='utf8')
     monkeypatch.setattr(transitions,'ROOT',root);monkeypatch.setattr(transitions,'_initialized_root',None);monkeypatch.setattr(repository,'ROOT',tmp_path/'repo')
     transitions.initialize();migrated=json.loads((root/'status.json').read_text())
-    assert migrated['schema']==2 and len(migrated['entries'])==310 and migrated['entries']['1-U-D']==entry
+    assert migrated['schema']==2 and len(migrated['entries'])==1302 and migrated['entries']['1-U-D']==entry
 
 def test_ready_fourth_order_transition_is_available_to_point_play():
     rows=[r for r in transitions.catalog(4)['entries'] if r['status']=='ready']

@@ -1,0 +1,22 @@
+#!/bin/bash
+#PBS -N pendulum5
+#PBS -q medium
+#PBS -l nodes=1:ppn=8
+#PBS -l mem=32gb
+#PBS -l walltime=24:00:00
+#PBS -j oe
+set -euo pipefail
+cd "$PBS_O_WORKDIR"
+ROOT="$(pwd -P)"
+case "$ROOT" in /data/wangqm/hmy/*|/wangqm/hmy/*) ;; *) exit 81 ;; esac
+mkdir -p "$ROOT/tmp" "$ROOT/cache/numba" "$ROOT/cache/matplotlib" "$ROOT/cache/pycache"
+export TMPDIR="$ROOT/tmp" TMP="$ROOT/tmp" TEMP="$ROOT/tmp"
+export XDG_CACHE_HOME="$ROOT/cache" MPLCONFIGDIR="$ROOT/cache/matplotlib"
+export NUMBA_CACHE_DIR="$ROOT/cache/numba" PYTHONPYCACHEPREFIX="$ROOT/cache/pycache"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=1
+export PYTHONUNBUFFERED=1 PENDULUM_CLUSTER_MODE=1
+SHARD="${PENDULUM_SHARD_INDEX:?}"
+SHARDS="${PENDULUM_SHARDS:?}"
+./venv/bin/python -u -c 'import json,os,socket,time; from pathlib import Path; from triple_pendulum import transitions; assert transitions.CLUSTER_MODE; data=dict(job_id=os.environ["PBS_JOBID"],host=socket.gethostname(),started_at=time.time(),shard=int(os.environ["PENDULUM_SHARD_INDEX"]),workers=8); Path("run-"+str(data["shard"])+".json").write_text(json.dumps(data)); print(json.dumps(data),flush=True)'
+./venv/bin/python -u -m triple_pendulum.precompute_equilibria --orders 5 --workers 8 --rounds 4 --start-round "${PENDULUM_START_ROUND:-0}" --shards "$SHARDS" --shard-index "$SHARD" >> "$ROOT/solver-$SHARD.log" 2>&1

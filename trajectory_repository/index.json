@@ -30508,56 +30508,6 @@
       "created_at": "2026-11-12T19:15:47.386159+08:00"
     },
     {
-      "id": "75e617f406e12d6b292e0cff",
-      "order": 5,
-      "title": "我的成功实验 → 上 / 上 / 上 / 上 / 上",
-      "pattern": "UUUUU",
-      "target_label": "上 / 上 / 上 / 上 / 上",
-      "initial": [
-        0.0,
-        3.141592653589793,
-        3.141592653589793,
-        3.141592653589793,
-        3.141592653589793,
-        3.141592653589793,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "target_angles": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "target": 0.0,
-      "parameters": {
-        "n": 5,
-        "cart_mass": 1.5,
-        "length": 0.65,
-        "mass": 0.3,
-        "gravity": 9.81,
-        "damping": 0.006,
-        "cart_damping": 0.08,
-        "max_force": 120,
-        "rail": 2.4,
-        "point_mass": false
-      },
-      "source": "实时成功记录",
-      "duration": 9.000000000000451,
-      "settled_at": 7.008000000000555,
-      "peak_force": 82.72666109473832,
-      "max_cart": 1.9735917297898933,
-      "final_error_deg": 0.004648459657688332,
-      "status": "recorded",
-      "has_control_plan": false,
-      "created_at": "2026-11-12T19:21:39.373581+08:00"
-    },
-    {
       "id": "ab7bc757a136ad052737bc25",
       "order": 4,
       "title": "我的成功实验 → 下 / 上 / 上 / 上",
@@ -31833,6 +31783,56 @@
       "status": "recorded",
       "has_control_plan": false,
       "created_at": "2026-11-12T20:15:38.400538+08:00"
+    },
+    {
+      "id": "75e617f406e12d6b292e0cff",
+      "order": 5,
+      "title": "我的成功实验 → 上 / 上 / 上 / 上 / 上",
+      "pattern": "UUUUU",
+      "target_label": "上 / 上 / 上 / 上 / 上",
+      "initial": [
+        0.0,
+        3.141592653589793,
+        3.141592653589793,
+        3.141592653589793,
+        3.141592653589793,
+        3.141592653589793,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "target_angles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "target": 0.0,
+      "parameters": {
+        "n": 5,
+        "cart_mass": 1.5,
+        "length": 0.65,
+        "mass": 0.3,
+        "gravity": 9.81,
+        "damping": 0.006,
+        "cart_damping": 0.08,
+        "max_force": 120,
+        "rail": 2.4,
+        "point_mass": false
+      },
+      "source": "实时成功记录",
+      "duration": 9.000000000000451,
+      "settled_at": 7.008000000000555,
+      "peak_force": 82.72666109327575,
+      "max_cart": 1.9735917297898053,
+      "final_error_deg": 0.0046484596714283285,
+      "status": "recorded",
+      "has_control_plan": false,
+      "created_at": "2026-11-12T21:53:53.474143+08:00"
     }
   ]
 }

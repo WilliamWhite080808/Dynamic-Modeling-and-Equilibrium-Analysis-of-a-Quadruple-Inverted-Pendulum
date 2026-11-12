@@ -169,7 +169,7 @@ def precomputed_catalog(order:int|None=None):
 
 @app.get('/api/transitions')
 def transition_catalog(order:int|None=None):
-    if order is not None and order not in (1,2,3,4):raise HTTPException(422,'稳态互转仅支持 1～4 阶')
+    if order is not None and order not in range(1,6):raise HTTPException(422,'稳态互转仅支持 1～5 阶')
     return transitions.catalog(order)
 
 
@@ -177,7 +177,7 @@ def transition_catalog(order:int|None=None):
 def transition_plan(body:dict):
     try:
         p=Plant(Parameters(**body['parameters']));source=body['source'];target=body['target']
-        if p.n not in (1,2,3,4):raise ValueError('稳态互转仅支持 1～4 阶')
+        if p.n not in range(1,6):raise ValueError('稳态互转仅支持 1～5 阶')
         expected=transitions.equilibrium(p,source)
         state=expected if body.get('jump_to_start') is True else np.asarray(body['state'],dtype=float)
         if state.shape!=(p.dim,) or not np.isfinite(state).all():raise ValueError('无效物理状态')

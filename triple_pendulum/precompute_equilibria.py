@@ -1,4 +1,4 @@
-"""Offline direct pose-to-pose planning, including 240 fourth-order transfers."""
+"""Offline direct pose-to-pose planning, including 992 fifth-order transfers."""
 import os
 for name in ('OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','OMP_NUM_THREADS'):os.environ[name]='1'
 from concurrent.futures import ProcessPoolExecutor,as_completed
@@ -114,7 +114,7 @@ def main():
     parser.add_argument('--orders',default='1,2,3,4');parser.add_argument('--start-round',type=int,default=0)
     parser.add_argument('--shards',type=int,default=1);parser.add_argument('--shard-index',type=int,default=0);args=parser.parse_args()
     orders=[int(v) for v in args.orders.split(',')]
-    if not orders or any(n not in range(1,transitions.MAX_ORDER+1) for n in orders):parser.error('Orders must be in 1..4')
+    if not orders or any(n not in range(1,transitions.MAX_ORDER+1) for n in orders):parser.error('Orders must be in 1..5')
     if not 0<=args.shard_index<args.shards:parser.error('Invalid shard index')
     transitions.initialize()
     eligible=[r for r in transitions.catalog()['entries'] if r['order'] in orders]
