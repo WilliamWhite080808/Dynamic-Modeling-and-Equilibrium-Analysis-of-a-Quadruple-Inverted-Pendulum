@@ -131,7 +131,7 @@ onmessage=e=>{
   }
   if(!model&&m.type!=='play-transition')return;
   if(m.type==='play-transition'){
-    if(!m.plan?.success||!m.plan.transition||m.design.parameters.n>4)return;
+    if(!m.plan?.success||!m.plan.transition||m.design.parameters.n>5)return;
     // Explicit point-and-play: the user authorizes loading the recorded start.
     // This is separate from continuous, state-preserving tour transitions.
     sensor='full_state';mode='auto';noise=0;reset(m.design,m.plan.initial);
@@ -146,7 +146,7 @@ onmessage=e=>{
     const observed=state.slice(1,model.d).map(a=>Math.cos(a)>0?'U':'D').join('');
     const near=source&&Math.max(...state.slice(1,model.d).map((a,i)=>Math.abs(wrap(a-(source[i]==='U'?0:Math.PI)))))<.025;
     const samePlant=m.design&&Object.entries(model.p).every(([key,value])=>m.design.parameters[key]===value);
-    if(!m.plan?.success||model.n>4||!samePlant||planning||plan||!near||observed!==source||Math.abs(state[0])>.05||Math.max(...state.slice(model.d).map(Math.abs))>.06){
+    if(!m.plan?.success||model.n>5||!samePlant||planning||plan||!near||observed!==source||Math.abs(state[0])>.05||Math.max(...state.slice(model.d).map(Math.abs))>.06){
       postMessage({type:'transition-rejected',request_id:m.request_id,message:'请先让所选起点稳态回中并停稳，再开始转场。'});return;
     }
     // Only the controller/reference changes. No state, time, tick or camera epoch reset.
