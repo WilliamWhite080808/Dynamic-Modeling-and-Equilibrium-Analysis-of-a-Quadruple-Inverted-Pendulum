@@ -139,7 +139,7 @@ def main():
             try:status=json.loads(STATUS.read_text(encoding='utf8'))
             except (OSError,ValueError):status={}
             status.update(phase='retry_sync',last_error=str(error)[-2000:],updated_at=time.time());common.atomic_json(STATUS,status)
-        if not args.watch or status['phase'] in ('complete','needs_search','tour_needs_review'):break
+        if not args.watch or status['phase'] in ('complete','tour_needs_review'):break
         time.sleep(max(30,args.interval))
 
 if __name__=='__main__':main()

@@ -1,4 +1,5 @@
 import {Physics,clamp} from './physics.js';
+import {STABLE_HOLD_SECONDS} from './experiment.js';
 
 export class ReplayPlayer{
   constructor(){this.loop=false;this.clip=null;this.time=0;this.playing=false;this.speed=1;this.epoch=-1;}
@@ -9,7 +10,7 @@ export class ReplayPlayer{
     this.time=0;this.playing=true;this.epoch--;this.speed=1;
   }
   seek(value){this.time=clamp(value,0,this.duration||0);}
-  advance(dt){if(this.playing){this.seek(this.time+Math.max(0,dt)*this.speed);if(this.loop&&this.time>=Math.min(this.duration,Math.max(0,(this.clip.settled_at||0)-this.offset)+10)){this.time=0;this.epoch--;}else if(this.time>=this.duration)this.playing=false;}}
+  advance(dt){if(this.playing){this.seek(this.time+Math.max(0,dt)*this.speed);if(this.loop&&this.time>=Math.min(this.duration,Math.max(0,(this.clip.settled_at||0)-this.offset)+STABLE_HOLD_SECONDS)){this.time=0;this.epoch--;}else if(this.time>=this.duration)this.playing=false;}}
   snapshot(){
     if(!this.clip)return null;
     const f=this.clip.frames,t=this.offset+this.time;let lo=0,hi=f.length-1;

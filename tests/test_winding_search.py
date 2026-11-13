@@ -2,6 +2,14 @@ from itertools import product
 import pytest
 from triple_pendulum.precompute_equilibria import winding_for,ATTEMPTS_PER_ROUND
 
+def test_tail_search_varies_reference_margin_inside_the_same_actuator_limit():
+    from triple_pendulum.precompute_equilibria import force_fraction_for,search_duration
+    fractions={force_fraction_for(a,r) for r in range(4) for a in range(8)}
+    assert fractions=={.66,.8,.9} and max(fractions)<1
+    assert search_duration(5,0,32,0)==7
+    assert search_duration(5,7,32,0)<=11
+    assert search_duration(5,7,32,17)==13
+
 
 @pytest.mark.parametrize('changed',range(1,7))
 def test_search_rounds_cover_all_rotation_directions(changed):

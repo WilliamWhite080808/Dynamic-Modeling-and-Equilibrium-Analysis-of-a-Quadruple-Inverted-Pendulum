@@ -2,7 +2,7 @@
 from pathlib import Path
 import collections, hashlib, json, sys, time
 from triple_pendulum.motion_text import read_motion, loads
-from triple_pendulum.motion_plugins import unpack, runtime, digest
+from triple_pendulum.motion_plugins import MotionStore,unpack, runtime, digest
 from triple_pendulum.model import Parameters
 from triple_pendulum import transitions
 
@@ -11,10 +11,15 @@ def main():
     model = loads((web/'models/standard.toml').read_bytes())
     counts, items = collections.Counter(), []
     ready = transitions.statuses()
+    store=MotionStore(web) if (web/'.cache/trajectory-index.json').exists() else None
     for file in sorted((web/'motions').glob('*.toml')):
         raw = file.read_bytes()
         assert raw == (desktop/'motions'/file.name).read_bytes(), file
-        doc = read_motion(raw)
+        if store:
+            meta=store.value['files'][file.name]
+            assert hashlib.sha256(raw).hexdigest()==meta['sha256']
+            doc=store.cached_document(meta)
+        else:doc = read_motion(raw)
         n, (a, b) = doc['n'], doc['ends']
         params = Parameters(n=n, **model['parameters']).dict()
         for direction, source, target in (('ab', a, b), ('ba', b, a)):
@@ -37,7 +42,8 @@ def main():
                   exact_source_control_equality=True, independent_ab_ba_origins=True,
                   fifth_worker_proofs=True, sha256=hashlib.sha256('\n'.join(sorted(items)).encode()).hexdigest(),
                   checked_at=time.time())
-    target = Path('results/editions-acceptance/all-paths.json')
+    target = Path(sys.argv[3]) if len(sys.argv)>3 else Path('results/editions-acceptance/all-paths.json')
+    target.parent.mkdir(parents=True,exist_ok=True)
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf8')
     print(json.dumps(report, ensure_ascii=False), flush=True)
 

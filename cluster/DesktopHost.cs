@@ -127,11 +127,14 @@ internal sealed class DesktopHost : Form {
         File.WriteAllText(log,"Native form Visible="+Visible+"\nURL="+url+"\nEngine="+view.CoreWebView2.Environment.BrowserVersionString+"\n",Encoding.UTF8);
         await Wait("!!document.querySelector('#loading')&&document.querySelector('#loading').classList.contains('hidden')&&document.querySelector('#transfer-count').textContent==='56/56'",90);
         File.AppendAllText(log,"Viewport="+await Js("JSON.stringify({width:innerWidth,height:innerHeight,dpi:devicePixelRatio})")+"\n",Encoding.UTF8);
+        if(await Js("Number(document.querySelector('#speed').value)===1&&document.querySelector('#speed-label').textContent==='1×'")!="true")throw new Exception("初始倍率不是 1×");
+        Text="自动验收中 · 倒立摆实验室";
+        await Js("for(const type of ['pointerdown','pointerup','click','keydown','input','change'])window.addEventListener(type,e=>{if(e.isTrusted){e.preventDefault();e.stopImmediatePropagation();}},{capture:true});true");
         int probe=Array.IndexOf(Environment.GetCommandLineArgs(),"--record-probe");
         if(probe>=0){await Js(File.ReadAllText(Environment.GetCommandLineArgs()[probe+1],Encoding.UTF8));await Wait("window.__recordProbe?.done===true",45);File.AppendAllText(log,await Js("JSON.stringify(window.__recordProbe)")+"\n",Encoding.UTF8);return;}
         if(Array.IndexOf(Environment.GetCommandLineArgs(),"--smoke")>=0){await Task.Delay(500);await Js("document.querySelector('#simulation').scrollIntoView({block:'center'})");await Shot("desktop-window.png");File.AppendAllText(log,"PASS maximized visible native window\n",Encoding.UTF8);return;}
         if(await Js("document.querySelectorAll('dialog[open]').length===0")!="true")throw new Exception("启动出现额外选择弹窗");
-        await Js("(()=>{let i=document.querySelector('#speed');i.value=10;i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));return true;})()");
+        await Js("(()=>{let i=document.querySelector('#speed');i.value=1;i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));return true;})()");
         for(int n=1;n<=5;n++) {
             await Wait("!document.querySelector('#orders [data-order=\""+n+"\"]').disabled",30);
             await Js("document.querySelector('#orders [data-order=\""+n+"\"]').click()");
@@ -140,7 +143,7 @@ internal sealed class DesktopHost : Form {
         }
         await Shot("desktop-fifth.png");
         await Js("document.querySelector('#orders [data-order=\"4\"]').click()");
-        await Wait("document.querySelector('#transfer-count').textContent==='240/240'&&document.querySelector('#status').textContent==='已稳定'",60);
+        await Wait("document.querySelector('#transfer-count').textContent==='240/240'&&document.querySelector('#orders [data-order=\"4\"]').classList.contains('selected')&&!document.querySelector('#orders [data-order=\"4\"]').disabled&&document.querySelector('#transfer-note').textContent.startsWith('↓↓↓↓ → ')&&document.querySelector('#status').textContent==='已稳定'",60);
         await Js("document.querySelector('#transfer-to-options [data-pose=\"DUUD\"]').click();document.querySelector('#pause').click()");
         await Wait("!document.querySelector('#experiment-seek').disabled&&document.querySelector('#pause').textContent==='继续摆动'&&document.querySelector('#transfer-note').textContent.includes('↓↓↓↓ → ↓↑↑↓')",30);
         await Js("(()=>{let i=document.querySelector('#experiment-seek');i.value=i.max;i.dispatchEvent(new Event('pointerdown',{bubbles:true}));i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));return true;})()");

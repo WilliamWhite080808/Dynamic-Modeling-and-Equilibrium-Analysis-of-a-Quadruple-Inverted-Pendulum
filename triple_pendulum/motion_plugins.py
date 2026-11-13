@@ -5,7 +5,7 @@ The lossless state-Hermite representation retains the certified controller.
 """
 from pathlib import Path
 from copy import deepcopy
-import hashlib,json,math,threading,time,uuid
+import gzip,hashlib,json,math,threading,time,uuid
 import numpy as np
 from .model import Parameters
 from .motion_text import read_motion,loads as read_toml
@@ -69,6 +69,12 @@ class MotionStore:
         if value.get('v')!=1:raise ValueError('轨迹索引版本不支持')
         self.value=value;self.plans={}
 
+    def cached_document(self,meta):
+        sha=meta.get('cache_sha256',meta['sha256']);ext=meta.get('ext','.json')
+        raw=(self.cache/(sha+ext)).read_bytes()
+        if hashlib.sha256(raw).hexdigest()!=sha:raise ValueError('已激活缓存损坏')
+        return json.loads(gzip.decompress(raw)) if ext=='.json.gz' else read_motion(raw)
+
     def validate(self,raw,model):
         doc=read_motion(raw);n=doc['n'];ends=doc['ends']
         if doc.get('v') not in (1,2) or doc.get('basis')!='state-hermite-v1' or not isinstance(n,int) or not 1<=n<=20 or len(ends)!=2 or ends[0]==ends[1] or any(len(x)!=n or set(x)-set('UD') for x in ends):raise ValueError('插件类别或端点无效')
@@ -89,12 +95,15 @@ class MotionStore:
                 try:
                     raw=path.read_bytes();sha=hashlib.sha256(raw).hexdigest()
                     previous=old['files'].get(path.name)
-                    if previous and previous['sha256']==sha and old.get('model')==model and previous.get('directions'):
-                        files[path.name]=previous;continue
-                    doc,params=self.validate(raw,model);ext='.toml' if path.suffix=='.toml' else '.json';target=self.cache/(sha+ext)
-                    if not target.exists():target.write_bytes(raw)
+                    unchanged=previous and previous['sha256']==sha and old.get('model')==model and previous.get('directions')
+                    if unchanged and previous.get('ext')=='.json.gz':
+                        self.cached_document(previous);files[path.name]=previous;continue
+                    if unchanged:doc=self.cached_document(previous);params=previous['parameters']
+                    else:doc,params=self.validate(raw,model)
+                    cached=gzip.compress(encoded(doc),compresslevel=3,mtime=0);cache_sha=hashlib.sha256(cached).hexdigest();ext='.json.gz';target=self.cache/(cache_sha+ext)
+                    if not target.exists():target.write_bytes(cached)
                     directions={k:{x:doc[k][x] for x in ('runtime_sha256','T','proof')} for k in ('ab','ba')}
-                    files[path.name]=dict(sha256=sha,n=doc['n'],ends=doc['ends'],parameters=params,directions=directions,ext=ext)
+                    files[path.name]=dict(sha256=sha,cache_sha256=cache_sha,n=doc['n'],ends=doc['ends'],parameters=params,directions=directions,ext=ext)
                 except Exception as error:
                     errors.append(dict(file=path.name,error=str(error)))
                     if path.name in old['files']:files[path.name]=old['files'][path.name]
@@ -115,9 +124,7 @@ class MotionStore:
                 if meta['n']!=plant.n or set(meta['ends'])!={source,target} or meta['parameters']!=plant.p.dict():continue
                 k=(meta['sha256'],source)
                 if k not in self.plans:
-                    raw=(self.cache/(meta['sha256']+meta.get('ext','.json'))).read_bytes()
-                    if hashlib.sha256(raw).hexdigest()!=meta['sha256']:raise ValueError('已激活缓存损坏')
-                    doc=read_motion(raw);direction='ab' if source==doc['ends'][0] else 'ba';self.plans[k]=unpack(doc[direction],plant.n,source,target,meta['parameters'])
+                    doc=self.cached_document(meta);direction='ab' if source==doc['ends'][0] else 'ba';self.plans[k]=unpack(doc[direction],plant.n,source,target,meta['parameters'])
                 return deepcopy(self.plans[k])
         return None
 
@@ -127,7 +134,7 @@ class MotionStore:
             for meta in self.value['files'].values():
                 order=meta['n']
                 if n is not None and n!=order:continue
-                doc=meta.get('directions') or read_motion((self.cache/(meta['sha256']+meta.get('ext','.json'))).read_bytes())
+                doc=meta.get('directions') or self.cached_document(meta)
                 for direction,a,b in (('ab',meta['ends'][0],meta['ends'][1]),('ba',meta['ends'][1],meta['ends'][0])):
                     data=doc[direction];ready[(order,a,b)]=dict(order=order,source=a,target=b,status='ready',sha256=data['runtime_sha256'],parameters=meta['parameters'],duration=data['T'],verification=data['proof'])
             rows=[]

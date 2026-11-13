@@ -14,6 +14,8 @@ hash 是重建后全部控制输入的摘要，origin 是已验收原文件摘�
 
 旧 .motion.json 仅保留兼容读取；新发布动作和共用模型均为可读 TOML。以下内容保留此前格式沿革，JSON/省略系数草案不代表本次实际交付。
 
+为加快一键载入，新包随附已验收的内部索引与 gzip-JSON 控制快照。公开动作仍为上面的 TOML；索引分别保存 source SHA 与内部缓存 SHA，运行时按哈希核对并重建原控制参考，不使用 pickle 或动画帧。首次不必重新解析全部 TOML；已有索引后修改/新增仍仅手动检查激活。包内仅携带 .cache/trajectory-index.json 与 .cache/motions/*.json.gz，排除实例、窗口配置、Numba 和个人数据。
+
 ---
 
 # 轨迹插件格式

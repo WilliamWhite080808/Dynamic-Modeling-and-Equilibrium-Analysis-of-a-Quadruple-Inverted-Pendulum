@@ -87,7 +87,7 @@ async function initialize(preset='down',custom=null){
       fillTransferOptions('D'.repeat(n),goalPattern);
       if(transferCompatible(transferRow($('transfer-from').value,$('transfer-to').value)))playTransfer($('transfer-from').value,$('transfer-to').value);
     }
-  }catch(err){if(gen!==generation)return;loading('系统建立失败',String(err));setNotice('无法连接本机求解服务，请通过 python -m triple_pendulum.server 启动。',true);$('orders').querySelectorAll('button').forEach(b=>b.disabled=false);}
+  }catch(err){if(gen!==generation)return;loading('系统建立失败',String(err));setNotice('实验室尚未就绪，请重新双击本文件夹的启动入口；若仍失败，请查看 results 中的启动日志。',true);$('orders').querySelectorAll('button').forEach(b=>b.disabled=false);}
 }
 function cancelPlanning(){const id=activeJob;activeJob=null;if(id)fetch(`/api/plan/${id}`,{method:'DELETE'}).catch(()=>{});}
 async function solvePlan(message){
@@ -207,6 +207,8 @@ $('speed').onchange=()=>setSimulationRate($('speed').value);
 $('speed').oninput=()=>{const value=+$('speed').value;if($('speed').value!==''&&value>=.1&&value<=10)setSimulationRate(value,false);};
 $('speed-range').oninput=()=>setSimulationRate($('speed-range').value);
 $('speed-default').onclick=()=>setSimulationRate(1);
+setSimulationRate(1);
+window.addEventListener('pageshow',()=>setSimulationRate(1));
 $('speed-toggle').onclick=()=>{const open=$('speed-panel').classList.toggle('hidden');$('speed-toggle').setAttribute('aria-expanded',String(!open));};
 document.addEventListener('pointerdown',e=>{if(!e.target.closest('.rate-control')){$('speed-panel').classList.add('hidden');$('speed-toggle').setAttribute('aria-expanded','false');}});
 function updateExperimentTimeline(s){
@@ -408,7 +410,12 @@ document.querySelectorAll('[data-close]').forEach(button=>button.onclick=()=>$(b
 
 function fillTransferOptions(source=activePreset==='down'?'D'.repeat(n):equilibriumCode(design?.target_angles||Array(n).fill(0)),destination=null){
   const choices=equilibriaFor(n),base='D'.repeat(n);
-  for(const side of ['from','to'])$('transfer-'+side+'-options').innerHTML=choices.map(code=>`<button type="button" class="pose-option" data-pose="${code}" aria-label="${poseArrows(code)}${code===base?'（基态）':''}" aria-pressed="false"><span class="pose-arrows" aria-hidden="true">${[...code].map((c,i)=>`<i style="--rod-color:${colors[i]}">${c==='U'?'↑':'↓'}</i>`).join('')}</span><span class="pose-dot" aria-hidden="true"></span></button>`).join('');
+  for(const side of ['from','to']){
+    const container=$('transfer-'+side+'-options');
+    if(container.dataset.order===String(n)&&container.children.length===choices.length)continue;
+    container.innerHTML=choices.map(code=>`<button type="button" class="pose-option" data-pose="${code}" aria-label="${poseArrows(code)}${code===base?'（基态）':''}" aria-pressed="false"><span class="pose-arrows" aria-hidden="true">${[...code].map((c,i)=>`<i style="--rod-color:${colors[i]}">${c==='U'?'↑':'↓'}</i>`).join('')}</span><span class="pose-dot" aria-hidden="true"></span></button>`).join('');
+    container.dataset.order=String(n);
+  }
   $('transfer-from').value=choices.includes(source)?source:choices[0];
   $('transfer-to').value=choices.includes(destination)?destination:source===base?choices[0]:base;
   $('pose-order').textContent=n;syncTransferPickers();
@@ -495,8 +502,8 @@ function updateTransferUI(s){
   const routed=rows.filter(r=>transferCompatible(r)&&r.route_waypoints).length;
   const computeNote=n>=4?`${labels[n]}阶 ${ready}/${total} 已通过本机验收${routed?'（'+(ready-routed)+' 条直达 · '+routed+' 条经中间姿态连续衔接）':''} · ${computePhase}`:'';
   $('route-progress').textContent=computeNote;
-  $('transfer-note').textContent=replayActive?'正在轨迹复现历史路径；上方仍可直接切换新路径，点击后自动退出轨迹复现并跳到新起点。':activeTransfer?`${activeTransfer.waypoints?activeTransfer.waypoints.map(poseArrows).join(' → ')+' · 连续衔接':poseArrows(activeTransfer.source)+' → '+poseArrows(activeTransfer.target)} · ${s.stable>=.5?'稳态保持 · '+Math.max(0,STABLE_HOLD_SECONDS-s.stable).toFixed(1)+' s 后'+(cruise?'进入下一组合':'重新起摆'):s.plan_active?'运动进度 '+Math.min(100,(s.time-activeTransfer.start_time)/activeTransfer.duration*100).toFixed(0)+'%':'落稳中'} · 可随时切换其他路径`:
-    transferBusy?'载入后自动跳到起点，无需等待当前姿态停稳。':transferSummary||computeNote||'切换起点或终点即开始运动；稳定保持 10 秒后自动重新起摆。';
+  $('transfer-note').textContent=replayActive?'正在轨迹复现历史路径；仍可直接切换新路径，点击后自动退出轨迹复现并跳到新起点。':activeTransfer?`${activeTransfer.waypoints?activeTransfer.waypoints.map(poseArrows).join(' → ')+' · 连续衔接':poseArrows(activeTransfer.source)+' → '+poseArrows(activeTransfer.target)} · ${s.stable>=.5?'稳态保持 · '+Math.max(0,STABLE_HOLD_SECONDS-s.stable).toFixed(1)+' s 后'+(cruise?'进入下一组合':'重新起摆'):s.plan_active?'运动进度 '+Math.min(100,(s.time-activeTransfer.start_time)/activeTransfer.duration*100).toFixed(0)+'%':'落稳中'} · 可随时切换其他路径`:
+    transferBusy?'载入后自动跳到起点，无需等待当前姿态停稳。':transferSummary||computeNote||'切换起点或终点即开始运动；稳定保持 5 秒后自动重新起摆。';
 }
 async function refreshTransfers(){
   try{const response=await fetch('/api/transitions');if(!response.ok)return;transferBank=await response.json();if(n<=20)renderTransferMatrix();}catch{}
@@ -511,7 +518,7 @@ for(const side of ['from','to'])$('transfer-'+side+'-options').onclick=e=>{
   if(snapshot)updateTransferUI(snapshot);
 };
 $('transfer-cruise').onclick=()=>{
-  if(cruise){cruise=null;settings({loop:true});setNotice('已结束序列演示，当前组合稳定保持 10 秒后重新起摆。');return;}
+  if(cruise){cruise=null;settings({loop:true});setNotice('已结束序列演示，当前组合稳定保持 5 秒后重新起摆。');return;}
   if(n>20||!design)return;const source=$('transfer-from').value,path=eulerTour(n,source);
   cruise={path,total:path.length-1,completed:0};transferSummary='';playTransfer(source,path[1],{tour:true});
 };

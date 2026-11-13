@@ -14,6 +14,14 @@ from .validate_plan import replay
 
 ATTEMPTS_PER_ROUND=8
 
+def force_fraction_for(attempt,round_index):
+    """Vary reference headroom without changing the actual actuator limit."""
+    return (.66,.80,.90)[(round_index+attempt//2)%3]
+
+def search_duration(n,attempt,windings,round_index):
+    limit=13. if round_index>=4 and attempt>=6 else 11.
+    return min(n+2.+2*(attempt//windings)+round_index,limit)
+
 def winding_for(windings,attempt,round_index):
     """Explore new rotation-sign combinations on subsequent search rounds."""
     return windings[(round_index*ATTEMPTS_PER_ROUND+attempt)%len(windings)]
@@ -82,8 +90,8 @@ def solve_pair(n,source,target,round_index=0):
             if reference is not None:
                 warm=reverse_reference(p,reference,source,target);opposite_guess=True
         optimize=implicit if attempt%2==0 else explicit
-        duration=n+2.+2*(attempt//len(windings))+round_index
-        duration=min(duration,11.)
+        duration=search_duration(n,attempt,len(windings),round_index)
+        fraction=force_fraction_for(attempt,round_index)
         endpoint=initial[1:p.d].copy()
         for i,sign in zip(changed,winding_for(windings,attempt,round_index)):endpoint[i]+=sign*np.pi
         if attempt>=max(4,len(windings)):
@@ -94,7 +102,7 @@ def solve_pair(n,source,target,round_index=0):
         try:
             transitions.update(n,source,target,attempt=attempt,phase='直接转场配点求解',duration=duration,iterations=0)
             result=optimize(p,initial,duration,round(duration/.03)+1,guess,max_iter=900 if n>=4 else 650,max_seconds=75 if n>=4 else 45,
-                seed=900+attempt+round_index*11,target_angles=goal,endpoint_angles=endpoint,initial_force=0.,force_rate=transitions.RATE,compute_gains=False,
+                seed=900+attempt+round_index*11,target_angles=goal,endpoint_angles=endpoint,initial_force=0.,force_rate=transitions.RATE,compute_gains=False,force_fraction=fraction,
                 progress=lambda i:transitions.update(n,source,target,iterations=i))
             if result['defect']<.02 and result['terminal_error']<.001:
                 warm=deepcopy(result);checkpoint_write(checkpoint,warm)
@@ -104,7 +112,7 @@ def solve_pair(n,source,target,round_index=0):
                 if result['dt']<=spacing+1e-10:continue
                 transitions.update(n,source,target,phase='细化直接转场与独立验收')
                 result=optimize(p,initial,duration,round(duration/spacing)+1,result,max_iter=800 if n>=4 else 600,max_seconds=90 if n>=4 else 60,
-                    target_angles=goal,endpoint_angles=endpoint,initial_force=0.,force_rate=transitions.RATE,compute_gains=False)
+                    target_angles=goal,endpoint_angles=endpoint,initial_force=0.,force_rate=transitions.RATE,compute_gains=False,force_fraction=fraction)
                 if result['defect']<.02 and result['terminal_error']<.001:
                     warm=deepcopy(result);checkpoint_write(checkpoint,warm)
                     if certify(p,source,target,result):return True

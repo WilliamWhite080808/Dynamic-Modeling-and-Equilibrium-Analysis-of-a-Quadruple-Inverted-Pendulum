@@ -34,3 +34,7 @@ dialog{border:1px solid #dce4f2;border-radius:15px;background:white;color:inheri
 @media(max-width:600px){.transport>div{width:100%}.transport>div:last-child{margin-left:0}.rate-panel{left:auto;right:0;width:250px}.transport button{height:34px}.experiment-timeline{padding:10px}.experiment-timeline small{font-size:9px}.transfer-actions #transfer-cruise{flex:1}}
 
 .record-download{display:inline-flex;align-items:center;min-height:34px;padding:7px 10px;border:1px solid #cbdaf1;border-radius:8px;color:#3f6cae;background:#f4f8ff;text-decoration:none;font-size:10px}
+
+/* Keep order selection above the scene and all pose choices below it. */
+.transition-section{margin-top:18px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 3px 14px #173c6c03}
+@media(max-width:760px){.transition-section{padding:12px;margin-top:14px}}

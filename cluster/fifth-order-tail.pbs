@@ -1,0 +1,18 @@
+#!/bin/bash
+#PBS -N pend5-tail
+#PBS -q medium
+#PBS -l nodes=1:ppn=8
+#PBS -l mem=32gb
+#PBS -l walltime=08:00:00
+#PBS -j oe
+set -euo pipefail
+cd "$PBS_O_WORKDIR"
+ROOT="$(pwd -P)"
+case "$ROOT" in /data/wangqm/hmy/pendulum5_20261112) ;; *) exit 81 ;; esac
+mkdir -p "$ROOT/tmp" "$ROOT/cache/pycache"
+export TMPDIR="$ROOT/tmp" TMP="$ROOT/tmp" TEMP="$ROOT/tmp"
+export XDG_CACHE_HOME="$ROOT/cache" MPLCONFIGDIR="$ROOT/cache/matplotlib"
+export NUMBA_CACHE_DIR="$ROOT/cache/numba-${PBS_JOBID}" PYTHONPYCACHEPREFIX="$ROOT/cache/pycache"
+export PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PENDULUM_CLUSTER_MODE=1
+export OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=1
+./venv/bin/python -u "$ROOT/run-fifth-tail.py" --orders 5 --workers "$PENDULUM_WORKERS" --rounds 4 --start-round "$PENDULUM_START_ROUND" --shards 8 --shard-index "$PENDULUM_SHARD_INDEX" >> "$ROOT/solver-$PENDULUM_SHARD_INDEX.log" 2>&1

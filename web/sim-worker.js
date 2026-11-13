@@ -185,7 +185,7 @@ setInterval(()=>{
     accumulator+=elapsed*speed;
     const budget=performance.now();let count=0;
     // Retain debt. Never enlarge dt or silently throw away simulation steps.
-    while(accumulator>=stepSize&&count<150&&performance.now()-budget<12){advance();accumulator-=stepSize;count++;if(loopRequested&&trajectory){const saved=trajectory,heldFor=stable;saved.cycle++;restoreTrajectory(saved,0,true);lastReason='稳定保持 10 秒，开始下一次起摆';postMessage({type:'trajectory-restarted',transition:transitionInfo,cycle:saved.cycle,held_for:heldFor,epoch});break;}if(planning||!running)break;}
+    while(accumulator>=stepSize&&count<150&&performance.now()-budget<12){advance();accumulator-=stepSize;count++;if(loopRequested&&trajectory){const saved=trajectory,heldFor=stable;saved.cycle++;restoreTrajectory(saved,0,true);lastReason='稳定保持 5 秒，开始下一次起摆';postMessage({type:'trajectory-restarted',transition:transitionInfo,cycle:saved.cycle,held_for:heldFor,epoch});break;}if(planning||!running)break;}
   }else accumulator=0;
   // Feed a 120 Hz display with fresh physical states, independently of UI text.
   if(now-sent>=8){snapshot();sent=now;}

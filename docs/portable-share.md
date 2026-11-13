@@ -7,15 +7,17 @@
 
 首次启动显示状态和轨迹校验进度，失败显示错误并记录 results 日志。包内运行环境隔离系统 Python/PYTHONPATH，包含实际求解器；无需外部 Python、Node.js 或求解器。支持现代 Windows 10/11 x64；实际验收环境为当前 Windows 11、200% DPI，不能据此声称所有 Windows 版本均已验证。
 
-12:12 固定快照：442 个独立双向插件，884 条方向；一至四阶依次 2/12/56/240，五阶 574。五阶累计计算 678 条，但未配对的 104 条没有伪造逆解。五阶完整连续序列仍未开放。
+13:17 固定快照：458 个独立双向插件，916 条方向；一至四阶依次 2/12/56/240，五阶 606。五阶累计计算 702 条，但未配对的 96 条没有伪造逆解。五阶完整连续序列仍未开放。
 
-新动作使用 `motions/阶数_姿态A_姿态B.toml`；每个参考节点独占一行，共用模型为 `models/standard.toml`。采用原精度无损分段 Hermite 参数，能准确推导的间隔及默认初值不重复写。两方向各自独立验收；全部 884 条与 transitions.statuses() 的真实 file 字段所指已认证源文件逐项一致，摘要见 results/editions-acceptance/all-paths.json。
+新动作使用 `motions/阶数_姿态A_姿态B.toml`；每个参考节点独占一行，共用模型为 `models/standard.toml`。采用原精度无损分段 Hermite 参数，能准确推导的间隔及默认初值不重复写。两方向各自独立验收；全部 916 条与 transitions.statuses() 的真实 file 字段所指已认证源文件逐项一致，摘要见 results/editions-acceptance/all-paths.json。
 
 首次无索引建立缓存，已有索引后仅用户“检查轨迹更新”激活变化。阶数从有效插件发现，保留六阶及更多扩展。ZIP 不含个人记录/测试缓存；旧目录及原记录完整保存在 results/版本备份，各新目录也保留用户已有 trajectory_repository/recordings。
 
 独立解压验收使用含中文和空格的新目录、系统目录专用 PATH、故意无效的 PYTHONHOME/PYTHONPATH 及无效外网代理。实际普通网页 EXE 必须自行打开浏览器，不能用驱动主动导航代替；桌面窗口必须记录自带引擎版本。新增录制验收要求文件非空且浏览器能实际解码视频帧。脚本与证据：tests/check_web_entry.py、tests/check_folder.py、tests/check_editions_data.py、cluster/DesktopHost.cs、results/editions-acceptance。
 
 构建使用 triple_pendulum.build_editions，导出复用 build_folder.export；历史 build_folder.build 是旧单目录入口，不用于新发布。旧版分发和以下历史说明保留供追溯。
+
+当前操作约定：一键 EXE 直达；阶数在顶部，起终点在仿真/图表下方，稳态保持 5 个仿真秒。
 
 ---
 

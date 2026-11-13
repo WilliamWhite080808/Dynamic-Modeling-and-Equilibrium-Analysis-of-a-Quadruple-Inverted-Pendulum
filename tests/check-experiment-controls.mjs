@@ -18,7 +18,9 @@ send({type:'settings',running:true});advance(1);assert.deepEqual(last.state,at3.
 send({type:'seek',time:1e6,running:false,request_id:2});assert.ok(Math.abs(last.time-last.timeline.end)<.00101);assert.ok(last.stable>=.49);
 begin();send({type:'settings',speed:.1});advance(1);assert.ok(Math.abs(last.time-.1)<.002);
 begin();send({type:'settings',speed:10});advance(1);assert.ok(Math.abs(last.time-10)<.002);assert.equal(last.boundaries,0);assert.ok(last.maxForce<=120);
-begin(true);advance(12);assert.equal(loops.length,0,'Do not restart before 10 seconds of stable holding');advance(8);
-assert.equal(loops.length,1);assert.ok(loops[0].held_for>=10);assert.equal(last.timeline.cycle,1);assert.ok(last.time<8);
+begin(true);
+for(let i=0;i<10000&&last.stable<4.9;i++)advance(.004);
+assert.ok(last.stable>=4.9);assert.equal(loops.length,0,'Do not restart before five seconds of stable holding');advance(.2);
+assert.equal(loops.length,1);assert.ok(loops[0].held_for>=5&&loops[0].held_for<5.01);assert.equal(last.timeline.cycle,1);assert.ok(last.time<.21);
 send({type:'settings',running:false});const stopped=last.time;advance(3);assert.equal(last.time,stopped);
-console.log('PASS: exact physical seek/resume, steady+0.5s timeline, continuous 0.1–10x rates, stable-10s repetition, stopped state and bounded cart force.');
+console.log('PASS: exact physical seek/resume, steady+0.5s timeline, continuous 0.1–10x rates, stable-5s repetition, stopped state and bounded cart force.');
