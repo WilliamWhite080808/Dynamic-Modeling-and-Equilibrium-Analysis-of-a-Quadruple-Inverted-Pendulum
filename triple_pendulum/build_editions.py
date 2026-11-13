@@ -1,7 +1,7 @@
 """Two independent complete distributions: system browser and native window."""
 from pathlib import Path
 import argparse,copy,datetime,hashlib,json,os,shutil,struct,subprocess,zipfile,zlib
-from .build_folder import export
+from .motion_export import export
 from .motion_text import dumps
 
 ROOT=Path(__file__).resolve().parent.parent
@@ -16,7 +16,7 @@ def compile_app(source,target,references=()):
     args.extend('/reference:'+str(Path(p).resolve()) for p in references)
     args.append(source);subprocess.run(args,cwd=ROOT/'cluster',check=True)
 
-def make(destination,edition,seed,lightweight=False):
+def make(destination,edition,seed,lightweight=True):
     destination=Path(destination);destination.mkdir(parents=True,exist_ok=True)
     if (destination/'release.toml').exists():raise ValueError('不要覆盖已经发布的版本')
     shutil.copytree(Path(seed)/'runtime',destination/'runtime',copy_function=linked_copy,ignore=shutil.ignore_patterns('__pycache__','*.pyc','*.nbc','*.nbi'))
@@ -35,13 +35,10 @@ def make(destination,edition,seed,lightweight=False):
         shutil.copy2(sdk/'runtimes/win-x64/native/WebView2Loader.dll',destination/'WebView2Loader.dll')
         licenses=destination/'许可';licenses.mkdir(exist_ok=True)
         for name in ('LICENSE.txt','NOTICE.txt'):shutil.copy2(sdk/name,licenses/('WebView2-'+name))
-        if not lightweight:
-            engine=next((ROOT/'results/desktop-build/fixed-runtime').glob('*'))
-            shutil.copytree(engine,destination/'engine',copy_function=linked_copy)
         compile_app('DesktopHost.cs',destination/'倒立摆.exe',[net/'Microsoft.Web.WebView2.Core.dll',net/'Microsoft.Web.WebView2.WinForms.dll'])
     return destination
 
-def sync_data(web,desktop,lightweight=False):
+def sync_data(web,desktop,lightweight=True):
     report=export(web,compact=lightweight)
     for name in ('motions','models'):shutil.copytree(Path(web)/name,Path(desktop)/name,dirs_exist_ok=True)
     expected={p.name for p in (Path(web)/'motions').glob('*.toml')}
@@ -52,7 +49,7 @@ def sync_data(web,desktop,lightweight=False):
     report.update(built_at=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).isoformat(),fifth_computed_total=computed,trajectory_format='TOML v2; lossless Hermite nodes',requires_external_python=False,requires_network=False,one_click_start=True,stable_hold_seconds=5,layout='阶数在上；仿真及图表居中；起点终点在下')
     if lightweight:report['trajectory_format']='TOML v3; lossless IEEE754 state-Hermite coefficients'
     for folder,kind in ((Path(web),'网页版'),(Path(desktop),'桌面版')):
-        value=dict(report,edition=kind,entry='打开网页版.exe' if kind=='网页版' else '倒立摆.exe',browser_engine='installed browser with verified executable fallback' if kind=='网页版' else 'bundled Microsoft WebView2 Fixed Version 157.0.4341.57')
+        value=dict(report,edition=kind,entry='打开网页版.exe' if kind=='网页版' else '倒立摆.exe',browser_engine='installed browser with verified executable fallback' if kind=='网页版' else 'installed WebView2 or actual browser; no component installation')
         (folder/'release.toml').write_text(dumps(value),encoding='utf8')
         notes=[kind+' · 倒立摆实验室','完整解压后，双击“'+value['entry']+'”，自动直接进入仿真，无选择页。',
             '自动检测实际可用浏览器，支持 Firefox/Chrome/Edge 等，不依赖默认 Edge 关联。首次使用 EXE 启动服务后，index.html 可直接进入。' if kind=='网页版' else '独立桌面窗口，自带浏览器引擎，不依赖系统 Edge、Firefox 或 Chrome。',

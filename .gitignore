@@ -23,6 +23,7 @@ Thumbs.db
 # Complete Windows distributions contain bundled runtimes and private caches.
 /dist/
 /.cache/
+/trajectory_repository/
 
 # Optimization checkpoints are reproducible scratch data.
 /precomputed_swingups/candidates/
@@ -43,6 +44,9 @@ Thumbs.db
 !/results/fourth-order-acceptance.json
 !/results/fourth-order-worker-audit.json
 !/results/fifth-order-worker-audit.json
+!/results/fifth-order-complete.json
+!/results/certified-bank-manifest.json
+!/results/desktop-share-acceptance.json
 !/results/recovery-audit.json
 !/results/recovery-stress-audit.json
 !/results/recovery-worker-audit.json

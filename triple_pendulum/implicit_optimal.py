@@ -25,7 +25,7 @@ def inverse_function(plant):
     required=ca.mtimes(matrix,acc)+ca.vertcat(bias0,bias)
     return ca.Function('required_forces',[s,acc],[required])
 
-def optimize(plant,initial,duration=8,nodes=201,guess=None,max_iter=600,seed=42,cancel=None,max_seconds=60,progress=None,target_angles=None,compute_gains=True,endpoint_angles=None,initial_force=None,residual_homotopy=False,force_rate=None,force_fraction=.66):
+def optimize(plant,initial,duration=8,nodes=201,guess=None,max_iter=600,seed=42,cancel=None,max_seconds=60,progress=None,target_angles=None,compute_gains=True,endpoint_angles=None,initial_force=None,residual_homotopy=False,force_rate=None,force_fraction=.66,reference_weight=0.):
     if not 0<force_fraction<=1:raise ValueError('Force fraction must remain inside the physical actuator limit')
     start=time.perf_counter();m=plant.dim;d=plant.d;h=duration/(nodes-1)
     initial=np.array(initial);goal=np.zeros(plant.n) if target_angles is None else np.asarray(target_angles)
@@ -75,7 +75,18 @@ def optimize(plant,initial,duration=8,nodes=201,guess=None,max_iter=600,seed=42,
     elif seed!=42:
         z[:,1:d]+=.1*np.sin(np.pi*t)[:,None]*np.random.default_rng(seed).normal(size=plant.n)
     acc=np.gradient(z[:,d:],h,axis=0)
-    opti.set_initial(X,z.T);opti.set_initial(A,acc.T);opti.set_initial(Am,((acc[:-1]+acc[1:])/2).T)
+    middle_acc=(acc[:-1]+acc[1:])/2
+    if guess is not None and len(guess.get('forces',[]))==len(guess['states']):
+        # A dynamics-consistent warm start preserves a feasible refined input.
+        # Finite differences of velocity can destroy feasibility at fast turns.
+        warm_force=np.interp(t,old,np.asarray(guess['forces']))
+        derivative=plant.batch(z.copy(),warm_force.copy());acc=derivative[:,d:]
+        mid_state=(z[:-1]+z[1:])/2+h/8*(derivative[:-1]-derivative[1:])
+        middle_acc=plant.batch(mid_state.copy(),((warm_force[:-1]+warm_force[1:])/2).copy())[:,d:]
+    opti.set_initial(X,z.T);opti.set_initial(A,acc.T);opti.set_initial(Am,middle_acc.T)
+    if reference_weight:
+        if guess is None or reference_weight<0:raise ValueError('Reference projection requires a warm input and positive weight')
+        opti.minimize(objective+reference_weight*ca.sumsqr(X-ca.DM(z.T)))
     best=None;iterations=0
     def callback(i):
         nonlocal best,iterations

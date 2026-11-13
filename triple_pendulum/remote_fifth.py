@@ -101,7 +101,8 @@ def cycle(root,rejected,workers):
     local=transitions.catalog(5)
     seen={transitions.key(5,row['source'],row['target']):row.get('remote_sha256') for row in local['entries'] if row['status']=='ready'}
     snapshot=remote_snapshot(root,seen,rejected)
-    status=dict(host='wqm',root=root,order=5,total=992,poses=32,workers=snapshot['metadata']['workers_total'],jobs=snapshot['jobs'],remote_ready=snapshot['remote_ready'],local_ready=local['ready'],updated_at=time.time(),phase='computing')
+    active=any(job['state'] in ('Q','R','E') for job in snapshot['jobs'])
+    status=dict(host='wqm',root=root,order=5,total=992,poses=32,workers=snapshot['metadata']['workers_total'] if active else 0,jobs=snapshot['jobs'],remote_ready=snapshot['remote_ready'],local_ready=local['ready'],updated_at=time.time(),phase='computing')
     with repository.disk_lock():
         rows=transitions.statuses()
         for remote in snapshot['entries']:
@@ -136,6 +137,12 @@ def cycle(root,rejected,workers):
         except Exception as error:status.update(phase='tour_needs_review',last_error=str(error)[-2000:])
     elif not any(job['state'] in ('Q','R','E') for job in status['jobs']):status['phase']='needs_search'
     status['updated_at']=time.time();common.atomic_json(STATUS,status)
+    if status.get('phase')=='complete':
+        # The last candidate was imported after the initial snapshot. Publish
+        # its exact receipt before watch exits so remote methods can finish.
+        final_rows=transitions.catalog(5)['entries']
+        final_seen={transitions.key(5,r['source'],r['target']):r.get('remote_sha256') for r in final_rows if r['status']=='ready'}
+        remote_snapshot(root,final_seen,rejected)
     print('SYNC '+json.dumps(status),flush=True)
     return status
 

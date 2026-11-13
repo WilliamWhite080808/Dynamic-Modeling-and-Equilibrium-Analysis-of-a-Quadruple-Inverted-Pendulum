@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest>=7,<10
+httpx==0.27.0
+marionette-driver==3.7.1

@@ -7,7 +7,7 @@ from marionette_driver.marionette import Marionette
 from marionette_driver.by import By
 
 def main():
-    folder=Path(sys.argv[1]).resolve();qa=Path(sys.argv[sys.argv.index('--qa')+1]).resolve() if '--qa' in sys.argv else ROOT/'results/folder-acceptance';qa.mkdir(parents=True,exist_ok=True)
+    folder=Path(sys.argv[1]).resolve();qa=Path(sys.argv[sys.argv.index('--qa')+1]).resolve() if '--qa' in sys.argv else ROOT/'results/acceptance/full-functions';qa.mkdir(parents=True,exist_ok=True)
     if (folder/'程序文件').is_dir():folder=folder/'程序文件'
     endpoint=json.loads((folder/'.cache/instance.json').read_text())['url']
     release=tomllib.loads((folder/'release.toml').read_text(encoding='utf8')) if (folder/'release.toml').exists() else json.loads((folder/'release.json').read_text())
@@ -43,8 +43,10 @@ def main():
             wait(f"return document.querySelector('#transfer-count').textContent==='{count}/{2**n*(2**n-1)}' && document.querySelector('#orders [data-order=\"{n}\"]').classList.contains('selected')&&!document.querySelector('#orders [data-order=\"{n}\"]').disabled&&document.querySelector('#transfer-note').textContent.startsWith('{'↓'*n} → ')&&parseFloat(document.querySelector('#angle-metric').textContent)<.5&&parseFloat(document.querySelector('#stable-metric').textContent)>=1;",90)
             checks.append(f'{n}-link default hanging start reaches stable through a certified plugin')
             print('PASS hanging',n,flush=True)
-        if '--seek-only' not in sys.argv:assert driver.find_element(By.CSS_SELECTOR,'#transfer-cruise').get_attribute('disabled')=='true'
-        checks.append('incomplete fifth-order full tour remains disabled')
+        if '--seek-only' not in sys.argv:
+            complete=5 in release.get('sequence_ready',[])
+            assert bool(driver.find_element(By.CSS_SELECTOR,'#transfer-cruise').get_attribute('disabled')) is not complete
+            checks.append('fifth-order full tour availability matches the exact certified snapshot')
         shot('fifth-order.png')
         click('#orders [data-order="4"]');wait("return document.querySelector('#transfer-count').textContent==='240/240' && document.querySelector('#status').textContent==='已稳定';")
         click('#transfer-to-options [data-pose="DUUD"]');click('#pause');wait("return document.querySelector('#pause').textContent==='继续摆动' && document.querySelector('#transfer-note').textContent.includes('↓↓↓↓ → ↓↑↑↓') && !document.querySelector('#experiment-seek').disabled;")

@@ -19,7 +19,19 @@ if os.name=='nt':
     # Keep the DLL directory wide, and pass an ASCII relative plugin path when possible.
     _casadi_dir=Path(ca.__file__).resolve().parent
     _dll_handle=os.add_dll_directory(str(_casadi_dir))
-    _relative=os.path.relpath(_casadi_dir)
+    try:_relative=os.path.relpath(_casadi_dir)
+    except ValueError:_relative=str(_casadi_dir)  # packed runtime may live on another drive
+    if not _relative.isascii():
+        import ctypes
+        _short=ctypes.create_unicode_buffer(32768)
+        if ctypes.windll.kernel32.GetShortPathNameW(str(_casadi_dir),_short,len(_short)) and _short.value.isascii():_relative=_short.value
+        else:
+            # CasADi uses LoadLibraryA; an NTFS volume may have no 8.3 names.
+            # Preload through the Unicode API. Its later basename lookup then
+            # reuses these exact modules without interpreting a UTF-8 path.
+            ctypes.windll.kernel32.SetDllDirectoryW(str(_casadi_dir));_relative=''
+            _plugin_handles=[ctypes.WinDLL(str(p)) for p in sorted(_casadi_dir.glob('libcasadi_linsol_*.dll'))]
+            _plugin_handles += [ctypes.WinDLL(str(_casadi_dir/'libcasadi_nlpsol_ipopt.dll'))]
     ca.GlobalOptions.setCasadiPath(_relative if _relative.isascii() else str(_casadi_dir))
 from .model import Plant,Parameters,wrap
 from .planner import tracking_gains
@@ -43,7 +55,7 @@ def symbolic_dynamics(plant):
     return ca.Function('dynamics',[s,u],[ca.vertcat(v,ca.solve(M,ca.vertcat(b0,b)))])
 
 
-def optimize(plant,initial,duration=5,nodes=201,guess=None,max_iter=1500,seed=42,cancel=None,max_seconds=180,progress=None,target_angles=None,compute_gains=True,endpoint_angles=None,initial_force=None,force_rate=None,force_fraction=.66,transcription='hermite-simpson'):
+def optimize(plant,initial,duration=5,nodes=201,guess=None,max_iter=1500,seed=42,cancel=None,max_seconds=180,progress=None,target_angles=None,compute_gains=True,endpoint_angles=None,initial_force=None,force_rate=None,force_fraction=.66,transcription='hermite-simpson',reference_weight=0.):
     if not 0<force_fraction<=1:raise ValueError('Force fraction must remain inside the physical actuator limit')
     if transcription not in ('hermite-simpson','rk4'):raise ValueError('Unknown transcription')
     start=time.perf_counter();m=plant.dim;d=plant.d;h=duration/(nodes-1)
@@ -96,6 +108,9 @@ def optimize(plant,initial,duration=5,nodes=201,guess=None,max_iter=1500,seed=42
     elif seed!=42:
         rng=np.random.default_rng(seed);z[:,1:d]+=.1*np.sin(np.pi*t)[:,None]*rng.normal(size=plant.n)[None,:]
     opti.set_initial(X,z.T);opti.set_initial(U,u[None,:])
+    if reference_weight:
+        if guess is None or reference_weight<0:raise ValueError('Reference projection requires a warm input and positive weight')
+        opti.minimize(opti.f+reference_weight*ca.sumsqr(X-ca.DM(z.T)))
     feasible_guess=None;iterations=0
     def callback(iteration):
         nonlocal feasible_guess,iterations

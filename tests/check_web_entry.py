@@ -7,7 +7,7 @@ from marionette_driver.marionette import Marionette
 from marionette_driver.by import By
 
 def main():
-    folder=Path(sys.argv[1]).resolve();qa=Path(sys.argv[sys.argv.index('--qa')+1]).resolve() if '--qa' in sys.argv else ROOT/'results/editions-acceptance';qa.mkdir(parents=True,exist_ok=True)
+    folder=Path(sys.argv[1]).resolve();qa=Path(sys.argv[sys.argv.index('--qa')+1]).resolve() if '--qa' in sys.argv else ROOT/'results/acceptance/web-entry';qa.mkdir(parents=True,exist_ok=True)
     resources=folder/'程序文件' if (folder/'程序文件').is_dir() else folder
     profile=qa/('web-profile-'+str(time.time_ns()));profile.mkdir()
     with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]

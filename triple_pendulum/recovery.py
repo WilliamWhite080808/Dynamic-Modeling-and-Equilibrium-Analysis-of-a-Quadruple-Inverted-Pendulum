@@ -2,7 +2,7 @@
 from copy import deepcopy
 import time
 import numpy as np
-from numba import njit
+from .accel_backend import njit,native
 from .model import dynamics,wrap
 
 
@@ -130,3 +130,8 @@ if __name__=='__main__':
             velocity=np.max(abs(states[:,p.d:]),axis=1)
             matches=np.flatnonzero((angle<.25)&(velocity<.6)&(abs(states[:,0])<.25))
             print(n,kx,kv,'capture',float(matches[0]*.004) if len(matches) else None,'rail',float(np.max(abs(states[:,0]))),'time',round(time.perf_counter()-start,2),flush=True)
+
+
+if native is not None:
+    dissipative_force=native.dissipative_force
+    dissipative_rollout=native.dissipative_rollout

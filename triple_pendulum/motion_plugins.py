@@ -5,7 +5,7 @@ The lossless state-Hermite representation retains the certified controller.
 """
 from pathlib import Path
 from copy import deepcopy
-import gzip,hashlib,json,math,threading,time,uuid
+import gzip,hashlib,json,math,threading,time,uuid,os,re
 import numpy as np
 from .model import Parameters
 from .motion_text import read_motion,loads as read_toml
@@ -61,6 +61,7 @@ def unpack(data,n,source,target,parameters):
 class MotionStore:
     def __init__(self,root):
         self.root=Path(root);self.cache=self.root/'.cache/motions';self.index=self.root/'.cache/trajectory-index.json';self.lock=threading.RLock();self.plans={}
+        if os.environ.get('PENDULUM_CACHE_HOME'):self.cache=Path(os.environ['PENDULUM_CACHE_HOME'])/'motions'
         if self.index.exists():
             try:json.loads(self.index.read_text(encoding='utf8'))
             except (OSError,ValueError):self.index.rename(self.index.with_name('trajectory-index.bad-'+str(time.time_ns())+'.json'))
@@ -102,6 +103,21 @@ class MotionStore:
         for direction,a,b in (('ab',ends[0],ends[1]),('ba',ends[1],ends[0])):unpack(doc[direction],n,a,b,params)
         return doc,params
 
+    def certificate_only_update(self,raw,previous,old_model,new_model):
+        # Sequence certificates do not change the physical reference. Accept this
+        # fast path only when every byte except the model-hash line is identical.
+        if not previous or previous.get('ext')!='.toml':return False
+        if {k:v for k,v in old_model.items() if k!='sequence_signatures'}!={k:v for k,v in new_model.items() if k!='sequence_signatures'}:return False
+        path=self.cache/(previous['cache_sha256']+'.toml')
+        try:prior=path.read_bytes()
+        except OSError:return False
+        if hashlib.sha256(prior).hexdigest()!=previous['cache_sha256']:return False
+        pattern=br'(?m)^model = "([0-9a-f]{64})"\r?\n'
+        a=re.search(pattern,prior);b=re.search(pattern,raw)
+        if not a or not b:return False
+        if a.group(1).decode() not in (digest(old_model),model_digest(old_model)) or b.group(1).decode() not in (digest(new_model),model_digest(new_model)):return False
+        return re.sub(pattern,b'model = ""\n',prior,count=1)==re.sub(pattern,b'model = ""\n',raw,count=1)
+
     def refresh(self):
         with self.lock:
             old=json.loads(self.index.read_text(encoding='utf8')) if self.index.exists() else {'files':{}}
@@ -114,6 +130,9 @@ class MotionStore:
                 try:
                     raw=path.read_bytes();sha=hashlib.sha256(raw).hexdigest()
                     previous=old['files'].get(path.name)
+                    if previous and previous['sha256']!=sha and self.certificate_only_update(raw,previous,old.get('model',{}),model):
+                        target=self.cache/(sha+'.toml');temporary=target.with_name(target.name+'.'+uuid.uuid4().hex+'.tmp');temporary.write_bytes(raw);temporary.replace(target)
+                        files[path.name]=dict(previous,sha256=sha,cache_sha256=sha,seed_source=path.name);continue
                     unchanged=previous and previous['sha256']==sha and old.get('model')==model and previous.get('directions')
                     if unchanged and previous.get('ext')=='.toml':
                         try:
@@ -127,7 +146,7 @@ class MotionStore:
                         self.cached_document(previous);files[path.name]=previous;continue
                     if unchanged:doc=self.cached_document(previous);params=previous['parameters']
                     else:doc,params=self.validate(raw,model)
-                    compact=read_toml(raw).get('v')==3 if not raw.lstrip().startswith(b'{') else False
+                    compact=read_toml(raw).get('v') in (3,4) if not raw.lstrip().startswith(b'{') else False
                     cached=raw if compact else gzip.compress(encoded(doc),compresslevel=3,mtime=0);cache_sha=hashlib.sha256(cached).hexdigest();ext='.toml' if compact else '.json.gz';target=self.cache/(cache_sha+ext)
                     if not target.exists() or hashlib.sha256(target.read_bytes()).hexdigest()!=cache_sha:target.write_bytes(cached)
                     directions={k:{x:doc[k][x] for x in ('runtime_sha256','T','proof')} for k in ('ab','ba')}

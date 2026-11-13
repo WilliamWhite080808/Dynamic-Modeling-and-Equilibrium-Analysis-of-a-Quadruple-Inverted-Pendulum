@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "ready": 992,
+  "individual": 992,
+  "continuous_edges": 992,
+  "continuous_closed_chain": true,
+  "simulation_seconds": 9772.096001532087,
+  "bank_sha256": "e1831f5a4ff70d97fc19c4609360fc2d6af1729aa4f7317acbe4ea8d6f139995",
+  "certificate_sha256": "7fd96e2a867c8edeb1845ac8f1a6ec5468301ddf6014555fcf8bfd254810f5ca",
+  "all_source_hashes_and_physics_checked": true
+}

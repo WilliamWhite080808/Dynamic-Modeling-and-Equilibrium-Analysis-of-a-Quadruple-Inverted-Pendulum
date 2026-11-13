@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.linalg import solve_continuous_are, solve_discrete_are, expm
-from scipy.signal import place_poles
 from .model import Plant
 
 

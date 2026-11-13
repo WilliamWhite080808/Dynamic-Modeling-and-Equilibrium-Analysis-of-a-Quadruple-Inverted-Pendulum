@@ -23,6 +23,9 @@ internal sealed class DesktopHost : Form {
     string url;
     int servicePid;
     bool closing;
+    bool preparing=true;
+    string RuntimePython {get{return Path.Combine(Environment.GetEnvironmentVariable("PENDULUM_RUNTIME_HOME")??Path.Combine(root,"runtime"),"python.exe");}}
+    string WindowCache {get{return Path.Combine(Environment.GetEnvironmentVariable("PENDULUM_CACHE_HOME")??Path.Combine(root,".cache"),"window");}}
     [DllImport("user32.dll")] static extern bool SetProcessDPIAware();
     [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr handle);
     [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr handle,int command);
@@ -42,7 +45,12 @@ internal sealed class DesktopHost : Form {
             }catch(IOException){}
         };
         Shown+=Open;
-        FormClosing+=delegate {closing=true;progress.Stop();};
+        FormClosing+=delegate(object s,FormClosingEventArgs e) {
+            closing=true;progress.Stop();
+            // Let the launcher publish its PID before exiting; otherwise its
+            // newly detached server can outlive an early window close.
+            if(preparing){e.Cancel=true;Hide();}
+        };
         FormClosed+=delegate {if(view!=null)view.Dispose();StopOwnService();};
     }
 
@@ -50,9 +58,10 @@ internal sealed class DesktopHost : Form {
         progress.Start();
         try {
             url=await Task.Run<string>(new Func<string>(Prepare));
-            if(closing)return;
             var instance=json.DeserializeObject(File.ReadAllText(Path.Combine(root,".cache","instance.json"),Encoding.UTF8)) as System.Collections.Generic.Dictionary<string,object>;
             if(instance.ContainsKey("pid")&&instance["pid"]!=null)servicePid=Convert.ToInt32(instance["pid"]);
+            preparing=false;
+            if(closing){StopOwnService();Close();return;}
             view=new WebView2();view.Dock=DockStyle.Fill;view.Visible=false;Controls.Add(view);
             var engine=Path.Combine(root,"engine");
             if(!File.Exists(Path.Combine(engine,"msedgewebview2.exe")))engine=null;
@@ -66,7 +75,7 @@ internal sealed class DesktopHost : Form {
             options.AdditionalBrowserArguments="--disable-background-networking --disable-component-update --disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-background-timer-throttling";
             CoreWebView2Environment env=null;bool fallbackAfterFailure=false;
             try {
-                env=await CoreWebView2Environment.CreateAsync(engine,Path.Combine(root,".cache","window"),options);
+                env=await CoreWebView2Environment.CreateAsync(engine,WindowCache,options);
                 await view.EnsureCoreWebView2Async(env);
             } catch {
                 if(engine==null&&testFolder==null)fallbackAfterFailure=true;
@@ -93,11 +102,11 @@ internal sealed class DesktopHost : Form {
             };
             if(testFolder!=null)view.CoreWebView2.DownloadStarting+=delegate(object s,CoreWebView2DownloadStartingEventArgs e){e.ResultFilePath=Path.Combine(testFolder,Path.GetFileName(e.ResultFilePath));e.Handled=true;};
             view.CoreWebView2.Navigate(url);
-        }catch(Exception error){Fail(error);if(testFolder!=null){Environment.ExitCode=1;Close();}}
+        }catch(Exception error){preparing=false;if(closing){StopOwnService();Close();return;}Fail(error);if(testFolder!=null){Environment.ExitCode=1;Close();}}
     }
 
     string Prepare() {
-        var python=Path.Combine(root,"runtime","python.exe");
+        var python=RuntimePython;
         if(!File.Exists(python))throw new Exception("求解环境缺失，请完整解压桌面版。");
         var start=new ProcessStartInfo(python,"\""+Path.Combine(root,"launch.py")+"\" --no-open");
         start.WorkingDirectory=root;start.UseShellExecute=false;start.CreateNoWindow=true;start.WindowStyle=ProcessWindowStyle.Hidden;
@@ -113,7 +122,7 @@ internal sealed class DesktopHost : Form {
     async Task BrowserFallback() {
         if(view!=null){Controls.Remove(view);view.Dispose();view=null;}
         var output=await Task.Run(delegate {
-            var info=new ProcessStartInfo(Path.Combine(root,"runtime","python.exe"),"\""+Path.Combine(root,"launch.py")+"\" --desktop");
+            var info=new ProcessStartInfo(RuntimePython,"\""+Path.Combine(root,"launch.py")+"\" --desktop");
             info.WorkingDirectory=root;info.UseShellExecute=false;info.CreateNoWindow=true;info.WindowStyle=ProcessWindowStyle.Hidden;
             info.RedirectStandardOutput=true;info.RedirectStandardError=true;info.StandardOutputEncoding=Encoding.UTF8;info.StandardErrorEncoding=Encoding.UTF8;
             using(var child=Process.Start(info)){var text=child.StandardOutput.ReadToEnd();var error=child.StandardError.ReadToEnd();child.WaitForExit();if(child.ExitCode!=0)throw new Exception(error);return text;}
@@ -131,7 +140,7 @@ internal sealed class DesktopHost : Form {
         if(servicePid<=0)return;
         try {
             using(var p=Process.GetProcessById(servicePid)) {
-                if(String.Equals(p.MainModule.FileName,Path.Combine(root,"runtime","python.exe"),StringComparison.OrdinalIgnoreCase))p.Kill();
+                if(String.Equals(p.MainModule.FileName,RuntimePython,StringComparison.OrdinalIgnoreCase))p.Kill();
             }
         }catch(ArgumentException){}catch(System.ComponentModel.Win32Exception){}catch(InvalidOperationException){}
     }

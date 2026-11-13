@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "folder": "dist/实验/桌面版",
+  "entry": "倒立摆.exe",
+  "archive": {
+    "file": "dist\\实验\\桌面分享包.zip",
+    "bytes": 97185619,
+    "sha256": "2ca8f26469ce4df174b4ec709e48541f5301c1722c5b60679d4028aae8e15120",
+    "crc_passed": true
+  },
+  "desktop_only": true,
+  "complete_solver": true,
+  "orders": {
+    "1": 2,
+    "2": 12,
+    "3": 56,
+    "4": 240,
+    "5": 992
+  },
+  "pairs": 651,
+  "directions": 1302,
+  "sequence_ready": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "own_python_modules": 17,
+  "own_python_bytes": 109952,
+  "source_and_archive_member_bytes_equal": true,
+  "all_1302_original_control_hashes_unchanged": true,
+  "lossless_report_sha256": "e6bdb2f6e5f9915c5f35dcbd5de8bfa3d0a0af490b47c7d9109ae6ef55fed354",
+  "cold_entry": {
+    "passed": true,
+    "archive_bytes": 97185619,
+    "archive_sha256": "2ca8f26469ce4df174b4ec709e48541f5301c1722c5b60679d4028aae8e15120",
+    "crc_and_all_member_bytes_passed": true,
+    "folder": "E:\\倒立摆\\results\\acceptance\\compact\\lifetime-fixed\\中文 空格\\桌面版",
+    "cold_start_seconds": 12.85899999999674,
+    "url": "http://127.0.0.1:8766",
+    "ordinary_exe": true,
+    "driver_navigation": false,
+    "window": {
+      "pid": 64588,
+      "title": "倒立摆实验室",
+      "visible": true,
+      "hwnd": 1187750
+    },
+    "actual_page_navigation_completed": true,
+    "runtime_auto_expanded": true,
+    "isolated_path_and_pythonhome": true,
+    "requires_installation": false,
+    "close_stops_own_backend": true
+  },
+  "early_close": {
+    "host_exited": true,
+    "closed_before_page_navigation": true,
+    "passed": true,
+    "actual_exe": "E:\\倒立摆\\results\\acceptance\\compact\\lifetime-fixed\\中文 空格\\桌面版",
+    "own_backend_exited": true
+  },
+  "final_runtime": {
+    "passed": true,
+    "interpreter": "E:\\倒立摆\\results\\acceptance\\compact\\final-isolated\\隔离缓存\\runtime-efdaad4bc071f5d6873e116c55571f77606784af1293ed8747c78dc2335f1d7e\\runtime\\python.exe",
+    "numba_imported": false,
+    "rhs_random_cases": 10,
+    "max_absolute_rhs_difference": 7.815970093361102e-14,
+    "orders_analyzed": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "fresh_ipopt_hanging_swingup": true,
+    "solver_seconds": 2.5929999999934807,
+    "verification": {
+      "final_state": [
+        -1.1207554562524627e-08,
+        6.283185305358311,
+        1.3835182388567993e-08,
+        2.1898813542997852e-09
+      ],
+      "final_angle_deg": 1.043514037661979e-07,
+      "max_cart": 0.9010960518483229,
+      "max_force": 26.454942658242782,
+      "max_force_rate": 287.18258032404225,
+      "settled_at": 4.984000000000001,
+      "final_stable": true,
+      "max_tracking_error": 3.39535674006879e-05
+    },
+    "v4_first_index_rebuilt": true,
+    "v4_manual_activation": true,
+    "v4_broken_index_rebuilt": true
+  },
+  "browser_fallback": {
+    "passed": true,
+    "entry": "E:\\倒立摆\\results\\acceptance\\compact\\isolated-final\\中文 空格\\accepted-desktop\\倒立摆.exe",
+    "browser": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+    "url": "http://127.0.0.1:8766",
+    "real_exe_opened_page_without_driver_navigation": true,
+    "orders_tested": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "proxy_isolated": true,
+    "order_above_scene": true,
+    "poses_below_scene": true,
+    "lower_pose_real_pointer_click": true,
+    "default_speed": 1,
+    "refresh_resets_speed_to_one": true,
+    "startup_seconds": 9.813000000009197
+  },
+  "physical_worker_fifth": {
+    "passed": true,
+    "ready": 992,
+    "individual": 992,
+    "continuous_edges": 992,
+    "continuous_closed_chain": true,
+    "simulation_seconds": 9772.096001532087,
+    "bank_sha256": "e1831f5a4ff70d97fc19c4609360fc2d6af1729aa4f7317acbe4ea8d6f139995",
+    "certificate_sha256": "7fd96e2a867c8edeb1845ac8f1a6ec5468301ddf6014555fcf8bfd254810f5ca",
+    "all_source_hashes_and_physics_checked": true
+  },
+  "recomputed_orders": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "all_1302_reoptimized": false,
+  "historical_archive": {
+    "records": 51884,
+    "unique_objects": 8819,
+    "bytes": 2726483539,
+    "manifest_sha256": "9d8106517299bfcc638c3da4d935106f2b99072c7c9269473329acb41f0e3661",
+    "independent": true,
+    "restore_check": true
+  },
+  "cleanup": {
+    "results_before": 35036481805,
+    "results_after": 3458090052,
+    "old_build_directories_removed": 26,
+    "original_editions_untouched": true,
+    "user_rar_untouched": true
+  },
+  "tested_platform": "current Windows x64, WebView2 125 and installed Firefox; no claim of testing every OS",
+  "automation": "completed and removed; no remote jobs restarted"
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "file": "s_sin.c",
+    "url": "https://www.netlib.org/fdlibm/s_sin.c",
+    "sha256": "4d5edb75368e4f8e0ac18682d3ae4b6944ba06801637cf0df6f378d6211f4c81"
+  },
+  {
+    "file": "s_cos.c",
+    "url": "https://www.netlib.org/fdlibm/s_cos.c",
+    "sha256": "bdcbea3c83b2d4aa521b9a5341f3e58b8cb9c8d326fcc4abb715f3704cf17799"
+  },
+  {
+    "file": "k_sin.c",
+    "url": "https://www.netlib.org/fdlibm/k_sin.c",
+    "sha256": "75d391f3c124806ce14893cd038ae5dd10663e40430ffa174d5fddcb33012167"
+  },
+  {
+    "file": "k_cos.c",
+    "url": "https://www.netlib.org/fdlibm/k_cos.c",
+    "sha256": "841086c75288f3f9fef03bae2a9dc24e99c3cdb2035e170c69452013a7b5befc"
+  },
+  {
+    "file": "e_rem_pio2.c",
+    "url": "https://www.netlib.org/fdlibm/e_rem_pio2.c",
+    "sha256": "3a08dd4a38f9f9fc9478a33ca05cb81a6566f1010ab14412e97cae091bede16b"
+  },
+  {
+    "file": "k_rem_pio2.c",
+    "url": "https://www.netlib.org/fdlibm/k_rem_pio2.c",
+    "sha256": "5796209ea3fe1af88e22badeaed0f6a6aa923914e097e227c410527cb5815740"
+  },
+  {
+    "file": "fdlibm.h",
+    "url": "https://www.netlib.org/fdlibm/fdlibm.h",
+    "sha256": "64113c472c2676499288bc35a821b0867916552930bc52c7445d2c50dddf0e71"
+  },
+  {
+    "file": "s_scalbn.c",
+    "url": "https://www.netlib.org/fdlibm/s_scalbn.c",
+    "sha256": "9ad1bb374fc2951ec086474c82373b45bccfdecd34d631974dccf8633f40d99e"
+  },
+  {
+    "file": "s_floor.c",
+    "url": "https://www.netlib.org/fdlibm/s_floor.c",
+    "sha256": "fbe8779a58d46879222ba6b390931b13118037c5123b8e89a73cf0231f643b4a"
+  },
+  {
+    "file": "s_copysign.c",
+    "url": "https://www.netlib.org/fdlibm/s_copysign.c",
+    "sha256": "459c18858c944a4e7062d38ab4dfb596edbe76706d24029c2dac766dcd2be3fd"
+  }
+]

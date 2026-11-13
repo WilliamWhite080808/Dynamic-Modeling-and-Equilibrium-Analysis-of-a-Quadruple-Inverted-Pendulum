@@ -97,7 +97,11 @@ def ensure_service():
                 env=os.environ.copy();env.update(PENDULUM_PORT=str(port),PYTHONNOUSERSITE='1',PYTHONUTF8='1',NUMBA_CACHE_DIR=str(cache/'numba'),TMP=str(cache),TEMP=str(cache))
                 flags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0
                 with (results/'server.log').open('a',encoding='utf8') as log:
-                    proc=subprocess.Popen([sys.executable,'-m','triple_pendulum.server'],cwd=ROOT,env=env,stdout=log,stderr=log,creationflags=flags,close_fds=True)
+                    command=[sys.executable,'-m','triple_pendulum.server']
+                    if env.get('PENDULUM_RUNTIME_HOME'):
+                        code='import sys,runpy;sys.path.insert(0,'+repr(str(ROOT))+');runpy.run_module("triple_pendulum.server",run_name="__main__")'
+                        command=[sys.executable,'-c',code]
+                    proc=subprocess.Popen(command,cwd=ROOT,env=env,stdout=log,stderr=log,creationflags=flags,close_fds=True)
                 record.write_text(json.dumps(dict(url=candidate,pid=proc.pid)),encoding='utf8')
                 deadline=time.monotonic()+360
                 while time.monotonic()<deadline:

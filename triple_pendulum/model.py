@@ -1,7 +1,7 @@
 """Rigid uniform rods; the cart is the only actuator. No state stabilization tricks."""
 from dataclasses import dataclass, asdict
 import numpy as np
-from numba import njit
+from .accel_backend import njit,native
 
 
 @dataclass
@@ -134,3 +134,9 @@ class Plant:
 
 def wrap(a):
     return (np.asarray(a)+np.pi)%(2*np.pi)-np.pi
+
+
+if native is not None:
+    acceleration=native.acceleration
+    dynamics=native.dynamics
+    batch_dynamics=native.batch_dynamics

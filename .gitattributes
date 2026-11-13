@@ -1,0 +1,17 @@
+# Normalize source text; certified numerical bytes must keep their SHA.
+*.py text eol=lf
+*.cs text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.toml text eol=lf
+*.ps1 text eol=lf
+*.json -text
+*.npz -text
+*.npy -text
+*.pyd -text
+*.dll -text
+# Keep the official Netlib mirror, including original whitespace and hashes.
+native/fdlibm/* -whitespace

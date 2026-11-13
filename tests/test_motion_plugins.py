@@ -61,6 +61,17 @@ def compact_pair(tmp,n,a,b):
     old,source=pair(tmp,n,a,b);doc=json.loads(old.read_bytes());path=old.with_name(f'{n}_{a}_{b}.toml')
     path.write_bytes(compact_bytes(doc));old.unlink();return path,source
 
+
+def test_sequence_certificate_change_reuses_identical_numeric_payload(tmp_path,monkeypatch):
+    from triple_pendulum.motion_plugins import model_digest
+    path,_=compact_pair(tmp_path,1,'U','D');store=MotionStore(tmp_path)
+    model=json.loads((tmp_path/'models/standard.json').read_bytes());old=digest(model)
+    model['sequence_signatures']={'1':'new-certificate'}
+    (tmp_path/'models/standard.json').write_bytes(encoded(model));path.write_bytes(path.read_bytes().replace(old.encode(),model_digest(model).encode()))
+    monkeypatch.setattr(store,'validate',lambda *a:(_ for _ in ()).throw(AssertionError('unchanged numeric data was decoded')))
+    result=store.refresh();assert not result['errors'] and result['changed']
+    assert store.value['model']==model and store.lookup(Plant(Parameters(n=1)),'U','D')['success']
+
 def test_compact_prebuilt_index_restores_missing_snapshots_without_parsing(tmp_path,monkeypatch):
     import triple_pendulum.motion_plugins as module
     path,_=compact_pair(tmp_path,1,'U','D');store=MotionStore(tmp_path);meta=next(iter(store.value['files'].values()))
