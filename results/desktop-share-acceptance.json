@@ -150,5 +150,30 @@
     "user_rar_untouched": true
   },
   "tested_platform": "current Windows x64, WebView2 125 and installed Firefox; no claim of testing every OS",
-  "automation": "completed and removed; no remote jobs restarted"
+  "automation": "completed and removed; no remote jobs restarted",
+  "git": {
+    "code_data_commit": "07c0f8fbe6520e3c18e79f1a5c608493e4a1123b",
+    "remote_main_verified": true,
+    "all1302_exact_git_objects_verified": true,
+    "certificate_blob_sha256": "7fd96e2a867c8edeb1845ac8f1a6ec5468301ddf6014555fcf8bfd254810f5ca"
+  },
+  "current_default_recompute": {
+    "passed": true,
+    "orders": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "bank_unchanged": true,
+    "all1302_recomputed": false,
+    "seconds": {
+      "1-D-U": 7.764999999999418,
+      "2-DD-UU": 8.031000000002678,
+      "3-DDD-UUU": 3.360000000000582,
+      "4-DDDD-UUUU": 5.421999999991385,
+      "5-DDDDD-UUUUU": 24.172000000005937
+    }
+  }
 }
