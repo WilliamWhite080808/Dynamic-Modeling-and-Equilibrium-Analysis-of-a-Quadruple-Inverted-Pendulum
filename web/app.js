@@ -6,8 +6,8 @@ import {eulerTour,poseArrows} from './transfers.js';
 import {TelemetryDashboard} from './telemetry.js';
 import {simulationRate,timelineEnd,STABLE_HOLD_SECONDS} from './experiment.js';
 import {CoreRecorder} from './recorder.js';
-const $=id=>document.getElementById(id), colors=['#3478ef','#f2a13c','#19ab9a','#a275df','#e6719b'];
-const labels=['','单','双','三','四','五'], english=['','SINGLE','DOUBLE','TRIPLE','QUADRUPLE','QUINTUPLE'];
+const $=id=>document.getElementById(id), colors=Array.from({length:20},(_,i)=>['#3478ef','#f2a13c','#19ab9a','#a275df','#e6719b','#368bba','#b79437','#668356'][i%8]);
+const labels=['','单','双','三','四','五','六','七','八','九','十'], english=['','SINGLE','DOUBLE','TRIPLE','QUADRUPLE','QUINTUPLE','SIX-LINK','SEVEN-LINK','EIGHT-LINK','NINE-LINK','TEN-LINK'];
 const worker=new Worker('/sim-worker.js?v=experiment-4',{type:'module'});
 const renderer=new Renderer($('arena'));
 const player=new ReplayPlayer();
@@ -20,15 +20,16 @@ let activeJob=null,replayActive=false,liveContext=null,liveSnapshot=null,replayF
 let goalPattern='UUU',inventoryGroups=[],selectedCard=null,selectedTarget='UUU';
 let bankRows=[],bankTotal=null;
 let transferBank=null,transferBusy=false,transferToken=0,pendingTransfer=null,activeTransfer=null,cruise=null,transferOrder=0,transferSummary='';
-const goalChoices=order=>order<=5?equilibriaFor(order):patternsFor(order);
+let transferRunIntent=true;
+const goalChoices=order=>order<=20?equilibriaFor(order):patternsFor(order);
 const equilibriumCode=angles=>angles.map(a=>Math.cos(a)>0?'U':'D').join('');
 const targetLabel=code=>[...code].map(c=>c==='U'?'上':'下').join(' / ');
 const requestedOrder=Number(new URLSearchParams(location.search).get('order'));
-let n=Number.isInteger(requestedOrder)&&requestedOrder>=1&&requestedOrder<=5?requestedOrder:3,design=null,snapshot=null,showTrail=true,activePreset='near',generation=0;
-let showHidden=false,showGhost=false,running=true,lastUI=0;
+let n=Number.isInteger(requestedOrder)&&requestedOrder>=1&&requestedOrder<=20?requestedOrder:3,design=null,snapshot=null,showTrail=true,activePreset='near',generation=0;
+let showHidden=false,showGhost=false,running=true,lastUI=0,runCommand=null;
 const parameters={n:3,cart_mass:1.5,length:0.65,mass:0.3,gravity:9.81,damping:0.006,cart_damping:0.08,max_force:120,rail:2.4,point_mass:false};
 const rad=Math.PI/180, deg=180/Math.PI;
-function settings(values){worker.postMessage({type:'settings',...values});}
+function settings(values){if(values.running!==undefined)runCommand=values.running;worker.postMessage({type:'settings',...values});}
 function setNotice(text,warn=false){$('notice').classList.toggle('warn',warn);$('notice').lastElementChild.textContent=text;}
 function loading(title,message){$('loading').classList.remove('hidden');$('loading').querySelector('h3').textContent=title;$('loading').querySelector('p').textContent=message;}
 function seeded(){let s=42;return()=>{s^=s<<13;s^=s>>>17;s^=s<<5;return (s>>>0)/4294967296;};}
@@ -45,7 +46,7 @@ function goalOptions(order,preferred=$('goal').value){
 }
 async function initialize(preset='down',custom=null){
   pendingSeek=null;seekDragging=false;clearTimeout(seekTimer);workerReasonSeen='';
-  transferToken++;transferBusy=false;pendingTransfer=null;activeTransfer=null;cruise=null;transferOrder=0;transferSummary='';
+  transferToken++;transferBusy=false;pendingTransfer=null;activeTransfer=null;cruise=null;transferOrder=0;transferSummary='';transferRunIntent=true;
   if(replayActive){const order=n,p={...parameters},goal=$('goal').value;exitReplay();n=order;Object.assign(parameters,p);$('force').value=p.max_force;goalOptions(order,goal);}
   cancelPlanning();settings({running:false});
   const gen=++generation;activePreset=preset;
@@ -54,6 +55,10 @@ async function initialize(preset='down',custom=null){
   try{
     parameters.n=n;parameters.max_force=+$('force').value;
     goalPattern=goalOptions(n);
+    if(preset==='down'&&transferBank?.plugin_mode){
+      const from='D'.repeat(n),available=transferBank.entries.filter(row=>row.order===n&&row.source===from&&row.status==='ready');
+      if(!available.some(row=>row.target===goalPattern)&&available.length)goalPattern=goalOptions(n,available[0].target);
+    }
     if(goalPattern.includes('D')||preset==='down')$('sensor').value='full_state';
     $('goal').disabled=false;$('sensor').disabled=goalPattern.includes('D');
     const initial=custom||initialFor(preset);
@@ -63,10 +68,10 @@ async function initialize(preset='down',custom=null){
     if(!response.ok)throw Error(await response.text());
     const data=await response.json();if(gen!==generation)return;const readyPlan=data.hanging_plan;bankRows=data.precomputed_catalog.entries;delete data.hanging_plan;delete data.precomputed_catalog;design=data;
     worker.postMessage({type:'init',design,initial,sensor:$('sensor').value,observer:$('observer').value,mode:$('controller').value,precomputedPlan:readyPlan,requirePrecomputed:preset==='down'||exactHanging,loop:true});
-    settings({mode:$('controller').value,noise:+$('noise').value,speed:+$('speed').value,stepSize:+$('dt').value,autoRetry:$('retry').checked});
+    settings({running:true,mode:$('controller').value,noise:+$('noise').value,speed:+$('speed').value,stepSize:+$('dt').value,autoRetry:$('retry').checked});
     running=true;$('pause').textContent='停止摆动';renderer.trail=[];snapshot=null;
     $('replay-hint').textContent='当前实验成功后会自动保存；已有记录可随时轨迹复现';
-    $('dimension').textContent=`${2*(n+1)} 维状态`;$('order-title').textContent=labels[n]+'重倒立摆';$('order-label').textContent=english[n];
+    $('dimension').textContent=`${2*(n+1)} 维状态`;$('order-title').textContent=(labels[n]||n)+'重倒立摆';$('order-label').textContent=english[n]||`${n}-LINK`;
     $('orders').querySelectorAll('button').forEach(b=>b.disabled=false);
     ['near','down','random'].forEach(p=>$(`${p}`).classList.toggle('active',p===preset));
     $('legend').innerHTML=Array.from({length:n},(_,i)=>`<span><i style="background:${colors[i]}"></i>θ${i+1}</span>`).join('');
@@ -77,7 +82,7 @@ async function initialize(preset='down',custom=null){
     const health=data.observability;
     setNotice(health.condition>1e9?'当前传感配置数值上接近不可观：请检查系统分析，并降低扰动或更换传感器。':'RK4 1 ms · 控制 250 Hz · 渲染与物理解耦。可以试着推它一下。',health.condition>1e9);
     updateBankStatus();
-    if(n<=5&&preset==='down'){
+    if(n<=20&&preset==='down'){
       await refreshTransfers();if(gen!==generation)return;
       fillTransferOptions('D'.repeat(n),goalPattern);
       if(transferCompatible(transferRow($('transfer-from').value,$('transfer-to').value)))playTransfer($('transfer-from').value,$('transfer-to').value);
@@ -126,7 +131,7 @@ worker.onmessage=e=>{
     design=result.design;goalPattern=result.target;goalOptions(n,result.target);
     $('controller').value='auto';$('sensor').value='full_state';$('sensor').disabled=result.target.includes('D');$('noise').value=0;$('noise-value').textContent='0.000';$('target').value=0;$('target-value').textContent='0.00 m';
     if(m.jumped){telemetry.clear();sceneLabels();$('orders').querySelectorAll('button').forEach(b=>b.disabled=false);lastPlayback={order:n,source:result.source,target:result.target};}
-    running=true;$('pause').textContent='停止摆动';fillTransferOptions(result.source,result.target);
+    running=transferRunIntent;settings({running});$('pause').textContent=running?'停止摆动':'继续摆动';fillTransferOptions(result.source,result.target);
     activeTransfer={...m.transition,waypoints:pendingTransfer.plan.route_waypoints};pendingTransfer=null;transferBusy=false;buildAnalysis();updateBankStatus();renderTransferMatrix();
     setNotice(`${m.jumped?'已切换到初态，开始运动':'连续转换'}：${poseArrows(m.transition.source)} → ${poseArrows(m.transition.target)}`);
     return;
@@ -138,6 +143,8 @@ worker.onmessage=e=>{
   if(m.type!=='state')return;
   if(pendingSeek!==null&&m.seek_request_id!==pendingSeek)return;
   liveSnapshot=m;if(replayActive)return;telemetry.push(m);
+  if(runCommand!==null&&m.running===runCommand)runCommand=null;
+  if(runCommand===null&&!transferBusy&&!seekDragging)running=m.running;
   snapshot=m;
   if(!m.planning)$('loading').classList.add('hidden');
   if(m.reason&&m.reason!==workerReasonSeen){workerReasonSeen=m.reason;setNotice(m.reason,m.stage==='recover'||!m.running);}
@@ -168,7 +175,7 @@ function updateUI(now){
   updateExperimentTimeline(s);
   updateTransferUI(s);
   if(replayActive){$('canvas-message').textContent=player.clip.source+' · '+(player.playing?'正在轨迹复现':'已停止摆动');$('realtime-status').textContent='轨迹复现模式 · 实时实验已停止摆动';$('replay-time').textContent=`${player.time.toFixed(2)} / ${player.duration.toFixed(2)} s`;$('replay-seek').value=String(player.time);$('replay-toggle').textContent=player.playing?'停止摆动':'继续摆动';$('pause').textContent=player.playing?'停止摆动':'继续摆动';}
-  else if(!s.running&&running){running=false;$('pause').textContent='继续摆动';}
+  else $('pause').textContent=running?'停止摆动':'继续摆动';
 
   if($('settings-dialog').open&&$('analysis').parentElement.open){
     $('state-table').innerHTML=`<table><thead><tr><th>状态</th><th>真实角度 / °</th><th>估计角度 / °</th><th>角速度 / °/s</th></tr></thead><tbody>${Array.from({length:n},(_,i)=>`<tr><td style="color:${colors[i]}">θ${i+1}</td><td>${(wrap(s.state[i+1])*deg).toFixed(3)}</td><td>${(wrap(s.estimate[i+1])*deg).toFixed(3)}</td><td>${(s.state[d+i+1]*deg).toFixed(3)}</td></tr>`).join('')}</tbody></table>`;
@@ -191,9 +198,9 @@ function animate(now){if(replayActive){player.advance(Math.min((now-replayFrame)
 requestAnimationFrame(animate);
 
 $('orders').addEventListener('click',e=>{const order=+e.target.dataset.order;if(order){if(replayActive)exitReplay();n=order;const url=new URL(location.href);url.searchParams.set('order',order);globalThis.history.replaceState(null,'',url);initialize('down');}});
-['near','down','random'].forEach(p=>$(p).onclick=()=>initialize(p));$('reset').onclick=()=>{if(lastPlayback?.order===n&&n<=5)playTransfer(lastPlayback.source,lastPlayback.target);else initialize('down');};
-$('pause').onclick=()=>{if(replayActive){player.playing=!player.playing;return;}if(snapshot?.stage==='unprepared'){initialize('down');return;}running=!running;settings({running});$('pause').textContent=running?'停止摆动':'继续摆动';};
-$('step').onclick=()=>{if(replayActive){player.playing=false;player.seek(player.time+player.clip.sample_dt);return;}running=false;settings({running:false});worker.postMessage({type:'step'});$('pause').textContent='继续摆动';};
+['near','down','random'].forEach(p=>$(p).onclick=()=>initialize(p));$('reset').onclick=()=>{if(lastPlayback?.order===n&&n<=20)playTransfer(lastPlayback.source,lastPlayback.target);else initialize('down');};
+$('pause').onclick=()=>{if(replayActive){player.playing=!player.playing;return;}if(snapshot?.stage==='unprepared'){initialize('down');return;}running=!running;if(transferBusy)transferRunIntent=running;settings({running});$('pause').textContent=running?'停止摆动':'继续摆动';};
+$('step').onclick=()=>{if(replayActive){player.playing=false;player.seek(player.time+player.clip.sample_dt);return;}running=false;if(transferBusy)transferRunIntent=false;settings({running:false});worker.postMessage({type:'step'});$('pause').textContent='继续摆动';};
 $('controller').onchange=()=>{cancelPlanning();settings({mode:$('controller').value});};
 function setSimulationRate(value,writeInput=true){const rate=simulationRate(value,1);if(writeInput)$('speed').value=String(rate);$('speed-range').value=String(rate);$('speed-label').textContent=`${+rate.toFixed(3)}×`;if(replayActive)player.speed=rate;else settings({speed:rate});}
 $('speed').onchange=()=>setSimulationRate($('speed').value);
@@ -211,15 +218,16 @@ function updateExperimentTimeline(s){
   const shown=seekDragging||pendingSeek!==null?+$('experiment-seek').value:Math.min(timeline.time,timeline.end);
   $('experiment-time').textContent=`${shown.toFixed(2)} / ${timeline.end.toFixed(2)} s`;
 }
-function beginSeek(){if(seekDragging)return;seekDragging=true;seekWasRunning=replayActive?player.playing:running;if(replayActive)player.playing=false;else settings({running:false});}
+function beginSeek(){if($('experiment-seek').disabled||transferBusy||seekDragging)return;seekDragging=true;seekWasRunning=replayActive?player.playing:running;if(replayActive)player.playing=false;else settings({running:false});}
 function sendSeek(resume){
+  if($('experiment-seek').disabled||transferBusy)return;
   clearTimeout(seekTimer);lastSeekSent=performance.now();const value=+$('experiment-seek').value;
   if(replayActive){player.seek(value);player.playing=resume;renderer.reset();return;}
   pendingSeek=++seekSerial;running=resume;worker.postMessage({type:'seek',time:value,running:resume,request_id:pendingSeek});$('pause').textContent=resume?'停止摆动':'继续摆动';
 }
 $('experiment-seek').onpointerdown=beginSeek;
-$('experiment-seek').oninput=()=>{beginSeek();clearTimeout(seekTimer);if(performance.now()-lastSeekSent>120)sendSeek(false);else seekTimer=setTimeout(()=>sendSeek(false),120);if(snapshot)updateExperimentTimeline(snapshot);};
-$('experiment-seek').onchange=()=>{const resume=seekWasRunning;seekDragging=false;sendSeek(resume);};
+$('experiment-seek').oninput=()=>{if($('experiment-seek').disabled||transferBusy)return;beginSeek();clearTimeout(seekTimer);if(performance.now()-lastSeekSent>120)sendSeek(false);else seekTimer=setTimeout(()=>sendSeek(false),120);if(snapshot)updateExperimentTimeline(snapshot);};
+$('experiment-seek').onchange=()=>{if($('experiment-seek').disabled||transferBusy)return;const resume=seekWasRunning;seekDragging=false;sendSeek(resume);};
 $('goal').onchange=()=>initialize('down');
 $('target').oninput=()=>{const v=+$('target').value;$('target-value').textContent=v.toFixed(2)+' m';settings({target:v});};
 $('arena').onclick=e=>{if(replayActive||!arenaGeometry)return;const r=$('arena').getBoundingClientRect(),v=clamp((e.clientX-r.left-arenaGeometry.center)/arenaGeometry.scale,-parameters.rail*.6,parameters.rail*.6);$('target').value=v;$('target').oninput();};
@@ -262,7 +270,7 @@ $('export').onclick=()=>replayActive?download(`pendulum-${n}-success-replay.json
 function sceneLabels(){
   $('orders').querySelectorAll('button').forEach(b=>b.classList.toggle('selected',+b.dataset.order===n));
   $('force').value=parameters.max_force;$('force-value').textContent=parameters.max_force+' N';$('length').value=parameters.length;$('rail').value=parameters.rail;
-  $('dimension').textContent=`${2*(n+1)} 维状态`;$('order-title').textContent=labels[n]+'重倒立摆';$('order-label').textContent=english[n];
+  $('dimension').textContent=`${2*(n+1)} 维状态`;$('order-title').textContent=(labels[n]||n)+'重倒立摆';$('order-label').textContent=english[n]||`${n}-LINK`;
   $('legend').innerHTML=Array.from({length:n},(_,i)=>`<span><i style="background:${colors[i]}"></i>θ${i+1}</span>`).join('');
   buildAnalysis();renderer.reset();
 }
@@ -307,7 +315,7 @@ function previewSVG(card){
   for(let i=0;i<order;i++){const l=(card.parameters?.length||.65)*(order===1?1:1-.22*i/(order-1));x+=l*Math.sin(s[i+1]);y+=l*Math.cos(s[i+1]);pts.push([x,y]);}
   const minX=Math.min(s[0]-.5,...pts.map(p=>p[0])),maxX=Math.max(s[0]+.5,...pts.map(p=>p[0])),minY=Math.min(-.18,...pts.map(p=>p[1])),maxY=Math.max(.18,...pts.map(p=>p[1]));
   const scale=Math.min(155/(maxX-minX),104/(maxY-minY)),px=v=>95+(v-(minX+maxX)/2)*scale,py=v=>66-(v-(minY+maxY)/2)*scale;
-  return `<svg viewBox="0 0 190 135" role="img" aria-label="${order} 重摆初始姿态"><path d="M 14 ${py(0)+14} H 176" stroke="#d6e1ef" stroke-width="3"/>${pts.slice(0,-1).map((p,i)=>`<path d="M ${px(p[0])} ${py(p[1])} L ${px(pts[i+1][0])} ${py(pts[i+1][1])}" stroke="${colors[i]}" stroke-width="6" stroke-linecap="round"/><circle cx="${px(pts[i+1][0])}" cy="${py(pts[i+1][1])}" r="4" fill="white" stroke="${colors[i]}" stroke-width="2"/>`).join('')}<rect x="${px(s[0])-13}" y="${py(0)-2}" width="26" height="15" rx="4" fill="#456b9f"/><circle cx="${px(s[0])-7}" cy="${py(0)+14}" r="3" fill="#758eae"/><circle cx="${px(s[0])+7}" cy="${py(0)+14}" r="3" fill="#758eae"/></svg>`;
+  return `<svg viewBox="0 0 190 135" role="img" aria-label="${order} 重摆初始姿态"><path d="M 14 ${py(0)+14} H 176" stroke="#d6e1ef" stroke-width="3"/><rect x="${px(s[0])-13}" y="${py(0)-2}" width="26" height="15" rx="4" fill="#456b9f"/><circle cx="${px(s[0])-7}" cy="${py(0)+14}" r="3" fill="#758eae"/><circle cx="${px(s[0])+7}" cy="${py(0)+14}" r="3" fill="#758eae"/>${pts.slice(0,-1).map((p,i)=>`<path d="M ${px(p[0])} ${py(p[1])} L ${px(pts[i+1][0])} ${py(pts[i+1][1])}" stroke="${colors[i]}" stroke-width="6" stroke-linecap="round"/><circle cx="${px(pts[i+1][0])}" cy="${py(pts[i+1][1])}" r="4" fill="white" stroke="${colors[i]}" stroke-width="2"/>`).join('')}</svg>`;
 }
 function equilibriumCardCode(card){
   if(!card||Math.abs(card.initial[0])>1e-7||card.initial.slice(card.order+1).some(v=>Math.abs(v)>1e-7)||card.initial.slice(1,card.order+1).some(v=>Math.abs(Math.sin(v))>1e-7))return null;
@@ -371,17 +379,18 @@ $('inventory-targets').onclick=e=>{const option=e.target.closest('[data-target]'
 $('inventory-play').onclick=async()=>{
   if(!selectedCard)return;const found=selectedCard.solutions.find(s=>s.pattern===selectedTarget);$('inventory-play').disabled=true;
   try{
-    if(found){const response=await fetch(`/api/repository/${found.id}`);if(!response.ok)throw Error('这条轨迹复现未能加载');const clip=await response.json();showClip(clip);$('inventory-dialog').close();}
+    if(found?.plugin){if(replayActive)exitReplay();n=selectedCard.order;Object.assign(parameters,selectedCard.parameters);goalOptions(n,selectedTarget);$('inventory-dialog').close();await initialize('custom',[...selectedCard.initial]);await playTransfer(equilibriumCardCode(selectedCard),selectedTarget);}
+    else if(found){const response=await fetch(`/api/repository/${found.id}`);if(!response.ok)throw Error('这条轨迹复现未能加载');const clip=await response.json();showClip(clip);$('inventory-dialog').close();}
     else{if(replayActive)exitReplay();n=selectedCard.order;Object.assign(parameters,selectedCard.parameters);$('force').value=parameters.max_force;$('force-value').textContent=parameters.max_force+' N';goalOptions(n,selectedTarget);$('inventory-dialog').close();initialize('custom',[...selectedCard.initial]);}
   }catch(err){$('inventory-path-detail').textContent=String(err.message||err);}
   finally{$('inventory-play').disabled=false;}
 };
 function updateBankStatus(){
-  const ready=bankRows.filter(r=>r.status==='ready').length,row=bankRows.find(r=>r.pattern===$('goal').value),base=n<=5&&$('goal').value==='D'.repeat(n);
+  const ready=bankRows.filter(r=>r.status==='ready').length,row=bankRows.find(r=>r.pattern===$('goal').value),base=n<=20&&$('goal').value==='D'.repeat(n);
   const labels={ready:'离线方案就绪',queued:'排队预计算',computing:'正在离线计算',retry_pending:'等待下一轮搜索'};
   const compatible=row?.parameters&&Object.entries(parameters).every(([k,v])=>row.parameters[k]===v);
   $('precomputed-status').textContent=`${n} 重：${ready} / ${2**n-1} 个默认方案就绪 · 当前目标${base?'为基态，可直接保持或由其他稳态转入':row?.status==='ready'&&!compatible?'参数已修改，需重新离线预优化':labels[row?.status]||'尚未预计算'}`;
-  for(const option of $('goal').options){const item=bankRows.find(r=>r.pattern===option.value);option.textContent=targetLabel(option.value)+(n<=5&&option.value==='D'.repeat(n)?'  · 基态':item?.status==='ready'?'  ✓ 预优化就绪':item?.status==='computing'?'  · 计算中':'  · 待预优化');}
+  for(const option of $('goal').options){const item=bankRows.find(r=>r.pattern===option.value);option.textContent=targetLabel(option.value)+(n<=20&&option.value==='D'.repeat(n)?'  · 基态':item?.status==='ready'?'  ✓ 预优化就绪':item?.status==='computing'?'  · 计算中':'  · 待预优化');}
   $('down').title=base?'保持完全下垂基态':row?.status==='ready'?'直接加载离线预优化方案，立即起摆':'该目标暂未通过离线验收，不会现场启动优化';
 
 }
@@ -423,19 +432,19 @@ function transferRow(source,target){return transferBank?.entries.find(row=>row.o
 function transferCompatible(row){return row?.status==='ready'&&Object.entries(parameters).every(([key,value])=>row.parameters?.[key]===value);}
 function transferResting(s){return !!s&&!s.planning&&!s.plan_active&&s.running&&s.stable>=1&&Math.abs(s.state[0])<.04&&Math.max(...s.state.slice(n+1).map(Math.abs))<.04;}
 function renderTransferMatrix(){
-  if(n>5)return;
+  if(n>20)return;
   syncTransferPickers();
   const choices=equilibriaFor(n),a=$('transfer-from').value,b=$('transfer-to').value;
   $('transfer-matrix').classList.toggle('fourth-order-matrix',n>=4);
   $('transfer-matrix').innerHTML=`<table><thead><tr><th>起点 ↓ / 目标 →</th>${choices.map(code=>`<th title="${targetLabel(code)}">${poseArrows(code)}</th>`).join('')}</tr></thead><tbody>${choices.map(source=>`<tr><th title="${targetLabel(source)}">${poseArrows(source)}</th>${choices.map(target=>{const row=transferRow(source,target),ready=transferCompatible(row);return `<td><button data-transfer-source="${source}" data-transfer-target="${target}" class="${source===a&&target===b?'selected ':''}${ready?'ready':''}" aria-label="${targetLabel(source)} 转 ${targetLabel(target)}" ${source===target||!ready?'disabled':''} title="${source===target?'同一姿态，无需转场':ready?row.duration.toFixed(2)+' s · 峰值 '+row.verification.max_force.toFixed(1)+' N'+(row.route_waypoints?' · 连续衔接：'+row.route_waypoints.map(poseArrows).join(' → '):' · 直达'):'离线预计算中'}">${source===target?'—':ready?'▶':row?.status==='computing'?'◌':'·'}</button></td>`;}).join('')}</tr>`).join('')}</tbody></table>`;
 }
 async function startTransfer(destination){
-  if(n>5||!design||!snapshot||transferBusy)return;
+  if(n>20||!design||!snapshot||transferBusy)return;
   const source=equilibriumCode(design.target_angles);if(source===destination)return;
   if(!transferResting(snapshot))return;
   const row=transferRow(source,destination);
   if(!transferCompatible(row)){cruise=null;goalOptions(n,source);setNotice('当前参数的这条稳态互转尚未通过离线验收。',true);return;}
-  const gen=generation,token=++transferToken;transferBusy=true;transferSummary='';
+  const gen=generation,token=++transferToken;transferBusy=true;transferSummary='';transferRunIntent=true;
   try{
     const response=await fetch('/api/transition',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({parameters,source,target:destination,state:snapshot.state})});
     if(!response.ok)throw Error((await response.json()).detail||'无法加载转场');
@@ -445,13 +454,14 @@ async function startTransfer(destination){
   }catch(error){if(gen===generation&&token===transferToken){transferBusy=false;pendingTransfer=null;cruise=null;goalOptions(n,source);setNotice(String(error.message||error),true);}}
 }
 async function playTransfer(source,destination,{tour=false}={}){
-  if(n>5||source===destination)return;
+  if(n>20||source===destination)return;
   const row=transferRow(source,destination);
   if(!transferCompatible(row)){setNotice('这条路径尚未完成离线验收，请选择有绿色标记的终点，或等待远端计算完成。',true);return;}
   if(replayActive){const order=n,p={...parameters};exitReplay();n=order;Object.assign(parameters,p);fillTransferOptions(source,destination);}
   cancelPlanning();if(!tour)cruise=null;activeTransfer=null;pendingTransfer=null;
   pendingSeek=null;seekDragging=false;clearTimeout(seekTimer);settings({running:false});
-  const gen=++generation,token=++transferToken;transferBusy=true;transferSummary='';
+  const gen=++generation,token=++transferToken;transferBusy=true;transferSummary='';transferRunIntent=true;running=true;$('pause').textContent='停止摆动';
+  $('experiment-seek').disabled=true;
   $('transfer-from').value=source;$('transfer-to').value=destination;renderTransferMatrix();
   setNotice(`正在载入 ${poseArrows(source)} → ${poseArrows(destination)}，随后跳到起点演示。`);
   try{
@@ -462,8 +472,8 @@ async function playTransfer(source,destination,{tour=false}={}){
   }catch(error){if(gen===generation&&token===transferToken){transferBusy=false;pendingTransfer=null;cruise=null;setNotice(error.message,true);}}
 }
 function updateTransferUI(s){
-  $('transfer-panel').classList.toggle('hidden',n>5);$('swingup-panel').classList.toggle('hidden',n<=5);
-  if(n>5){$('transfer-note').textContent='';return;}
+  $('transfer-panel').classList.toggle('hidden',n>20);$('swingup-panel').classList.toggle('hidden',n<=20);
+  if(n>20){$('transfer-note').textContent='';return;}
   if(transferOrder!==n)fillTransferOptions();
   const rows=transferBank?.entries.filter(row=>row.order===n)||[],ready=rows.filter(transferCompatible).length,total=2**n*(2**n-1);
   $('transfer-count').textContent=`${ready}/${total}`;$('transfer-total').textContent=transferBank?`${ready} / ${total} 已就绪`:'';
@@ -489,7 +499,7 @@ function updateTransferUI(s){
     transferBusy?'载入后自动跳到起点，无需等待当前姿态停稳。':transferSummary||computeNote||'切换起点或终点即开始运动；稳定保持 10 秒后自动重新起摆。';
 }
 async function refreshTransfers(){
-  try{const response=await fetch('/api/transitions');if(!response.ok)return;transferBank=await response.json();if(n<=5)renderTransferMatrix();}catch{}
+  try{const response=await fetch('/api/transitions');if(!response.ok)return;transferBank=await response.json();if(n<=20)renderTransferMatrix();}catch{}
 }
 for(const side of ['from','to'])$('transfer-'+side+'-options').onclick=e=>{
   const button=e.target.closest('[data-pose]');if(!button)return;
@@ -502,7 +512,7 @@ for(const side of ['from','to'])$('transfer-'+side+'-options').onclick=e=>{
 };
 $('transfer-cruise').onclick=()=>{
   if(cruise){cruise=null;settings({loop:true});setNotice('已结束序列演示，当前组合稳定保持 10 秒后重新起摆。');return;}
-  if(n>5||!design)return;const source=$('transfer-from').value,path=eulerTour(n,source);
+  if(n>20||!design)return;const source=$('transfer-from').value,path=eulerTour(n,source);
   cruise={path,total:path.length-1,completed:0};transferSummary='';playTransfer(source,path[1],{tour:true});
 };
 $('transfer-matrix').onclick=e=>{
@@ -510,7 +520,27 @@ $('transfer-matrix').onclick=e=>{
   const {transferSource:source,transferTarget:target}=button.dataset;
   $('routes-dialog').close();playTransfer(source,target);
 };
-refreshTransfers();setInterval(refreshTransfers,15000);
-refreshInventoryCount();refreshBank();setInterval(refreshBank,15000);
+setInterval(refreshTransfers,15000);
+setInterval(refreshBank,15000);
 addEventListener('pagehide',()=>{if(activeJob)fetch(`/api/plan/${activeJob}`,{method:'DELETE',keepalive:true}).catch(()=>{});});
-initialize();
+async function discoverOrders(preferred=n){
+  const response=await fetch('/api/health');if(!response.ok)throw Error('本机服务尚未就绪');
+  const health=await response.json(),orders=health.orders;
+  if(!orders?.length)throw Error('motions 目录没有有效的双向轨迹插件');
+  $('orders').innerHTML=orders.map(order=>`<button data-order="${order}" class="${order===preferred?'selected':''}">${order}</button>`).join('');
+  $('inventory-order').innerHTML=orders.map(order=>`<option value="${order}">${labels[order]||order}重摆 · ${2**order} 种姿态</option>`).join('');
+  if(!orders.includes(n))n=orders.includes(3)?3:orders[0];
+  $('inventory-order').value=String(n);
+}
+const updateMotions=$('check-motion-updates');
+if(updateMotions)updateMotions.onclick=async()=>{
+  updateMotions.disabled=true;updateMotions.textContent='检查中…';
+  try{
+    const response=await fetch('/api/motions/check',{method:'POST'});if(!response.ok)throw Error(await response.text());
+    const report=await response.json();await discoverOrders(n);await refreshTransfers();await refreshBank();await refreshInventoryCount();
+    updateMotions.title=`已检查 · ${report.directions??'当前'} 条已验收方向${report.errors?.length?' · '+report.errors.length+' 个文件无效':''}`;
+    setNotice(report.errors?.length?`检查完成，${report.errors.length} 个文件无效，保留其原可用版本。`:`轨迹检查完成 · ${report.directions??'当前'} 条已验收方向${report.changed?'，新条目已激活':'，没有新增变化'}。`,!!report.errors?.length);
+  }catch(error){setNotice('轨迹检查失败：'+error.message,true);}
+  finally{updateMotions.disabled=false;updateMotions.textContent='检查轨迹更新';}
+};
+(async()=>{try{await discoverOrders();await refreshTransfers();refreshInventoryCount();refreshBank();await initialize();}catch(error){loading('无法打开实验室',error.message);}})();

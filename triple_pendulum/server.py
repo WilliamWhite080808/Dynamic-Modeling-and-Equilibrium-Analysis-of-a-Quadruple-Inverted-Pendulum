@@ -17,7 +17,7 @@ from .model import Plant, Parameters, wrap
 from .control import analyze
 from .planner import plan
 from .planning_service import certified_plan
-from . import repository,precomputed,transitions
+from . import repository,precomputed,transitions,motion_plugins
 
 ROOT=Path(__file__).resolve().parent.parent
 RECORDINGS=ROOT/'recordings'
@@ -71,7 +71,7 @@ def run_job(job,plant,initial,duration,seed,target_angles):
 def design(body:dict):
     try:
         p=Parameters(**body.get('parameters',{}))
-        if p.n>5: raise ValueError('Interactive orders are validated up to 5')
+        if p.n>5 and p.n not in available_orders():raise ValueError('没有此阶数的有效轨迹插件')
         plant=Plant(p);goal=repository.angles(body.get('pattern','U'*p.n))
         if len(goal)!=p.n:raise ValueError('目标维度与阶数不匹配')
         data=analyze(plant,body.get('sensor','full_state'),float(body.get('aggressive',1)),goal)
@@ -88,7 +88,7 @@ def start_plan(body:dict):
 def _start_plan(body:dict):
     try:
         p=Parameters(**body['parameters']); plant=Plant(p); initial=np.asarray(body['state'],dtype=float)
-        if p.n>5 or initial.shape!=(plant.dim,) or not np.isfinite(initial).all(): raise ValueError('Invalid planning state')
+        if p.n not in available_orders() or initial.shape!=(plant.dim,) or not np.isfinite(initial).all(): raise ValueError('Invalid planning state')
         target_angles=repository.angles(body.get('pattern','U'*p.n))
         if len(target_angles)!=p.n:raise ValueError('目标维度与摆杆阶数不匹配')
         duration=float(np.clip(body.get('duration',p.n+2),2,12)); seed=int(body.get('seed',1))
@@ -138,10 +138,17 @@ def success_replay(order:int):
 
 @app.get('/api/repository')
 def solution_catalog(order:int=3,pattern:str=''):
-    if order not in range(1,6):raise HTTPException(422,'Only orders 1..5 are supported')
+    if order not in available_orders():raise HTTPException(422,'没有此阶数的有效轨迹')
     rows=[row for row in repository.catalog() if row['order']==order and (not pattern or row['pattern']==pattern)]
+    store=motion_plugins.active()
+    if store:
+        for row in store.catalog(order)['entries']:
+            if row['status']!='ready' or (pattern and row['target']!=pattern):continue
+            initial=[0.,*repository.angles(row['source']),*([0.]*(order+1))]
+            rows.append(dict(id=row['sha256'][:24],order=order,initial=initial,parameters=row['parameters'],pattern=row['target'],settled_at=row['verification']['settled_at'],duration=row['duration'],peak_force=row['verification']['max_force'],max_cart=row['verification']['max_cart'],final_error_deg=row['verification']['final_angle_deg'],created_at='2026-11-13',status='verified',has_control_plan=True,plugin=True))
     coverage={code:sum(row['pattern']==code for row in repository.catalog() if row['order']==order) for code in (transitions.patterns(order) if order<=4 else repository.patterns(order))}
-    return {'solutions':sorted(rows,key=lambda row:row['created_at'],reverse=True),'coverage':coverage,'directory':'trajectory_repository'}
+    if store:coverage={code:sum(row['pattern']==code for row in rows) for code in transitions.patterns(order)}
+    return {'solutions':sorted(rows,key=lambda row:row['created_at'],reverse=True),'coverage':coverage,'directory':'motions + trajectory_repository' if store else 'trajectory_repository'}
 
 
 @app.get('/api/repository/{ident}')
@@ -158,18 +165,28 @@ def record_live(body:dict):
 
 
 @app.get('/api/health')
-def health(): return {'status':'ok','orders':[1,2,3,4,5]}
+def health(): return {'status':'ok','orders':available_orders(),'instance':str(ROOT.resolve())}
+
+def available_orders():
+    store=motion_plugins.active()
+    return store.orders() if store else [1,2,3,4,5]
+
+@app.post('/api/motions/check')
+def check_motion_updates():
+    store=motion_plugins.active()
+    if not store:return dict(changed=False,orders=available_orders(),errors=[],message='当前开发目录使用原轨迹库')
+    return store.refresh()
 
 
 @app.get('/api/precomputed')
 def precomputed_catalog(order:int|None=None):
-    if order is not None and order not in range(1,6):raise HTTPException(422,'Only orders 1..5 are supported')
+    if order is not None and order not in available_orders():raise HTTPException(422,'没有此阶数的有效轨迹')
     return precomputed.catalog(order)
 
 
 @app.get('/api/transitions')
 def transition_catalog(order:int|None=None):
-    if order is not None and order not in range(1,6):raise HTTPException(422,'稳态互转仅支持 1～5 阶')
+    if order is not None and order not in available_orders():raise HTTPException(422,'没有此阶数的有效轨迹')
     return transitions.catalog(order)
 
 
@@ -177,7 +194,7 @@ def transition_catalog(order:int|None=None):
 def transition_plan(body:dict):
     try:
         p=Plant(Parameters(**body['parameters']));source=body['source'];target=body['target']
-        if p.n not in range(1,6):raise ValueError('稳态互转仅支持 1～5 阶')
+        if p.n not in available_orders():raise ValueError('没有此阶数的有效轨迹')
         expected=transitions.equilibrium(p,source)
         state=expected if body.get('jump_to_start') is True else np.asarray(body['state'],dtype=float)
         if state.shape!=(p.dim,) or not np.isfinite(state).all():raise ValueError('无效物理状态')
@@ -194,7 +211,7 @@ app.mount('/',StaticFiles(directory=ROOT/'web',html=True),name='web')
 
 def main():
     import uvicorn
-    uvicorn.run(app,host='127.0.0.1',port=8765,log_level='warning')
+    uvicorn.run(app,host='127.0.0.1',port=int(os.environ.get('PENDULUM_PORT','8765')),log_level='warning')
 
 
 if __name__=='__main__': main()

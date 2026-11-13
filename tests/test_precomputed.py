@@ -24,14 +24,37 @@ def test_manifest_tracks_57_distinct_hanging_tasks():
     assert {(r['order'],r['pattern']) for r in bank['entries']}=={(n,code) for n in range(1,6) for code in repository.patterns(n)}
 
 def test_runtime_uses_preoptimized_file_without_verification_or_optimizer(monkeypatch):
-    from triple_pendulum import planning_service,server
+    from copy import deepcopy
+    from triple_pendulum import planning_service,server,transitions
     plant=Plant(Parameters(n=1));initial=precomputed.hanging(plant)
+    # Only a rate-certified cache entry may bypass the strengthened verifier.
+    certified=transitions.lookup(plant,'D','U')
+    assert certified['force_rate']==500 and certified['verification']['max_force_rate']<=500+1e-6
+    certified.update(precomputed=True,wall_seconds=0.)
+    monkeypatch.setattr(precomputed,'lookup',lambda *a,**k:deepcopy(certified))
     def forbidden(*a,**k):raise AssertionError('Live startup attempted to optimize or re-integrate the cached plan')
     monkeypatch.setattr(planning_service,'verify',forbidden)
     result=planning_service.certified_plan(plant,initial,3,42)
     assert result['precomputed'] and result['wall_seconds']==0
     info=server.design({'parameters':plant.p.dict(),'initial':initial.tolist(),'pattern':'U'})
     assert info['hanging_plan']['precomputed']
+
+
+def test_legacy_precomputed_plan_is_reverified_before_reuse(monkeypatch):
+    from copy import deepcopy
+    from triple_pendulum import planning_service,transitions
+    plant=Plant(Parameters(n=1));initial=precomputed.hanging(plant)
+    legacy=transitions.lookup(plant,'D','U');legacy.pop('force_rate')
+    monkeypatch.setattr(precomputed,'lookup',lambda *a,**k:deepcopy(legacy))
+    original_verify=planning_service.verify;calls=[]
+    def observed_verify(*args,**kwargs):
+        calls.append(True)
+        return original_verify(*args,**kwargs)
+    monkeypatch.setattr(planning_service,'verify',observed_verify)
+    result=planning_service.certified_plan(plant,initial,3,42)
+    assert calls==[True] and result['force_rate']==500
+    assert result['verification']['final_stable']
+    assert result['verification']['max_force_rate']<=500+1e-6
 
 def test_incompatible_initial_or_parameters_do_not_use_default_bank():
     p=Plant(Parameters(n=1));x=precomputed.hanging(p);x[-1]=.1

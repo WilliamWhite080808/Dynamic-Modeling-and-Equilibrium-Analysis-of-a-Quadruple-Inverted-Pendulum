@@ -12,9 +12,36 @@ RATE=500.
 MAX_ORDER=5
 CLUSTER_MODE=os.environ.get('PENDULUM_CLUSTER_MODE')=='1'
 _initialized_root=None
+_case_manifest_root=None
+_case_manifest=None
+
+def search_manifest():
+    """Stable shard membership; avoid enumerating every progress file per case."""
+    global _case_manifest_root,_case_manifest
+    if not CLUSTER_MODE:return {key(r['order'],r['source'],r['target']):r for r in catalog()['entries']}
+    if _case_manifest_root!=ROOT or _case_manifest is None:
+        initialize();_case_manifest=json.loads((ROOT/'status.json').read_text(encoding='utf8'))['entries'];_case_manifest_root=ROOT
+    return _case_manifest
+
+def case_status(n,source,target):
+    if not CLUSTER_MODE:return statuses()[key(n,source,target)]
+    k=key(n,source,target);row=dict(search_manifest()[k])
+    progress=ROOT/'progress'/(k+'.json')
+    if row['status']!='ready':
+        try:row.update(json.loads(progress.read_text(encoding='utf8')))
+        except (OSError,ValueError):pass
+    certificate=ROOT/'certificates'/(k+'.json')
+    try:
+        value=json.loads(certificate.read_text(encoding='utf8'))
+        try:rejected=json.loads((ROOT/'rejections'/(k+'.json')).read_text(encoding='utf8'))
+        except (OSError,ValueError):rejected={}
+        if rejected.get('sha256')==value['sha256']:row.update(status='retry_pending',phase='本机复验未通过，重新搜索')
+        else:row=value
+    except (OSError,ValueError,KeyError):pass
+    return row
 
 def patterns(n):
-    if n not in range(1,MAX_ORDER+1):raise ValueError('稳态互转仅开放 1～5 阶')
+    if n not in range(1,21):raise ValueError('无效摆杆阶数')
     return [''.join(p) for p in product('UD',repeat=n)]
 
 def equilibrium(plant,code):
@@ -91,6 +118,9 @@ def update(n,source,target,**values):
         row.update(values,updated_at=time.time());_write(rows)
 
 def catalog(n=None):
+    from .motion_plugins import active
+    store=active()
+    if store:return store.catalog(n)
     all_rows=list(statuses().values());rows=[r for r in all_rows if n is None or r['order']==n]
     audit_path=ROOT.parent/'results/fourth-order-worker-audit.json'
     try:audit=json.loads(audit_path.read_text(encoding='utf8'))
@@ -144,7 +174,10 @@ def admit(plant,source,target,plan,report,history):
 
 def lookup(plant,source,target):
     if source not in patterns(plant.n) or target not in patterns(plant.n) or source==target:raise ValueError('请选择不同的起止稳态')
-    row=statuses()[key(plant.n,source,target)]
+    from .motion_plugins import active
+    store=active()
+    if store:return store.lookup(plant,source,target)
+    row=case_status(plant.n,source,target)
     if row['status']!='ready' or row.get('parameters')!=plant.p.dict():return None
     encoded=(ROOT/row['file']).read_bytes()
     if hashlib.sha256(encoded).hexdigest()!=row['sha256']:raise ValueError('转场文件校验失败')

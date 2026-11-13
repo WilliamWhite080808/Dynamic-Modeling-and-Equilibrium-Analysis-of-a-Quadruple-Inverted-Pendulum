@@ -6,6 +6,13 @@ from triple_pendulum.model import Plant,Parameters
 from triple_pendulum.control import analyze
 from triple_pendulum.recovery import dissipative_force,recover_plan
 
+def test_near_upright_recovery_enforces_cart_force_slew():
+    plant=Plant(Parameters(n=1));initial=np.array([0.,.021,0.,0.])
+    plan,_=recover_plan(plant,initial,[0.])
+    assert plan['force_rate']==500
+    assert plan['strict_rest']
+    assert plan['verification']['max_force_rate']<=500+1e-6
+
 
 @pytest.mark.parametrize('n',[1,3,5])
 def test_cart_dissipation_removes_mechanical_energy_without_joint_actuators(n):
@@ -22,15 +29,19 @@ def test_cart_dissipation_removes_mechanical_energy_without_joint_actuators(n):
 
 
 def test_real_worker_recovers_arbitrary_positions_and_angular_velocities(tmp_path):
+    from triple_pendulum import transitions,repository
     fixtures={'plans':[],'forces':[]}
     for n in range(1,6):
         p=Plant(Parameters(n=n));rng=np.random.default_rng(720+n)
         x=np.zeros(p.dim);x[0]=.3;x[1:p.d]=rng.uniform(-np.pi,np.pi,n);x[p.d:]=rng.uniform(-.8,.8,p.d)
-        original=x.copy();result=recover_plan(p,x,np.zeros(n));assert result is not None
+        available=[r for r in transitions.catalog(n)['entries'] if r['status']=='ready' and r['source']=='D'*n]
+        goal=np.array(repository.angles(next((r['target'] for r in available if r['target']=='U'*n),available[0]['target'])))
+        original=x.copy();result=recover_plan(p,x,goal);assert result is not None,f'{n}-link recovery did not pass physical validation'
         plan,_=result
         np.testing.assert_array_equal(x,original);np.testing.assert_array_equal(plan['initial'],original)
         assert plan['verification']['final_stable']
-        fixtures['plans'].append(dict(design=analyze(p,target=np.zeros(n)),plan=plan))
+        assert plan['verification']['max_force_rate']<=500+1e-6
+        fixtures['plans'].append(dict(design=analyze(p,target=goal),plan=plan))
         for t in (0.,.1,.35,.6,1.):
             policy=dict(kx=8.,kv=6.,kick=12.)
             fixtures['forces'].append(dict(state=x.tolist(),time=t,parameters=p.p.dict(),policy=policy,

@@ -12,6 +12,12 @@ from .model import Plant,Parameters,wrap
 from .planner import tracking_gains
 from .validate_plan import replay
 
+ATTEMPTS_PER_ROUND=8
+
+def winding_for(windings,attempt,round_index):
+    """Explore new rotation-sign combinations on subsequent search rounds."""
+    return windings[(round_index*ATTEMPTS_PER_ROUND+attempt)%len(windings)]
+
 def shard_keys(rows,count,index):
     if not 0<=index<count:raise ValueError('Invalid shard index')
     keys=sorted(transitions.key(r['order'],r['source'],r['target']) for r in rows)
@@ -34,7 +40,7 @@ def reverse_reference(plant,plan,source,target):
 
 
 def certify(p,source,target,plan):
-    if transitions.statuses()[transitions.key(p.n,source,target)]['status']=='ready':return True
+    if transitions.case_status(p.n,source,target)['status']=='ready':return True
     plan.update(initial=transitions.equilibrium(p,source).tolist(),target_angles=repository.angles(target),force_rate=transitions.RATE,strict_rest=True)
     if not plan.get('gains'):plan['gains']=tracking_gains(p,plan)
     report=replay(p,plan,total=plan['duration']+15);history=report.pop('history')
@@ -47,7 +53,7 @@ def solve_pair(n,source,target,round_index=0):
     from .implicit_optimal import optimize as implicit
     from .optimal import optimize as explicit
     p=Plant(Parameters(n=n));initial=transitions.equilibrium(p,source);goal=np.array(repository.angles(target))
-    if transitions.statuses()[transitions.key(n,source,target)]['status']=='ready':return True
+    if transitions.case_status(n,source,target)['status']=='ready':return True
     transitions.update(n,source,target,status='computing',phase='离线直接转场优化')
     warm=None;checkpoint=transitions.ROOT/'candidates'/f'{n}-{source}-{target}.json';checkpoint.parent.mkdir(exist_ok=True)
     if checkpoint.exists():
@@ -68,10 +74,9 @@ def solve_pair(n,source,target,round_index=0):
     windings=list(product((1,-1),repeat=len(changed)))
     last_error='尚未找到通过闭环验收的直接转场'
     opposite_tried=None
-    for attempt in range(8):
-        rows=transitions.statuses()
-        if rows[transitions.key(n,source,target)]['status']=='ready':return True
-        opposite=rows[transitions.key(n,target,source)];opposite_guess=False
+    for attempt in range(ATTEMPTS_PER_ROUND):
+        if transitions.case_status(n,source,target)['status']=='ready':return True
+        opposite=transitions.case_status(n,target,source);opposite_guess=False
         if n>=4 and not(attempt==0 and warm is not None) and opposite['status']=='ready' and opposite.get('sha256')!=opposite_tried:
             opposite_tried=opposite['sha256'];reference=transitions.lookup(p,target,source)
             if reference is not None:
@@ -80,7 +85,7 @@ def solve_pair(n,source,target,round_index=0):
         duration=n+2.+2*(attempt//len(windings))+round_index
         duration=min(duration,11.)
         endpoint=initial[1:p.d].copy()
-        for i,sign in zip(changed,windings[attempt%len(windings)]):endpoint[i]+=sign*np.pi
+        for i,sign in zip(changed,winding_for(windings,attempt,round_index)):endpoint[i]+=sign*np.pi
         if attempt>=max(4,len(windings)):
             unchanged=[i for i in range(n) if i not in changed]
             if unchanged:endpoint[unchanged[(attempt+round_index)%len(unchanged)]]+=2*np.pi*(-1 if attempt%2 else 1)
@@ -117,7 +122,7 @@ def main():
     if not orders or any(n not in range(1,transitions.MAX_ORDER+1) for n in orders):parser.error('Orders must be in 1..5')
     if not 0<=args.shard_index<args.shards:parser.error('Invalid shard index')
     transitions.initialize()
-    eligible=[r for r in transitions.catalog()['entries'] if r['order'] in orders]
+    eligible=[r for r in transitions.search_manifest().values() if r['order'] in orders]
     selected=shard_keys(eligible,args.shards,args.shard_index)
     workers=args.workers
     if os.environ.get('PBS_NODEFILE'):
@@ -126,7 +131,8 @@ def main():
     # Compile the true RK4 dynamics once before the Linux workers fork.
     warm_plant=Plant(Parameters(n=orders[0]));warm_plant.rk4(transitions.equilibrium(warm_plant,'D'*orders[0]),0.,.001)
     for round_index in range(args.start_round,args.start_round+args.rounds):
-        pending=[r for r in transitions.catalog()['entries'] if transitions.key(r['order'],r['source'],r['target']) in selected and r['status']!='ready']
+        pending=[transitions.case_status(r['order'],r['source'],r['target']) for r in eligible if transitions.key(r['order'],r['source'],r['target']) in selected]
+        pending=[r for r in pending if r['status']!='ready']
         if not pending:break
         pending.sort(key=lambda r:(r['order'],sum(a!=b for a,b in zip(r['source'],r['target']))))
         print('ROUND',round_index+1,'pending',len(pending),flush=True)
@@ -135,7 +141,7 @@ def main():
             for future in as_completed(futures):
                 try:future.result()
                 except Exception as error:print('PAIR ERROR',repr(error),flush=True)
-    rows=[r for r in transitions.catalog()['entries'] if transitions.key(r['order'],r['source'],r['target']) in selected]
+    rows=[transitions.case_status(r['order'],r['source'],r['target']) for r in eligible if transitions.key(r['order'],r['source'],r['target']) in selected]
     print('RESULT',sum(r['status']=='ready' for r in rows),'/',len(rows),flush=True)
 
 if __name__=='__main__':main()

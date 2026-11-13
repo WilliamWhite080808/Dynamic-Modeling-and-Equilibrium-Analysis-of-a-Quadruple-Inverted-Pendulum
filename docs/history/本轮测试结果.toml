@@ -1,0 +1,27 @@
+recorded_at = "2026-11-13T13:06:45.413328+08:00"
+
+[full_run]
+passed = 117
+failed = 1
+seconds = 737.99
+failure = "legacy cached plan test omitted force_rate certification precondition"
+
+[targeted_rerun]
+passed = 2
+failed = 0
+seconds = 2.99
+includes = "corrected certified-cache test plus real legacy-cache reverification regression"
+
+[worker]
+individual = 1007
+continuous_edges = 310
+continuous_orders = [1, 2, 3, 4]
+rail_contacts = 0
+live_planner_requests = 0
+
+[worker.orders]
+1 = 2
+2 = 12
+3 = 56
+4 = 240
+5 = 697

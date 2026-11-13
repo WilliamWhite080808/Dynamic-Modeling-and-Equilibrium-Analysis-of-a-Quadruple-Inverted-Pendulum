@@ -16,9 +16,10 @@ def check_cancel(cancel):
 
 def verify(plant,result,cancel=None,save=False):
     check_cancel(cancel)
+    result.update(force_rate=500.,strict_rest=True)
     report=replay(plant,result,total=result['duration']+(20 if plant.n>=4 else 10),cancel=cancel)
     history=report.pop('history')
-    passed=bool(report['final_stable'] and report['max_cart']<plant.p.rail*.96 and report['max_tracking_error']<3)
+    passed=bool(report['final_stable'] and report['max_cart']<plant.p.rail*.96 and report['max_tracking_error']<3 and report['max_force']<=plant.p.max_force+1e-6 and report['max_force_rate']<=500+1e-6)
     if passed and save:
         check_cancel(cancel);result['verification']=report
         result['repository_id']=repository.store(result,plant,history)['id']
@@ -44,12 +45,15 @@ def certified_plan(plant,initial,duration,seed,cancel=None,progress=None,target_
     status('匹配已验证的起摆方案')
     goal=np.zeros(plant.n) if target_angles is None else np.asarray(target_angles)
     ready=precomputed.lookup(plant,initial,goal)
-    if ready is not None:return ready
+    if ready is not None:
+        if ready.get('force_rate')==500:return ready
+        report,passed=verify(plant,ready,cancel)
+        if passed:ready.update(verification=report);return ready
     for row in reversed(repository.catalog()):
         if row['order']!=plant.n or row['pattern']!=repository.pattern(goal) or row['parameters']!=plant.p.dict() or not row.get('has_control_plan',True):continue
         if np.max(abs(np.asarray(row['initial'])-initial))<1e-12:
             data=repository.read(row['id']);cached=data.get('control_plan')
-            if cached and data.get('verification',{}).get('final_stable'):
+            if cached and cached.get('force_rate')==500 and data.get('verification',{}).get('final_stable') and data.get('verification',{}).get('max_force_rate',float('inf'))<=500+1e-6:
                 cached.update(success=True,wall_seconds=0.,repository_id=row['id'],source='仓库已验证路径')
                 return cached
     path=ROOT/'results'/f'verified-{plant.n}.json'

@@ -1,0 +1,145 @@
+recorded_at = "2026-11-13T12:45:57.090575+08:00"
+
+[source_ready]
+1 = 2
+2 = 12
+3 = 56
+4 = 240
+5 = 691
+
+[remote_sync]
+host = "wqm"
+root = "/data/wangqm/hmy/pendulum5_20261112"
+order = 5
+total = 992
+poses = 32
+workers = 64
+remote_ready = 691
+local_ready = 691
+updated_at = 1794545125.6670353
+phase = "computing"
+
+[[remote_sync.jobs]]
+job_id = "1128821.mu01"
+state = "R"
+node = "cu14"
+
+[[remote_sync.jobs]]
+job_id = "1128884.mu01"
+state = "R"
+node = "cu31"
+
+[[remote_sync.jobs]]
+job_id = "1128822.mu01"
+state = "R"
+node = "cu15"
+
+[[remote_sync.jobs]]
+job_id = "1128816.mu01"
+state = "R"
+node = "cu24"
+
+[[remote_sync.jobs]]
+job_id = "1128817.mu01"
+state = "R"
+node = "cu23"
+
+[[remote_sync.jobs]]
+job_id = "1128818.mu01"
+state = "R"
+node = "cu22"
+
+[[remote_sync.jobs]]
+job_id = "1128871.mu01"
+state = "R"
+node = "cu20"
+
+[[remote_sync.jobs]]
+job_id = "1128820.mu01"
+state = "R"
+node = "cu20"
+
+[delivery]
+passed = true
+normal_original_exe = true
+web_exe_real_browser_launch = true
+native_bundled_engine = "157.0.4341.57"
+native_full_ui_and_decoded_recording = true
+firefox_decoded_recording = true
+
+[[delivery.archives]]
+file = "dist\\倒立摆实验室_完整便携包_20261113\\网页版.zip"
+bytes = 253051687
+sha256 = "479565898a85de84cd57a08da9281732a853ace3a22d73bdf07640f9225e39eb"
+
+[[delivery.archives]]
+file = "dist\\倒立摆实验室_完整便携包_20261113\\桌面版.zip"
+bytes = 565292450
+sha256 = "280a586ab1ee209383a69d2bc9a244d02e724ba8ef046b2e38749489b66c5610"
+
+[delivery.data]
+passed = true
+pairs = 442
+directions = 884
+exact_source_control_equality = true
+independent_ab_ba_origins = true
+fifth_worker_proofs = true
+sha256 = "2e17b8bb883001623f1213b419bb0d9925a1bbbf5b848b64e296cf699e96d64d"
+checked_at = 1794543316.3087127
+
+[delivery.data.orders]
+1 = 2
+2 = 12
+3 = 56
+4 = 240
+5 = 574
+
+[delivery.instances]
+
+[delivery.instances.网页版]
+url = "http://127.0.0.1:8766"
+ready_fifth = 574
+full_fifth_sequence = false
+
+[delivery.instances.桌面版]
+url = "http://127.0.0.1:8768"
+ready_fifth = 574
+full_fifth_sequence = false
+
+[delivery.solver]
+
+[delivery.solver.runtime]
+isolated_runtime = true
+ipopt_solved = true
+sys_path = ["E:\\倒立摆\\results\\editions-acceptance\\独立解压 有空格 网页\\网页版\\runtime\\python311.zip", "E:\\倒立摆\\results\\editions-acceptance\\独立解压 有空格 网页\\网页版\\runtime", "E:\\倒立摆\\results\\editions-acceptance\\独立解压 有空格 网页\\网页版\\runtime\\Lib\\site-packages", "E:\\倒立摆\\results\\editions-acceptance\\独立解压 有空格 网页\\网页版"]
+
+[delivery.solver.custom]
+status = "done"
+success = true
+source = "耗散恢复 + 轨迹接入"
+
+[delivery.solver.custom.verification]
+final_state = [7.897480073579488e-16, -2.1884836205983536e-16, 1.2095052242884832e-15, -3.604260871153573e-16]
+final_angle_deg = 0.0
+max_cart = 0.0756854293149068
+max_force = 6.309747179719839
+max_force_rate = 500.0
+settled_at = 2.472
+final_stable = true
+max_tracking_error = 0.0
+
+[[delivery.independent_extraction]]
+edition = "网页版"
+passed = true
+files = 3669
+all_zip_crc_verified = true
+exact_executable_runtime_physics_web_and_motion_identity_with_tested_recipient = true
+normal_files_no_external_symlinks = true
+
+[[delivery.independent_extraction]]
+edition = "桌面版"
+passed = true
+files = 3931
+all_zip_crc_verified = true
+exact_executable_runtime_physics_web_and_motion_identity_with_tested_recipient = true
+normal_files_no_external_symlinks = true

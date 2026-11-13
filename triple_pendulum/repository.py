@@ -17,7 +17,7 @@ LOCK=threading.RLock()
 PATTERNS=['UUU','UUD','UDU','UDD','DUU','DUD','DDU']
 
 def patterns(order):
-    if not 1<=order<=5:raise ValueError('Interactive orders are 1..5')
+    if not 1<=order<=20:raise ValueError('无效摆杆阶数')
     return [''.join(chars) for chars in product('UD',repeat=order) if 'U' in chars]
 
 def angles(pattern):

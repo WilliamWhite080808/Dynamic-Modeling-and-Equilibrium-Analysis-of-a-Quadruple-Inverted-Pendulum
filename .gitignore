@@ -20,6 +20,10 @@ recordings/
 .DS_Store
 Thumbs.db
 
+# Complete Windows distributions contain bundled runtimes and private caches.
+/dist/
+/.cache/
+
 # Optimization checkpoints are reproducible scratch data.
 /precomputed_swingups/candidates/
 /equilibrium_transitions/candidates/

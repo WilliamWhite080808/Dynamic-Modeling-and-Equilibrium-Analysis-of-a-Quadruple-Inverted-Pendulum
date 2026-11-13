@@ -22,6 +22,7 @@ def dissipative_rollout(initial,total,rail,max_force,kx,kv,kick,H,a,total_mass,g
     state=initial.copy();states[0]=state;forces[0]=0.;used=0
     for k in range(count):
         force=dissipative_force(state,k*.004,rail,max_force,kx,kv,kick)
+        force=min(forces[k]+2.,max(forces[k]-2.,force))
         for j in range(4):
             f1=dynamics(state,force,H,a,total_mass,gravity,damping,cart_damping)
             f2=dynamics(state+.0005*f1,force,H,a,total_mass,gravity,damping,cart_damping)
@@ -61,7 +62,7 @@ def funnel_candidates(states,template):
 
 
 def recover_plan(plant,initial,goal,cancel=None,progress=None,max_settle=90.):
-    from . import precomputed
+    from . import precomputed,transitions,repository
     from .validate_plan import replay
     started=time.perf_counter();initial=np.asarray(initial).copy()
     def status(phase,**values):
@@ -69,8 +70,9 @@ def recover_plan(plant,initial,goal,cancel=None,progress=None,max_settle=90.):
         if progress:progress(dict(phase=phase,**values))
     def validate(candidate):
         status('独立验证恢复路径',horizon=candidate['duration'])
+        candidate.update(force_rate=500.,strict_rest=True)
         report=replay(plant,candidate,total=candidate['duration']+20,cancel=cancel);history=report.pop('history')
-        passed=report['final_stable'] and report['max_cart']<plant.p.rail*.96 and report['max_tracking_error']<3
+        passed=report['final_stable'] and report['max_cart']<plant.p.rail*.96 and report['max_tracking_error']<3 and report['max_force']<=plant.p.max_force+1e-6 and report['max_force_rate']<=500+1e-6
         if passed:
             candidate.update(success=True,verification=report,parameters=plant.p.dict(),wall_seconds=time.perf_counter()-started,
                 source='耗散恢复 + 轨迹接入',validation='完整非线性闭环恢复验收通过')
@@ -80,7 +82,8 @@ def recover_plan(plant,initial,goal,cancel=None,progress=None,max_settle=90.):
         direct=dict(initial=initial.tolist(),target_angles=np.asarray(goal).tolist(),duration=8.,segments=[dict(kind='balance',duration=8.)])
         result=validate(direct)
         if result:return result
-    template=precomputed.lookup(plant,precomputed.hanging(plant),goal)
+    template=transitions.lookup(plant,'D'*plant.n,repository.pattern(goal)) if repository.pattern(goal)!='D'*plant.n else None
+    if template is None:template=precomputed.lookup(plant,precomputed.hanging(plant),goal)
     if template is None:return None
     indices,cost=funnel_candidates(initial[None,:],template)
     if np.isfinite(cost[0]):

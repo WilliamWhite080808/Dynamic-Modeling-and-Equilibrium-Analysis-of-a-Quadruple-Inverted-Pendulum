@@ -74,6 +74,9 @@ def lookup(plant,initial,goal):
     if len(code)!=plant.n or code=='D'*plant.n:return None
     s=np.asarray(initial,dtype=float)
     if s.shape!=(plant.dim,) or not np.isfinite(s).all() or abs(s[0])>1e-10 or np.max(abs(s[plant.d:]))>1e-10 or np.max(abs(wrap(s[1:plant.d]-np.pi)))>1e-10:return None
+    from .motion_plugins import active
+    store=active()
+    if store:return store.lookup(plant,'D'*plant.n,code)
     row=statuses().get(f'{plant.n}-{code}',{})
     if row.get('status')!='ready' or row.get('parameters')!=plant.p.dict():return None
     encoded=(ROOT/row['file']).read_bytes()
@@ -86,6 +89,11 @@ def lookup(plant,initial,goal):
     return data
 
 def catalog(order=None):
+    from .motion_plugins import active
+    store=active()
+    if store:
+        rows=[dict(r,pattern=r['target']) for r in store.catalog(order)['entries'] if r['source']=='D'*r['order'] and r['target']!='D'*r['order']]
+        return dict(total=len(rows),ready=sum(r['status']=='ready' for r in rows),entries=rows)
     rows=list(statuses().values())
     if order is not None:rows=[r for r in rows if r['order']==order]
     return dict(total=len(rows),ready=sum(r['status']=='ready' for r in rows),entries=rows)

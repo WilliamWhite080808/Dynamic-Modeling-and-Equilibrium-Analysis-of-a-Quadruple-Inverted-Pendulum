@@ -30,7 +30,9 @@ def test_runtime_transfer_is_parameter_and_source_checked():
     np.testing.assert_allclose(jumped['plan']['initial'],transitions.equilibrium(p,'UD'))
     for changes in (dict(source='UU'),dict(target='UD'),dict(parameters=Parameters(n=2,mass=.7).dict()),dict(state=[float('nan')]*p.dim)):
         with pytest.raises(HTTPException):server.transition_plan(dict(parameters=p.p.dict(),source='UD',target='DD',state=state)|changes)
-    with pytest.raises(ValueError):transitions.patterns(6)
+    assert len(transitions.patterns(6))==64
+    with pytest.raises(ValueError):transitions.patterns(0)
+    with pytest.raises(ValueError):transitions.patterns(21)
 
 def test_fourth_order_covers_all_240_directed_pairs():
     catalog=transitions.catalog(4);assert catalog['total']==240
