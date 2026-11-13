@@ -141,6 +141,7 @@ class MotionStore:
                 return dict(changed=False,errors=errors,orders=sorted({x['n'] for x in old['files'].values()}),directions=2*len(old['files']))
             changed=files!=old['files']
             value=dict(v=1,activated_at=time.time(),model=model,files=files)
+            if old.get('source_preload'):value['source_preload']=True
             atomic(self.index,value);self.value=value;self.plans={};self.seed_errors={}
             (self.root/'.cache/trajectory-progress.txt').write_text(f'已就绪：{len(files)} 对、{2*len(files)} 条方向',encoding='utf8')
             return dict(changed=changed,errors=errors,orders=self.orders(),directions=2*len(files),pairs=len(files))

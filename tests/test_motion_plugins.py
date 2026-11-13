@@ -64,6 +64,8 @@ def compact_pair(tmp,n,a,b):
 def test_compact_prebuilt_index_restores_missing_snapshots_without_parsing(tmp_path,monkeypatch):
     import triple_pendulum.motion_plugins as module
     path,_=compact_pair(tmp_path,1,'U','D');store=MotionStore(tmp_path);meta=next(iter(store.value['files'].values()))
+    store.value['source_preload']=True;module.atomic(store.index,store.value)
+    store.refresh();assert json.loads(store.index.read_bytes())['source_preload'] is True
     assert meta['seed_source']==path.name and meta['ext']=='.toml'
     cached=store.cache/(meta['cache_sha256']+meta['ext']);cached.unlink()
     with monkeypatch.context() as patch:

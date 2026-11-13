@@ -8,6 +8,7 @@ from marionette_driver.by import By
 
 def main():
     folder=Path(sys.argv[1]).resolve();qa=Path(sys.argv[sys.argv.index('--qa')+1]).resolve() if '--qa' in sys.argv else ROOT/'results/folder-acceptance';qa.mkdir(parents=True,exist_ok=True)
+    if (folder/'程序文件').is_dir():folder=folder/'程序文件'
     endpoint=json.loads((folder/'.cache/instance.json').read_text())['url']
     release=tomllib.loads((folder/'release.toml').read_text(encoding='utf8')) if (folder/'release.toml').exists() else json.loads((folder/'release.json').read_text())
     profile=qa/('profile-'+uuid.uuid4().hex[:8]);profile.mkdir();downloads=qa/'downloads';downloads.mkdir(exist_ok=True)

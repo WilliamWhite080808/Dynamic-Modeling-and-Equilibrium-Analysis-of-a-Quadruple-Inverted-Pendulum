@@ -8,6 +8,7 @@ from marionette_driver.by import By
 
 def main():
     folder=Path(sys.argv[1]).resolve();qa=Path(sys.argv[sys.argv.index('--qa')+1]).resolve() if '--qa' in sys.argv else ROOT/'results/editions-acceptance';qa.mkdir(parents=True,exist_ok=True)
+    resources=folder/'程序文件' if (folder/'程序文件').is_dir() else folder
     profile=qa/('web-profile-'+str(time.time_ns()));profile.mkdir()
     with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
     prefs={'marionette.port':port,'browser.shell.checkDefaultBrowser':False,'browser.aboutwelcome.enabled':False,'browser.startup.homepage_override.mstone':'ignore','network.proxy.type':1,'network.proxy.http':'127.0.0.1','network.proxy.http_port':9,'network.proxy.ssl':'127.0.0.1','network.proxy.ssl_port':9,'network.proxy.no_proxies_on':'127.0.0.1,localhost','widget.windows.window_occlusion_tracking.enabled':False,'dom.timeout.enable_budget_timer_throttling':False}
@@ -28,14 +29,14 @@ def main():
         driver.start_session();driver.set_window_rect(width=1680,height=1200)
         # Do not navigate: the EXE must have opened this page itself.
         wait("return location.origin.startsWith('http://127.0.0.1:')&&document.querySelector('#transfer-count')?.textContent==='56/56'&&document.querySelector('#loading').classList.contains('hidden');")
-        endpoint=json.loads((folder/'.cache/instance.json').read_text())['url'];assert js('return location.origin;')==endpoint
+        endpoint=json.loads((resources/'.cache/instance.json').read_text())['url'];assert js('return location.origin;')==endpoint
         startup_seconds=time.monotonic()-opened_at
         assert js("return Number(document.querySelector('#speed').value)===1&&document.querySelector('#speed-label').textContent==='1×';")
         js("let i=document.querySelector('#speed');i.value=10;i.dispatchEvent(new Event('change',{bubbles:true}));return true;")
         driver.refresh()
         wait("return document.querySelector('#loading').classList.contains('hidden')&&Number(document.querySelector('#speed').value)===1&&document.querySelector('#speed-label').textContent==='1×';")
         (qa/'startup-1x.png').write_bytes(base64.b64decode(driver.screenshot(full=True)))
-        chosen=(folder/'.cache/browser.txt').read_text(encoding='utf8');assert Path(chosen).name.lower()=='firefox.exe'
+        chosen=(resources/'.cache/browser.txt').read_text(encoding='utf8');assert Path(chosen).name.lower()=='firefox.exe'
         wait("return document.querySelectorAll('dialog[open]').length===0;")
         assert js("let order=document.querySelector('.experiment-bar').getBoundingClientRect(),stage=document.querySelector('.stage-grid').getBoundingClientRect(),poses=document.querySelector('.transition-section').getBoundingClientRect();return order.bottom<=stage.top&&poses.top>=stage.bottom&&document.querySelector('#transfer-panel').closest('.transition-section')!==null;")
         assert js("return ['一阶摆','二阶摆','三阶摆','四阶摆','五阶摆'].every((label,i)=>document.querySelector('#orders [data-order=\"'+(i+1)+'\"]').textContent===label)&&document.querySelector('#open-routes').closest('.experiment-bar')!==null;")
