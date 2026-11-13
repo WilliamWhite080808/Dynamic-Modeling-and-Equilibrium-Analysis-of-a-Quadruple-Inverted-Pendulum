@@ -30,6 +30,19 @@ for key,digest in REJECTED.items():
     path=transitions.ROOT/'rejections'/(key+'.json');temporary=path.with_name(path.name+'.'+uuid.uuid4().hex+'.tmp')
     temporary.write_text(json.dumps(dict(sha256=digest)));temporary.replace(path)
 rows=transitions.statuses();transitions._write(rows)
+portfolio=root/'portfolio/active.json'
+if portfolio.exists():
+    portfolio_cases={r['key'] for r in json.loads(portfolio.read_text())['cases']}
+    accepted=root/'portfolio/accepted';accepted.mkdir(parents=True,exist_ok=True)
+    for key,digest in SEEN.items():
+        if key not in portfolio_cases or rows.get(key,{}).get('sha256')!=digest:continue
+        receipt=accepted/(key+'.json')
+        try:old_receipt=json.loads(receipt.read_text())
+        except (OSError,ValueError):old_receipt={}
+        if old_receipt.get('sha256')!=digest:
+            temporary=receipt.with_name(receipt.name+'.'+uuid.uuid4().hex+'.tmp')
+            temporary.write_text(json.dumps(dict(sha256=digest,local_physics_and_worker_accepted=True,time=time.time())))
+            temporary.replace(receipt)
 entries=[row for row in rows.values() if row['order']==5]
 download=[row for row in entries if row['status']=='ready' and SEEN.get('5-'+row['source']+'-'+row['target'])!=row['sha256']]
 archive=None

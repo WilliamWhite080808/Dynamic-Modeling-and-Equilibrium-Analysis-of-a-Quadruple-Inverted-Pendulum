@@ -55,6 +55,9 @@ def read_motion(raw):
     text=raw.decode('utf-8-sig') if isinstance(raw,bytes) else raw
     if text.lstrip().startswith('{'):return json.loads(text)
     doc=loads(text)
+    if doc.get('v')==3:
+        from .motion_codec import expand
+        return expand(doc)
     if doc.get('v')!=2:raise ValueError('不支持的文本轨迹版本')
     doc['basis']='state-hermite-v1';doc['model_sha256']=doc.pop('model')
     for name in ('ab','ba'):

@@ -10,6 +10,7 @@ parser=argparse.ArgumentParser();parser.add_argument('--only-shards');args=parse
 selected=set(map(int,args.only_shards.split(','))) if args.only_shards is not None else None
 assert selected is None or selected and selected.issubset(set(range(8))),'Invalid shard selection'
 path=root/'job.json';job=json.loads(path.read_text());live=set()
+assert job.get('mode') not in ('four-method-portfolio','portfolio-preparing'),'Portfolio uses portfolio_admin.py, not legacy shard continuation'
 for old in job['jobs']:
     p=subprocess.run([qstat,'-f',old['job_id']],stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
     if p.returncode:

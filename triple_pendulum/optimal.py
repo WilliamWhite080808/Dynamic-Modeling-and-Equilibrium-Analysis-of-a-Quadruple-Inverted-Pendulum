@@ -43,17 +43,24 @@ def symbolic_dynamics(plant):
     return ca.Function('dynamics',[s,u],[ca.vertcat(v,ca.solve(M,ca.vertcat(b0,b)))])
 
 
-def optimize(plant,initial,duration=5,nodes=201,guess=None,max_iter=1500,seed=42,cancel=None,max_seconds=180,progress=None,target_angles=None,compute_gains=True,endpoint_angles=None,initial_force=None,force_rate=None,force_fraction=.66):
+def optimize(plant,initial,duration=5,nodes=201,guess=None,max_iter=1500,seed=42,cancel=None,max_seconds=180,progress=None,target_angles=None,compute_gains=True,endpoint_angles=None,initial_force=None,force_rate=None,force_fraction=.66,transcription='hermite-simpson'):
     if not 0<force_fraction<=1:raise ValueError('Force fraction must remain inside the physical actuator limit')
+    if transcription not in ('hermite-simpson','rk4'):raise ValueError('Unknown transcription')
     start=time.perf_counter();m=plant.dim;d=plant.d;h=duration/(nodes-1)
     initial=np.asarray(initial,dtype=float);goal=np.zeros(plant.n) if target_angles is None else np.asarray(target_angles)
     target=np.zeros(m);target[1:d]=initial[1:d]-wrap(initial[1:d]-goal)
     if endpoint_angles is not None:target[1:d]=np.asarray(endpoint_angles)
     f=symbolic_dynamics(plant);opti=ca.Opti();X=opti.variable(m,nodes);U=opti.variable(1,nodes)
     fs=f.map(nodes)(X,U)
-    midpoint=(X[:,:-1]+X[:,1:])/2+h/8*(fs[:,:-1]-fs[:,1:])
-    fm=f.map(nodes-1)(midpoint,(U[:,:-1]+U[:,1:])/2)
-    defect=X[:,1:]-X[:,:-1]-h/6*(fs[:,:-1]+4*fm+fs[:,1:])
+    if transcription=='rk4':
+        stage=f.map(nodes-1);left=X[:,:-1];um=(U[:,:-1]+U[:,1:])/2
+        k1=fs[:,:-1];k2=stage(left+h/2*k1,um);midpoint=left+h/2*k2
+        k3=stage(midpoint,um);k4=stage(left+h*k3,U[:,1:])
+        defect=X[:,1:]-left-h/6*(k1+2*k2+2*k3+k4)
+    else:
+        midpoint=(X[:,:-1]+X[:,1:])/2+h/8*(fs[:,:-1]-fs[:,1:])
+        fm=f.map(nodes-1)(midpoint,(U[:,:-1]+U[:,1:])/2)
+        defect=X[:,1:]-X[:,:-1]-h/6*(fs[:,:-1]+4*fm+fs[:,1:])
     opti.subject_to(defect==0)
     opti.subject_to(X[:,0]==initial);opti.subject_to(X[:,-1]==target)
     opti.subject_to(opti.bounded(-plant.p.rail*.82,X[0,:],plant.p.rail*.82))
@@ -111,13 +118,19 @@ def optimize(plant,initial,duration=5,nodes=201,guess=None,max_iter=1500,seed=42
         solved=False;states=np.array(opti.debug.value(X)).T;forces=np.array(opti.debug.value(U)).reshape(-1)
         if feasible_guess is not None:states,forces=feasible_guess
     derivatives=plant.batch(states.copy(),forces.copy())
-    mid=(states[:-1]+states[1:])/2+h/8*(derivatives[:-1]-derivatives[1:])
-    fm_num=plant.batch(mid.copy(),((forces[:-1]+forces[1:])/2).copy())
-    err=states[1:]-states[:-1]-h/6*(derivatives[:-1]+4*fm_num+derivatives[1:])
+    if transcription=='rk4':
+        left=states[:-1];um=(forces[:-1]+forces[1:])/2;k1=derivatives[:-1]
+        k2=plant.batch((left+h/2*k1).copy(),um.copy());k3=plant.batch((left+h/2*k2).copy(),um.copy())
+        k4=plant.batch((left+h*k3).copy(),forces[1:].copy())
+        err=states[1:]-left-h/6*(k1+2*k2+2*k3+k4)
+    else:
+        mid=(states[:-1]+states[1:])/2+h/8*(derivatives[:-1]-derivatives[1:])
+        fm_num=plant.batch(mid.copy(),((forces[:-1]+forces[1:])/2).copy())
+        err=states[1:]-states[:-1]-h/6*(derivatives[:-1]+4*fm_num+derivatives[1:])
     defect_error=float(np.max(abs(err)));terminal=float(np.linalg.norm(states[-1]-target))
     info=dict(duration=duration,dt=h,states=states.tolist(),forces=forces.tolist(),derivatives=derivatives.tolist(),
         initial=initial.tolist(),target_angles=goal.tolist(),defect=defect_error,terminal_error=terminal,nfev=iterations,
-        wall_seconds=time.perf_counter()-start,solver='CasADi / IPOPT · Hermite–Simpson',
+        wall_seconds=time.perf_counter()-start,solver='CasADi / IPOPT · '+('RK4 multiple shooting' if transcription=='rk4' else 'Hermite–Simpson'),
         success=bool(defect_error<1e-5 and terminal<1e-5))
     info['gains']=tracking_gains(plant,info) if info['success'] and compute_gains else []
     return info

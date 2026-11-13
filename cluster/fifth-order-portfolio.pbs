@@ -1,0 +1,19 @@
+#!/bin/bash
+#PBS -N pend5-four
+#PBS -q medium
+#PBS -l nodes=1:ppn=4
+#PBS -l mem=16gb
+#PBS -l walltime=06:00:00
+#PBS -j oe
+set -euo pipefail
+cd "$PBS_O_WORKDIR"
+ROOT="$(pwd -P)"
+case "$ROOT" in /data/wangqm/hmy/pendulum5_20261112) ;; *) exit 81 ;; esac
+mkdir -p "$ROOT/tmp" "$ROOT/cache/pycache" "$ROOT/portfolio/$PORTFOLIO_RUN/logs"
+exec >> "$ROOT/portfolio/$PORTFOLIO_RUN/logs/group-$PORTFOLIO_GROUP.log" 2>&1
+export TMPDIR="$ROOT/tmp" TMP="$ROOT/tmp" TEMP="$ROOT/tmp"
+export XDG_CACHE_HOME="$ROOT/cache" MPLCONFIGDIR="$ROOT/cache/matplotlib"
+export NUMBA_CACHE_DIR="$ROOT/cache/numba-$PBS_JOBID" PYTHONPYCACHEPREFIX="$ROOT/cache/pycache"
+export PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PENDULUM_CLUSTER_MODE=1
+export OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=1
+./venv/bin/python -u -m triple_pendulum.portfolio_fifth --manifest "$ROOT/portfolio/$PORTFOLIO_RUN/manifest.json" --case-indices "$PORTFOLIO_CASES" --hours 5.5
