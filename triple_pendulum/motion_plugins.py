@@ -61,17 +61,36 @@ def unpack(data,n,source,target,parameters):
 class MotionStore:
     def __init__(self,root):
         self.root=Path(root);self.cache=self.root/'.cache/motions';self.index=self.root/'.cache/trajectory-index.json';self.lock=threading.RLock();self.plans={}
+        if self.index.exists():
+            try:json.loads(self.index.read_text(encoding='utf8'))
+            except (OSError,ValueError):self.index.rename(self.index.with_name('trajectory-index.bad-'+str(time.time_ns())+'.json'))
         if not self.index.exists():self.refresh()
         self.load()
 
     def load(self):
         value=json.loads(self.index.read_text(encoding='utf8'))
         if value.get('v')!=1:raise ValueError('轨迹索引版本不支持')
-        self.value=value;self.plans={}
+        self.value=value;self.plans={};self.seed_errors={}
+        for filename,meta in value['files'].items():
+            if meta.get('seed_source'):
+                try:self.restore_seed(meta)
+                except (OSError,ValueError) as error:self.seed_errors[filename]=str(error)
+
+    def restore_seed(self,meta):
+        sha=meta.get('cache_sha256',meta['sha256']);target=self.cache/(sha+meta.get('ext','.json'))
+        if target.exists():return
+        name=meta.get('seed_source')
+        if not name or Path(name).name!=name:raise ValueError('缺少可重建的预载轨迹')
+        raw=(self.root/'motions'/name).read_bytes()
+        if hashlib.sha256(raw).hexdigest()!=sha:raise ValueError('预载缓存缺失且源文件已改变，请手动检查轨迹更新')
+        target.parent.mkdir(parents=True,exist_ok=True)
+        temporary=target.with_name(target.name+'.'+uuid.uuid4().hex+'.tmp');temporary.write_bytes(raw);temporary.replace(target)
 
     def cached_document(self,meta):
         sha=meta.get('cache_sha256',meta['sha256']);ext=meta.get('ext','.json')
-        raw=(self.cache/(sha+ext)).read_bytes()
+        path=self.cache/(sha+ext)
+        if not path.exists() and meta.get('seed_source'):self.restore_seed(meta)
+        raw=path.read_bytes()
         if hashlib.sha256(raw).hexdigest()!=sha:raise ValueError('已激活缓存损坏')
         return json.loads(gzip.decompress(raw)) if ext=='.json.gz' else read_motion(raw)
 
@@ -96,14 +115,24 @@ class MotionStore:
                     raw=path.read_bytes();sha=hashlib.sha256(raw).hexdigest()
                     previous=old['files'].get(path.name)
                     unchanged=previous and previous['sha256']==sha and old.get('model')==model and previous.get('directions')
+                    if unchanged and previous.get('ext')=='.toml':
+                        try:
+                            self.restore_seed(previous)
+                            snapshot=self.cache/(previous['cache_sha256']+'.toml')
+                            if hashlib.sha256(snapshot.read_bytes()).hexdigest()==previous['cache_sha256']:
+                                files[path.name]=previous;continue
+                        except (OSError,ValueError):pass
+                        unchanged=False
                     if unchanged and previous.get('ext')=='.json.gz':
                         self.cached_document(previous);files[path.name]=previous;continue
                     if unchanged:doc=self.cached_document(previous);params=previous['parameters']
                     else:doc,params=self.validate(raw,model)
-                    cached=gzip.compress(encoded(doc),compresslevel=3,mtime=0);cache_sha=hashlib.sha256(cached).hexdigest();ext='.json.gz';target=self.cache/(cache_sha+ext)
-                    if not target.exists():target.write_bytes(cached)
+                    compact=read_toml(raw).get('v')==3 if not raw.lstrip().startswith(b'{') else False
+                    cached=raw if compact else gzip.compress(encoded(doc),compresslevel=3,mtime=0);cache_sha=hashlib.sha256(cached).hexdigest();ext='.toml' if compact else '.json.gz';target=self.cache/(cache_sha+ext)
+                    if not target.exists() or hashlib.sha256(target.read_bytes()).hexdigest()!=cache_sha:target.write_bytes(cached)
                     directions={k:{x:doc[k][x] for x in ('runtime_sha256','T','proof')} for k in ('ab','ba')}
                     files[path.name]=dict(sha256=sha,cache_sha256=cache_sha,n=doc['n'],ends=doc['ends'],parameters=params,directions=directions,ext=ext)
+                    if compact:files[path.name]['seed_source']=path.name
                 except Exception as error:
                     errors.append(dict(file=path.name,error=str(error)))
                     if path.name in old['files']:files[path.name]=old['files'][path.name]
@@ -112,15 +141,16 @@ class MotionStore:
                 return dict(changed=False,errors=errors,orders=sorted({x['n'] for x in old['files'].values()}),directions=2*len(old['files']))
             changed=files!=old['files']
             value=dict(v=1,activated_at=time.time(),model=model,files=files)
-            atomic(self.index,value);self.value=value;self.plans={}
+            atomic(self.index,value);self.value=value;self.plans={};self.seed_errors={}
             (self.root/'.cache/trajectory-progress.txt').write_text(f'已就绪：{len(files)} 对、{2*len(files)} 条方向',encoding='utf8')
             return dict(changed=changed,errors=errors,orders=self.orders(),directions=2*len(files),pairs=len(files))
 
-    def orders(self):return sorted({v['n'] for v in self.value['files'].values()})
+    def orders(self):return sorted({v['n'] for k,v in self.value['files'].items() if k not in getattr(self,'seed_errors',{})})
 
     def lookup(self,plant,source,target):
         with self.lock:
-            for meta in self.value['files'].values():
+            for filename,meta in self.value['files'].items():
+                if filename in getattr(self,'seed_errors',{}):continue
                 if meta['n']!=plant.n or set(meta['ends'])!={source,target} or meta['parameters']!=plant.p.dict():continue
                 k=(meta['sha256'],source)
                 if k not in self.plans:
@@ -131,7 +161,8 @@ class MotionStore:
     def catalog(self,n=None):
         with self.lock:
             ready={}
-            for meta in self.value['files'].values():
+            for filename,meta in self.value['files'].items():
+                if filename in getattr(self,'seed_errors',{}):continue
                 order=meta['n']
                 if n is not None and n!=order:continue
                 doc=meta.get('directions') or self.cached_document(meta)

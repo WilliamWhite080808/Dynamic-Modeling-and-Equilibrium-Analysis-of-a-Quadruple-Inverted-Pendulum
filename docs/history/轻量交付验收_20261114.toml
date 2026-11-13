@@ -1,0 +1,46 @@
+# 固定版本的可追溯验收摘要；完整证据位于本机 results/light-acceptance。
+version = "20261114-light"
+pairs = 646
+directions = 1292
+fifth_directions = 982
+fifth_total = 992
+sequence_ready = [1, 2, 3, 4]
+complete_local_solver = true
+existing_browser_or_webview = true
+bundled_browser_engine = false
+prebuilt_index = true
+duplicate_payload_in_zip = false
+updates_require_manual_check = true
+regression_tests_passed = 27
+exact_source_control_sha256 = "e6a2d3bc590eb16b95cc6e5146e8d6a10c99d268d62054dc30e22782b7573ff3"
+
+[web]
+bytes = 278784271
+sha256 = "3709abff83b29ae06f77b84afaf368b5f9406e61309f9d982dedf008f16cf221"
+entry = "打开网页版.exe"
+real_entry_opened_page = true
+cold_start_seconds = 14.11
+
+[desktop]
+bytes = 279028860
+sha256 = "e96c258da86a2311130af4417ce16e53a899652a09588c755b3b8c738381f5cf"
+entry = "倒立摆.exe"
+real_visible_window = true
+system_webview_version_tested = "125.0.2535.67"
+missing_webview_browser_fallback_passed = true
+
+[checks]
+crc = true
+exact_control_equality_all_directions = true
+independent_forward_reverse = true
+actual_fifth_worker_proofs = true
+isolated_environment = true
+real_bundled_ipopt_hanging_swingup = true
+api_custom_initial_solve = true
+orders_1_to_5_hanging = true
+speed_open_and_refresh_one = true
+order_above_poses_below = true
+timeline_and_warehouse = true
+manual_update = true
+recorded_video_decodes = true
+final_directory_normal_exes = true

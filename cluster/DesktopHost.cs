@@ -33,7 +33,7 @@ internal sealed class DesktopHost : Form {
         StartPosition=FormStartPosition.CenterScreen;WindowState=FormWindowState.Maximized;BackColor=Color.FromArgb(244,247,252);
         AutoScaleMode=AutoScaleMode.Dpi;Font=new Font("Microsoft YaHei UI",11);
         status.Dock=DockStyle.Fill;status.TextAlign=ContentAlignment.MiddleCenter;
-        status.Text="正在打开倒立摆实验室…\n首次启动会校验全部轨迹";Controls.Add(status);
+        status.Text="正在打开倒立摆实验室…\n载入预建轨迹索引";Controls.Add(status);
         progress.Interval=300;progress.Tick+=delegate {
             try {
                 var p=Path.Combine(root,".cache","startup.txt");var t=Path.Combine(root,".cache","trajectory-progress.txt");
@@ -55,11 +55,24 @@ internal sealed class DesktopHost : Form {
             if(instance.ContainsKey("pid")&&instance["pid"]!=null)servicePid=Convert.ToInt32(instance["pid"]);
             view=new WebView2();view.Dock=DockStyle.Fill;view.Visible=false;Controls.Add(view);
             var engine=Path.Combine(root,"engine");
-            if(!File.Exists(Path.Combine(engine,"msedgewebview2.exe")))throw new Exception("桌面窗口引擎缺失，请完整解压桌面版。");
+            if(!File.Exists(Path.Combine(engine,"msedgewebview2.exe")))engine=null;
+            bool browserOnly=Environment.GetEnvironmentVariable("PENDULUM_FORCE_BROWSER")=="1";
+            if(engine==null&&!browserOnly) {
+                try{CoreWebView2Environment.GetAvailableBrowserVersionString(null);}
+                catch{browserOnly=true;}
+            }
+            if(browserOnly){await BrowserFallback();return;}
             var options=new CoreWebView2EnvironmentOptions();
             options.AdditionalBrowserArguments="--disable-background-networking --disable-component-update --disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-background-timer-throttling";
-            var env=await CoreWebView2Environment.CreateAsync(engine,Path.Combine(root,".cache","window"),options);
-            await view.EnsureCoreWebView2Async(env);
+            CoreWebView2Environment env=null;bool fallbackAfterFailure=false;
+            try {
+                env=await CoreWebView2Environment.CreateAsync(engine,Path.Combine(root,".cache","window"),options);
+                await view.EnsureCoreWebView2Async(env);
+            } catch {
+                if(engine==null&&testFolder==null)fallbackAfterFailure=true;
+                else throw;
+            }
+            if(fallbackAfterFailure){await BrowserFallback();return;}
             view.CoreWebView2.Settings.AreDefaultContextMenusEnabled=false;
             view.CoreWebView2.NavigationStarting+=delegate(object s,CoreWebView2NavigationStartingEventArgs e) {
                 Uri target;
@@ -96,6 +109,17 @@ internal sealed class DesktopHost : Form {
             if(!value.StartsWith("http://127.0.0.1:"))throw new Exception("本机服务没有返回有效地址。");
             return value;
         }
+    }
+    async Task BrowserFallback() {
+        if(view!=null){Controls.Remove(view);view.Dispose();view=null;}
+        var output=await Task.Run(delegate {
+            var info=new ProcessStartInfo(Path.Combine(root,"runtime","python.exe"),"\""+Path.Combine(root,"launch.py")+"\" --desktop");
+            info.WorkingDirectory=root;info.UseShellExecute=false;info.CreateNoWindow=true;info.WindowStyle=ProcessWindowStyle.Hidden;
+            info.RedirectStandardOutput=true;info.RedirectStandardError=true;info.StandardOutputEncoding=Encoding.UTF8;info.StandardErrorEncoding=Encoding.UTF8;
+            using(var child=Process.Start(info)){var text=child.StandardOutput.ReadToEnd();var error=child.StandardError.ReadToEnd();child.WaitForExit();if(child.ExitCode!=0)throw new Exception(error);return text;}
+        });
+        File.WriteAllText(Path.Combine(root,"results","桌面入口.log"),"Existing browser fallback\n"+output,Encoding.UTF8);
+        servicePid=0;progress.Stop();Close();
     }
     void Fail(Exception error) {
         progress.Stop();status.Visible=true;status.BringToFront();status.ForeColor=Color.Firebrick;
@@ -161,7 +185,7 @@ internal sealed class DesktopHost : Form {
         if(recordings.Length==0||new FileInfo(recordings[recordings.Length-1]).Length<1000)throw new Exception("未生成有效核心区域录制文件");
         await Js("(()=>{let v=document.createElement('video');v.muted=true;v.src=document.querySelector('.record-download').href;v.id='recording-check';v.style.display='none';document.body.append(v);v.load();return true;})()");
         await Wait("document.querySelector('#recording-check').readyState>=2&&document.querySelector('#recording-check').videoWidth>0",20);
-        File.AppendAllText(log,"PASS manual update, warehouse and core recording\nPASS native desktop standalone; no installed browser required\n",Encoding.UTF8);
+        File.AppendAllText(log,"PASS manual update, warehouse and core recording\nPASS native desktop using available WebView2 engine\n",Encoding.UTF8);
     }
 
     [STAThread] static void Main(string[] args) {

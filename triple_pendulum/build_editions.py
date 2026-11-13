@@ -16,7 +16,7 @@ def compile_app(source,target,references=()):
     args.extend('/reference:'+str(Path(p).resolve()) for p in references)
     args.append(source);subprocess.run(args,cwd=ROOT/'cluster',check=True)
 
-def make(destination,edition,seed):
+def make(destination,edition,seed,lightweight=False):
     destination=Path(destination);destination.mkdir(parents=True,exist_ok=True)
     if (destination/'release.toml').exists():raise ValueError('不要覆盖已经发布的版本')
     shutil.copytree(Path(seed)/'runtime',destination/'runtime',copy_function=linked_copy,ignore=shutil.ignore_patterns('__pycache__','*.pyc','*.nbc','*.nbi'))
@@ -35,13 +35,14 @@ def make(destination,edition,seed):
         shutil.copy2(sdk/'runtimes/win-x64/native/WebView2Loader.dll',destination/'WebView2Loader.dll')
         licenses=destination/'许可';licenses.mkdir(exist_ok=True)
         for name in ('LICENSE.txt','NOTICE.txt'):shutil.copy2(sdk/name,licenses/('WebView2-'+name))
-        engine=next((ROOT/'results/desktop-build/fixed-runtime').glob('*'))
-        shutil.copytree(engine,destination/'engine',copy_function=linked_copy)
+        if not lightweight:
+            engine=next((ROOT/'results/desktop-build/fixed-runtime').glob('*'))
+            shutil.copytree(engine,destination/'engine',copy_function=linked_copy)
         compile_app('DesktopHost.cs',destination/'倒立摆.exe',[net/'Microsoft.Web.WebView2.Core.dll',net/'Microsoft.Web.WebView2.WinForms.dll'])
     return destination
 
-def sync_data(web,desktop):
-    report=export(web)
+def sync_data(web,desktop,lightweight=False):
+    report=export(web,compact=lightweight)
     for name in ('motions','models'):shutil.copytree(Path(web)/name,Path(desktop)/name,dirs_exist_ok=True)
     expected={p.name for p in (Path(web)/'motions').glob('*.toml')}
     for path in (Path(desktop)/'motions').glob('*.toml'):
@@ -49,6 +50,7 @@ def sync_data(web,desktop):
     from . import transitions
     computed=report['orders'].get(5,0)+report['unpaired_directions_not_published']
     report.update(built_at=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).isoformat(),fifth_computed_total=computed,trajectory_format='TOML v2; lossless Hermite nodes',requires_external_python=False,requires_network=False,one_click_start=True,stable_hold_seconds=5,layout='阶数在上；仿真及图表居中；起点终点在下')
+    if lightweight:report['trajectory_format']='TOML v3; lossless IEEE754 state-Hermite coefficients'
     for folder,kind in ((Path(web),'网页版'),(Path(desktop),'桌面版')):
         value=dict(report,edition=kind,entry='打开网页版.exe' if kind=='网页版' else '倒立摆.exe',browser_engine='installed browser with verified executable fallback' if kind=='网页版' else 'bundled Microsoft WebView2 Fixed Version 157.0.4341.57')
         (folder/'release.toml').write_text(dumps(value),encoding='utf8')
@@ -77,12 +79,14 @@ def prepare_cache(folder):
 
 def zip_edition(folder,target):
     folder=Path(folder);target=Path(target)
+    index=folder/'.cache/trajectory-index.json'
+    seeded=json.loads(index.read_bytes()).get('source_preload',False) if index.exists() else False
     previous=zipfile.ZipFile(target) if target.exists() else None
     temporary=target.with_name(target.name+'.new')
     with zipfile.ZipFile(temporary,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as bundle:
         for path in sorted(folder.rglob('*')):
             parts=path.relative_to(folder).parts
-            preload=parts==('.cache','trajectory-index.json') or (parts[:2]==('.cache','motions') and path.name.endswith('.json.gz'))
+            preload=parts==('.cache','trajectory-index.json') or (not seeded and parts[:2]==('.cache','motions') and path.name.endswith('.json.gz'))
             regular=not any(p in ('.cache','__pycache__','recordings','trajectory_repository') for p in parts)
             if path.is_file() and (regular or preload) and not (parts[0]=='results' and path.suffix=='.log'):
                 name=(Path(folder.name)/path.relative_to(folder)).as_posix();old=previous.NameToInfo.get(name) if previous else None

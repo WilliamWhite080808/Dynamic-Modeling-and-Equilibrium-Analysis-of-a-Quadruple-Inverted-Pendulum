@@ -14,3 +14,14 @@ def test_archive_reuses_verified_members_and_keeps_only_portable_preload(tmp_pat
         assert archive.read('网页版/change.txt')==b'after'
         assert archive.read('网页版/.cache/motions/a.json.gz')==b'cached-control'
         assert '网页版/.cache/instance.json' not in archive.namelist()
+
+def test_seeded_archive_carries_prebuilt_index_without_duplicate_payload(tmp_path):
+    folder=tmp_path/'网页版';(folder/'.cache/motions').mkdir(parents=True);(folder/'motions').mkdir()
+    (folder/'motions/1_D_U.toml').write_bytes(b'public lossless payload')
+    (folder/'.cache/motions/duplicate.json.gz').write_bytes(b'duplicate')
+    (folder/'.cache/trajectory-index.json').write_text('{"source_preload":true}')
+    target=tmp_path/'网页版.zip';zip_edition(folder,target)
+    with zipfile.ZipFile(target) as z:
+        assert '网页版/.cache/trajectory-index.json' in z.namelist()
+        assert '网页版/motions/1_D_U.toml' in z.namelist()
+        assert not any('/.cache/motions/' in name for name in z.namelist())

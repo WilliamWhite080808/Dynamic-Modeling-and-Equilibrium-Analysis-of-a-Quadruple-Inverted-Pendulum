@@ -22,4 +22,4 @@ def test_broken_browser_is_skipped_and_next_executable_opens(tmp_path,monkeypatc
 def test_no_browser_has_visible_error_instead_of_false_success(monkeypatch):
     import pytest
     mod=launcher();monkeypatch.setattr(mod,'browser_candidates',lambda:[])
-    with pytest.raises(RuntimeError,match='桌面版'):mod.open_browser('http://127.0.0.1:8767')
+    with pytest.raises(RuntimeError,match='未找到实际可用'):mod.open_browser('http://127.0.0.1:8767')

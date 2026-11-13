@@ -13,7 +13,9 @@ def main():
     prefs={'marionette.port':port,'browser.shell.checkDefaultBrowser':False,'browser.aboutwelcome.enabled':False,'browser.startup.homepage_override.mstone':'ignore','network.proxy.type':1,'network.proxy.http':'127.0.0.1','network.proxy.http_port':9,'network.proxy.ssl':'127.0.0.1','network.proxy.ssl_port':9,'network.proxy.no_proxies_on':'127.0.0.1,localhost','widget.windows.window_occlusion_tracking.enabled':False,'dom.timeout.enable_budget_timer_throttling':False}
     (profile/'user.js').write_text('\n'.join(f'user_pref({json.dumps(k)},{json.dumps(v)});' for k,v in prefs.items()),encoding='utf8')
     env=os.environ.copy();env.update(PATH=os.environ['SystemRoot']+'\\System32',PYTHONHOME='Z:/missing-python',PYTHONPATH='Z:/missing-python',BROWSER='Z:/missing-edge.exe',PENDULUM_TEST_FIREFOX_PROFILE=str(profile),PYTHONUTF8='1')
-    opened_at=time.monotonic();app=subprocess.Popen([str(folder/'打开网页版.exe')],cwd=folder,env=env,creationflags=subprocess.CREATE_NO_WINDOW|subprocess.CREATE_BREAKAWAY_FROM_JOB)
+    entry=sys.argv[sys.argv.index('--entry')+1] if '--entry' in sys.argv else '打开网页版.exe'
+    if '--force-browser' in sys.argv:env['PENDULUM_FORCE_BROWSER']='1'
+    opened_at=time.monotonic();app=subprocess.Popen([str(folder/entry)],cwd=folder,env=env,creationflags=subprocess.CREATE_NO_WINDOW|subprocess.CREATE_BREAKAWAY_FROM_JOB)
     driver=Marionette(port=port,startup_timeout=300,socket_timeout=90)
     def js(code):return driver.execute_script(code,sandbox=None)
     def wait(code,seconds=90):
@@ -52,7 +54,7 @@ def main():
         driver.find_element(By.CSS_SELECTOR,'#transfer-to-options [data-pose="DUUD"]').click()
         driver.find_element(By.CSS_SELECTOR,'#pause').click()
         wait("return document.querySelector('#transfer-note').textContent.includes('↓↓↓↓ → ↓↑↑↓')&&document.querySelector('#pause').textContent==='继续摆动'&&!document.querySelector('#experiment-seek').disabled;")
-        report=dict(passed=True,entry=str(folder/'打开网页版.exe'),browser=chosen,url=endpoint,real_exe_opened_page_without_driver_navigation=True,orders_tested=[1,2,3,4,5],proxy_isolated=True,order_above_scene=True,poses_below_scene=True,lower_pose_real_pointer_click=True,default_speed=1,refresh_resets_speed_to_one=True,startup_seconds=startup_seconds)
+        report=dict(passed=True,entry=str(folder/entry),browser=chosen,url=endpoint,real_exe_opened_page_without_driver_navigation=True,orders_tested=[1,2,3,4,5],proxy_isolated=True,order_above_scene=True,poses_below_scene=True,lower_pose_real_pointer_click=True,default_speed=1,refresh_resets_speed_to_one=True,startup_seconds=startup_seconds)
         (qa/'web-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8');print(json.dumps(report,ensure_ascii=False),flush=True)
         app.wait(timeout=20);assert app.returncode==0
     finally:

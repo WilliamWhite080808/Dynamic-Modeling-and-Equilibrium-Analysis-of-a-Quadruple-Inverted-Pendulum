@@ -55,3 +55,30 @@ def test_build_preload_refreshes_new_build_but_refuses_started_instance(tmp_path
     pair(tmp_path,2,'UU','DD');assert prepare_cache(tmp_path)['pairs']==2
     (tmp_path/'.cache/instance.json').write_text('{}')
     with pytest.raises(ValueError,match='已运行应用'):prepare_cache(tmp_path)
+
+def compact_pair(tmp,n,a,b):
+    from triple_pendulum.motion_codec import compact_bytes
+    old,source=pair(tmp,n,a,b);doc=json.loads(old.read_bytes());path=old.with_name(f'{n}_{a}_{b}.toml')
+    path.write_bytes(compact_bytes(doc));old.unlink();return path,source
+
+def test_compact_prebuilt_index_restores_missing_snapshots_without_parsing(tmp_path,monkeypatch):
+    import triple_pendulum.motion_plugins as module
+    path,_=compact_pair(tmp_path,1,'U','D');store=MotionStore(tmp_path);meta=next(iter(store.value['files'].values()))
+    assert meta['seed_source']==path.name and meta['ext']=='.toml'
+    cached=store.cache/(meta['cache_sha256']+meta['ext']);cached.unlink()
+    with monkeypatch.context() as patch:
+        patch.setattr(module,'read_motion',lambda *args:(_ for _ in ()).throw(AssertionError('startup parsed coefficients')))
+        rebuilt=MotionStore(tmp_path);assert rebuilt.orders()==[1] and rebuilt.catalog()['ready']==2
+    assert cached.read_bytes()==path.read_bytes()
+    before=rebuilt.lookup(Plant(Parameters(n=1)),'U','D')
+    compact_pair(tmp_path,2,'UU','DD');path.write_text('broken')
+    assert MotionStore(tmp_path).orders()==[1]
+    assert MotionStore(tmp_path).lookup(Plant(Parameters(n=1)),'U','D')==before
+
+def test_missing_or_broken_index_is_rebuilt_and_changed_missing_seed_requires_manual_update(tmp_path):
+    path,_=compact_pair(tmp_path,1,'U','D');store=MotionStore(tmp_path)
+    store.index.unlink();assert MotionStore(tmp_path).catalog()['ready']==2
+    store.index.write_text('{broken');assert MotionStore(tmp_path).catalog()['ready']==2
+    assert list((tmp_path/'.cache').glob('trajectory-index.bad-*.json'))
+    meta=next(iter(store.value['files'].values()));(store.cache/(meta['cache_sha256']+meta['ext'])).unlink();path.write_text('broken')
+    invalid=MotionStore(tmp_path);assert invalid.orders()==[] and invalid.seed_errors

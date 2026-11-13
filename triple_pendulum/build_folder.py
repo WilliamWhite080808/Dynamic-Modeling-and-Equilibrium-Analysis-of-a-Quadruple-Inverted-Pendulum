@@ -6,7 +6,7 @@ from .motion_text import dumps as toml,motion_bytes
 
 ROOT=Path(__file__).resolve().parent.parent
 
-def export(destination):
+def export(destination,compact=False):
     destination=Path(destination);motions=destination/'motions';models=destination/'models';motions.mkdir(parents=True,exist_ok=True);models.mkdir(exist_ok=True)
     rows=transitions.statuses();ready={k:r for k,r in rows.items() if r['status']=='ready'};pairs=[];signatures={};counts={};omitted=0
     # Read immutable admitted bytes once: background calculation may continue.
@@ -35,7 +35,11 @@ def export(destination):
     expected_files=set()
     for pair in pairs:
         doc=dict(v=1,basis='state-hermite-v1',model_sha256=motion_plugins.model_digest(model),**pair)
-        raw=motion_bytes(doc);path=motions/f'{pair["n"]}_{pair["ends"][0]}_{pair["ends"][1]}.toml';expected_files.add(path.name)
+        if compact:
+            from .motion_codec import compact_bytes
+            raw=compact_bytes(doc)
+        else:raw=motion_bytes(doc)
+        path=motions/f'{pair["n"]}_{pair["ends"][0]}_{pair["ends"][1]}.toml';expected_files.add(path.name)
         if path.exists() and path.read_bytes()==raw:continue
         motion_plugins.MotionStore.validate(None,raw,model);path.write_bytes(raw)
     for path in motions.glob('*.toml'):

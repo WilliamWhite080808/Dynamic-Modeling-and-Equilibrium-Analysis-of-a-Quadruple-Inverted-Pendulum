@@ -46,11 +46,13 @@ def browser_candidates():
         if Path(path).is_file() and os.path.normcase(path) not in [os.path.normcase(p) for p in result]:result.append(path)
     return result
 
-def open_browser(url):
+def open_browser(url,desktop=False):
     errors=[]
     for path in browser_candidates():
         try:
             command=[path,url]
+            if desktop:
+                command=[path,'--new-window',url] if Path(path).name.lower()=='firefox.exe' else [path,'--app='+url,'--new-window']
             profile=os.environ.get('PENDULUM_TEST_FIREFOX_PROFILE')
             if profile and Path(path).name.lower()=='firefox.exe':command=[path,'--no-remote','--marionette','--profile',profile,url]
             proc=subprocess.Popen(command,close_fds=True)
@@ -60,7 +62,7 @@ def open_browser(url):
             (ROOT/'.cache/browser.txt').write_text(path,encoding='utf8');return path
         except OSError as error:errors.append(str(error))
         except RuntimeError as error:errors.append(str(error))
-    raise RuntimeError('未找到可用浏览器。请使用自带窗口引擎的桌面版。'+('；'.join(errors[-2:])))
+    raise RuntimeError('未找到实际可用的浏览器或桌面引擎，请检查浏览器是否被移除。'+('；'.join(errors[-2:])))
 
 def ensure_service():
     cache=ROOT/'.cache';cache.mkdir(exist_ok=True);record=cache/'instance.json'
@@ -115,7 +117,7 @@ def ensure_service():
 
 def main():
     os.chdir(ROOT);url=ensure_service()
-    if '--no-open' not in sys.argv:open_browser(url)
+    if '--no-open' not in sys.argv:open_browser(url,desktop='--desktop' in sys.argv)
     print(url,flush=True);return 0
 
 if __name__=='__main__':
