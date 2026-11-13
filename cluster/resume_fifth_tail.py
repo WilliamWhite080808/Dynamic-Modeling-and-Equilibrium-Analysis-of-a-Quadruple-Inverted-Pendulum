@@ -21,6 +21,10 @@ keys=sorted(k for k,r in allrows.items() if r['order']==5)
 assert len(keys)==992
 nodes={0:'cu14',1:'cu31',2:'cu15',3:'cu16',4:'cu19',5:'cu30',6:'cu20',7:'cu15'}
 stamp=int(time.time());(root/('job-before-tail-'+str(stamp)+'.json')).write_bytes(path.read_bytes())
+def save_job():
+    job['job_ids']=[x['job_id'] for x in job['jobs']]
+    job['workers_total']=sum(x.get('workers',8) for x in job['jobs']);job['core_limit']=150
+    temporary=path.with_suffix('.new');temporary.write_text(json.dumps(job,indent=2));temporary.replace(path)
 allocations=[]
 for old in job['jobs']:
     if selected is not None and old['shard'] not in selected:continue
@@ -32,7 +36,13 @@ for old in job['jobs']:
         try:r=json.loads((root/'equilibrium_transitions/rejections'/(k+'.json')).read_text())
         except (OSError,ValueError):r={}
         if c.get('status')!='ready' or r.get('sha256')==c.get('sha256'):pending.append(k)
-    if not pending:continue
+    if not pending:
+        if not old.get('completed'):
+            job.setdefault('retired_jobs',[]).append(dict(old,retired_at=time.time(),reason='All shard directions certified; no replacement job needed'))
+            finished=dict(old,workers=0,completed=True,completed_at=time.time())
+            job['jobs']=[finished if x['shard']==shard else x for x in job['jobs']]
+            save_job();print(json.dumps(dict(shard=shard,completed=True,workers=0)),flush=True)
+        continue
     cpus=min(8 if shard in (1,6) else 16,len(pending))
     log=(root/('solver-'+str(shard)+'.log')).read_text(errors='replace')
     completed=bool(re.search(r'RESULT \d+ / 124\s*$',log))
@@ -51,6 +61,5 @@ for old,shard,pending,cpus,start,completed in allocations:
     replacement=dict(job_id=ident,shard=shard,submitted_at=time.time(),start_round=start,rounds=4,requested_node=nodes[shard],workers=cpus,pending_at_submission=len(pending),checkpoint_preserved=True)
     job.setdefault('retired_jobs',[]).append(dict(old,retired_at=time.time(),reason='Completed round result; continue remaining cases' if completed else 'Old job absent from PBS before RESULT; resume incomplete round and preserve all checkpoints'))
     job['jobs']=[replacement if x['shard']==shard else x for x in job['jobs']]
-    job['job_ids']=[x['job_id'] for x in job['jobs']];job['workers_total']=sum(x.get('workers',8) for x in job['jobs']);job['core_limit']=150
-    temporary=path.with_suffix('.new');temporary.write_text(json.dumps(job,indent=2));temporary.replace(path)
+    save_job()
     print(json.dumps(replacement),flush=True)
