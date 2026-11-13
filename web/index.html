@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4f6fa"><title>Pendulum Lab · 多重摆实验室</title><link rel="stylesheet" href="/lab.css?v=experiment-4"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4f6fa"><title>Pendulum Lab · 多重摆实验室</title><link rel="stylesheet" href="/lab.css?v=matrix-top-5"></head>
 <body>
 <header class="topbar"><a class="brand" href="/" aria-label="Pendulum Lab 首页"><span class="brand-mark">⫯</span><strong>Pendulum<span> / Lab</span></strong></a><span class="physical-tag">自由关节 · 仅小车驱动</span><nav><button id="check-motion-updates">检查轨迹更新</button><button id="open-inventory">▦ 路径仓库 <span id="inventory-count">—</span></button><button id="open-settings" aria-label="参数与分析">⚙ 参数与分析</button></nav></header>
 <main class="workspace">
   <div class="workspace-heading"><div><span class="eyebrow">DYNAMICS PLAYGROUND <span id="order-label">TRIPLE</span></span><h1><span id="order-title">三重倒立摆</span><span class="status" id="status">连接中</span></h1></div><div class="live"><i></i><span>实时求解</span><time id="clock">00:00.00</time></div></div>
   <section class="experiment-bar" aria-label="实验操作">
-    <div class="order-control"><span class="control-caption">摆杆阶数</span><div class="order-picker" id="orders" role="group" aria-label="摆杆阶数"><button data-order="1">1</button><button data-order="2">2</button><button data-order="3" class="selected">3</button><button data-order="4">4</button><button data-order="5">5</button></div></div>
+    <div class="order-control"><span class="control-caption">摆杆阶数</span><div class="order-picker" id="orders" role="group" aria-label="摆杆阶数"><button data-order="1">一阶摆</button><button data-order="2">二阶摆</button><button data-order="3" class="selected">三阶摆</button><button data-order="4">四阶摆</button><button data-order="5">五阶摆</button></div></div>
     <div id="swingup-panel" class="hidden"><label>目标姿态<select id="goal" aria-label="目标平衡姿态"></select></label><button id="down" class="primary">▶ 悬垂起摆</button><small id="precomputed-status"></small></div>
+    <button id="open-routes" class="primary matrix-launch" aria-haspopup="dialog" aria-controls="routes-dialog"><span aria-hidden="true">▦</span> 转场矩阵 <span id="transfer-count">—</span></button>
     <button id="edit-initial" class="custom-button">自定义初值</button>
   </section>
   <div class="stage-grid">
@@ -27,7 +28,7 @@
       <section class="pose-picker"><div class="pose-picker-heading"><h2>起点</h2><output id="transfer-from-preview"></output></div><input id="transfer-from" type="hidden"><div id="transfer-from-options" class="pose-options" role="group" aria-label="转场起点稳态"></div></section>
       <span class="transfer-arrow" aria-hidden="true">→</span>
       <section class="pose-picker"><div class="pose-picker-heading"><h2>终点</h2><output id="transfer-to-preview"></output></div><input id="transfer-to" type="hidden"><div id="transfer-to-options" class="pose-options" role="group" aria-label="转场目标稳态"></div></section>
-      <div class="transfer-actions"><span class="pose-key">箭头从左到右对应第 1～<span id="pose-order">3</span> 根杆 · ↑ 向上 / ↓ 向下</span><button id="transfer-cruise" title="依次演示当前阶数的全部有向转场">↻ 序列演示</button><button id="open-routes">转场矩阵 <span id="transfer-count">—</span></button></div>
+      <div class="transfer-actions"><span class="pose-key">箭头从左到右对应第 1～<span id="pose-order">3</span> 根杆 · ↑ 向上 / ↓ 向下</span><button id="transfer-cruise" title="依次演示当前阶数的全部有向转场">↻ 序列演示</button></div>
     </div>
   </section>
   <footer><span>被动刚性杆 · RK4 <span id="integration-label">1 ms</span> · <span id="dimension">8 维状态</span></span><span id="realtime-status">实时运行</span><button id="export">↓ 导出数据</button></footer>
@@ -40,5 +41,5 @@
 </div><details class="diagnostics"><summary>系统分析与计算状态</summary><div id="analysis"><div class="analysis-grid"><div id="health"></div><canvas id="poles"></canvas></div><div id="state-table"></div><div class="telemetry"><span>机械能 <b id="energy">—</b> J</span><span>积分 <b id="physics-ms">—</b> ms</span><span>观测 <b id="observer-ms">—</b> ms</span><span>估计误差 <b id="estimate-error">—</b></span><span>触壁 <b id="contacts">0</b></span><span id="saturation"></span></div></div></details></dialog>
 <dialog id="initial-dialog"><form method="dialog"><div class="dialog-heading"><div><span class="eyebrow">INITIAL CONDITIONS</span><h2>设定一次新实验</h2></div><button value="cancel" class="icon-button">✕</button></div><p>角度相对竖直向上，单位 °；角速度单位 °/s。</p><div id="initial-fields"></div><div class="dialog-actions"><button value="cancel">取消</button><button type="button" id="start-custom" class="primary">应用并开始 →</button></div></form></dialog>
 <dialog id="inventory-dialog"><div class="inventory-header"><div><span class="eyebrow">SAVED TRAJECTORIES</span><h2>路径仓库 <span id="inventory-total"></span></h2><p>选一张初态卡片，再选择目标平衡姿态。角速度也参与求解。</p></div><button id="close-inventory" class="icon-button" aria-label="关闭路径仓库">✕</button></div><div class="inventory-toolbar"><label for="inventory-order">系统</label><select id="inventory-order"><option value="3">三重摆 · 8 种目标</option><option value="1">单摆 · 2 种目标</option><option value="2">双重摆 · 4 种目标</option><option value="4">四重摆 · 16 种目标</option><option value="5">五重摆 · 31 种目标</option></select><button id="inventory-new">＋ 手动输入初值</button><button id="inventory-refresh" title="刷新仓库">⟳</button><span id="inventory-summary">正在读取本地仓库…</span></div><div class="inventory-body"><div id="inventory-cards" class="inventory-cards"></div><aside class="inventory-selection"><button id="inventory-back">← 重选初态</button><span class="eyebrow">TARGET EQUILIBRIUM</span><h3 id="selected-card-title">先选择一张初态卡片</h3><p id="selected-card-detail">卡片中的 θ 为角度，ω 为角速度。</p><div id="inventory-targets" class="inventory-targets"></div><p id="inventory-path-detail" class="inventory-path-detail">已有路径可直接轨迹复现；新的组合会通过真实动力学求解，成功后自动入库。</p><button id="inventory-play" class="primary" disabled>选择初态与目标</button></aside></div></dialog>
-<script type="module" src="/app.js?v=experiment-4"></script>
+<script type="module" src="/app.js?v=matrix-top-5"></script>
 </body></html>

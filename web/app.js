@@ -8,6 +8,7 @@ import {simulationRate,timelineEnd,STABLE_HOLD_SECONDS} from './experiment.js';
 import {CoreRecorder} from './recorder.js';
 const $=id=>document.getElementById(id), colors=Array.from({length:20},(_,i)=>['#3478ef','#f2a13c','#19ab9a','#a275df','#e6719b','#368bba','#b79437','#668356'][i%8]);
 const labels=['','单','双','三','四','五','六','七','八','九','十'], english=['','SINGLE','DOUBLE','TRIPLE','QUADRUPLE','QUINTUPLE','SIX-LINK','SEVEN-LINK','EIGHT-LINK','NINE-LINK','TEN-LINK'];
+const orderLabel=order=>(['','一','二'][order]||labels[order]||order)+'阶摆';
 const worker=new Worker('/sim-worker.js?v=experiment-4',{type:'module'});
 const renderer=new Renderer($('arena'));
 const player=new ReplayPlayer();
@@ -534,8 +535,8 @@ async function discoverOrders(preferred=n){
   const response=await fetch('/api/health');if(!response.ok)throw Error('本机服务尚未就绪');
   const health=await response.json(),orders=health.orders;
   if(!orders?.length)throw Error('motions 目录没有有效的双向轨迹插件');
-  $('orders').innerHTML=orders.map(order=>`<button data-order="${order}" class="${order===preferred?'selected':''}">${order}</button>`).join('');
-  $('inventory-order').innerHTML=orders.map(order=>`<option value="${order}">${labels[order]||order}重摆 · ${2**order} 种姿态</option>`).join('');
+  $('orders').innerHTML=orders.map(order=>`<button data-order="${order}" class="${order===preferred?'selected':''}">${orderLabel(order)}</button>`).join('');
+  $('inventory-order').innerHTML=orders.map(order=>`<option value="${order}">${orderLabel(order)} · ${2**order} 种姿态</option>`).join('');
   if(!orders.includes(n))n=orders.includes(3)?3:orders[0];
   $('inventory-order').value=String(n);
 }

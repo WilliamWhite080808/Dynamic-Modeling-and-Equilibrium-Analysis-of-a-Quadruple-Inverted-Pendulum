@@ -7,12 +7,23 @@ from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor
 from copy import deepcopy
 from itertools import product
+from contextlib import contextmanager
 import numpy as np
 from . import transitions,repository
 from .model import Plant,Parameters
 from .precompute_equilibria import reverse_reference,certify
 
 METHODS=('explicit-hs','inverse-hs','residual-continuation','rk4-shooting')
+
+
+@contextmanager
+def certification_lock(case,timeout=1.):
+    # Atomic mkdir avoids NFS advisory-lock retries blocking a method forever.
+    # Never expire another owner's lock merely because a replay is slow.
+    root=transitions.ROOT.parent/'portfolio/locks-v2'/case['key']
+    root.mkdir(parents=True,exist_ok=True)
+    with repository.directory_lock(root,timeout=timeout,stale_seconds=float('inf')):
+        yield
 
 def atomic(path,value):
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
@@ -101,11 +112,10 @@ def run_method(case,method,directory,hours):
                 if result['defect']<.02 and result['terminal_error']<.001:
                     warm=deepcopy(result);atomic(checkpoint,warm)
                     result['portfolio']=dict(method=method,attempt=attempt,run=Path(directory).parents[1].name)
-                    import fcntl
-                    lock=transitions.ROOT.parent/'portfolio/locks'/(case['key']+'.lock');lock.parent.mkdir(parents=True,exist_ok=True)
-                    with lock.open('a') as handle:
-                        fcntl.flock(handle,fcntl.LOCK_EX)
+                    atomic(status,dict(meta,state='waiting_certification_lock',time=time.time()))
+                    with certification_lock(case):
                         if transitions.case_status(5,case['source'],case['target'])['status']=='ready':break
+                        atomic(status,dict(meta,state='verifying_candidate',time=time.time()))
                         if certify(plant,case['source'],case['target'],result):
                             print('CANDIDATE_PUBLISHED',method,case['key'],flush=True);break
         except InterruptedError:pass

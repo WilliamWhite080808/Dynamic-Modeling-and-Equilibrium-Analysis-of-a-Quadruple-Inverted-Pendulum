@@ -38,6 +38,7 @@ def main():
         chosen=(folder/'.cache/browser.txt').read_text(encoding='utf8');assert Path(chosen).name.lower()=='firefox.exe'
         wait("return document.querySelectorAll('dialog[open]').length===0;")
         assert js("let order=document.querySelector('.experiment-bar').getBoundingClientRect(),stage=document.querySelector('.stage-grid').getBoundingClientRect(),poses=document.querySelector('.transition-section').getBoundingClientRect();return order.bottom<=stage.top&&poses.top>=stage.bottom&&document.querySelector('#transfer-panel').closest('.transition-section')!==null;")
+        assert js("return ['一阶摆','二阶摆','三阶摆','四阶摆','五阶摆'].every((label,i)=>document.querySelector('#orders [data-order=\"'+(i+1)+'\"]').textContent===label)&&document.querySelector('#open-routes').closest('.experiment-bar')!==null;")
         driver.find_element(By.CSS_SELECTOR,'#speed-toggle').click()
         js("let i=document.querySelector('#speed');i.value=10;i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));return true;")
         driver.find_element(By.CSS_SELECTOR,'#speed-toggle').click()

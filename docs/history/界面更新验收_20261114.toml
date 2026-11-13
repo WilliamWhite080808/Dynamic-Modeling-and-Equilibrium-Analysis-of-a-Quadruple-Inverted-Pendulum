@@ -1,0 +1,20 @@
+version = "20261114-light-v2"
+previous_version_preserved = true
+trajectory_snapshot_changed = false
+fifth_directions = 982
+matrix_entry_top_primary = true
+full_order_labels = true
+pose_choices_below_scene = true
+actual_pointer_matrix_and_transfer = true
+normal_web_exe = true
+normal_desktop_exe_visible = true
+visual_inspection = true
+default_speed = 1
+
+[web]
+bytes = 278784603
+sha256 = "b24d1b34fa62ca046142d9df351c221a890afda6c5e643bdb61a95afe0f9ef42"
+
+[desktop]
+bytes = 279029206
+sha256 = "989f4c5114ee634c0747c8186d7dab31292833905f4869976cfc8b9dd50624f0"

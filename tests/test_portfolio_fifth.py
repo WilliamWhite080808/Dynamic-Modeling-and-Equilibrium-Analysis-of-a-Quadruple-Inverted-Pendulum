@@ -23,6 +23,32 @@ def test_acceptance_requires_exact_local_physics_and_worker_receipt(tmp_path,mon
     atomic(path,dict(sha256='current',local_physics_and_worker_accepted=True));assert accepted(case)
     row['status']='retry_pending';assert not accepted(case)
 
+
+def test_candidate_gate_excludes_other_methods_times_out_and_releases(tmp_path,monkeypatch):
+    monkeypatch.setattr(portfolio_fifth.transitions,'ROOT',tmp_path/'equilibrium_transitions')
+    case=dict(key='5-UUDUD-DDDDD')
+    with portfolio_fifth.certification_lock(case):
+        with pytest.raises(TimeoutError):
+            with portfolio_fifth.certification_lock(case,timeout=.01):
+                pytest.fail('simultaneous candidate publication')
+    with pytest.raises(ValueError):
+        with portfolio_fifth.certification_lock(case):
+            raise ValueError('replay failed')
+    with portfolio_fifth.certification_lock(case,timeout=.01):
+        pass
+
+
+def test_candidate_gate_does_not_steal_an_old_unverified_owner(tmp_path,monkeypatch):
+    monkeypatch.setattr(portfolio_fifth.transitions,'ROOT',tmp_path/'equilibrium_transitions')
+    case=dict(key='5-UUDUD-DDDDD');owner=tmp_path/'portfolio/locks-v2'/case['key']/'.write.lockdir'
+    owner.mkdir(parents=True)
+    import os
+    os.utime(owner,(0,0))
+    with pytest.raises(TimeoutError):
+        with portfolio_fifth.certification_lock(case,timeout=.01):
+            pytest.fail('stale timestamp must not authorize stealing a lock')
+    assert owner.is_dir()
+
 def test_maui_planner_respects_cpu_memory_time_and_hundred_core_limit():
     spec=importlib.util.spec_from_file_location('portfolio_admin',Path(__file__).resolve().parents[1]/'cluster/portfolio_admin.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
     text='cu14 100 16384 0 0 INFINITY\ncu15 100 999999 0 0 01:00:00\ncu16 100 999999 0 0 1:00:00:00'
