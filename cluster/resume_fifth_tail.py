@@ -1,15 +1,21 @@
 """Remote-only checkpoint continuation, no duplicate jobs, <=150 cores."""
 from pathlib import Path
-import json,subprocess,time,re
+import argparse,json,subprocess,time,re
 
 root=Path('/data/wangqm/hmy/pendulum5_20261112')
 assert root.resolve()==root and root.parent==Path('/data/wangqm/hmy')
 qstat='/opt/tsce4/torque6/bin/qstat'
 qsub='/opt/tsce4/torque6/bin/qsub'
-path=root/'job.json';job=json.loads(path.read_text())
+parser=argparse.ArgumentParser();parser.add_argument('--only-shards');args=parser.parse_args()
+selected=set(map(int,args.only_shards.split(','))) if args.only_shards is not None else None
+assert selected is None or selected and selected.issubset(set(range(8))),'Invalid shard selection'
+path=root/'job.json';job=json.loads(path.read_text());live=set()
 for old in job['jobs']:
     p=subprocess.run([qstat,'-f',old['job_id']],stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
-    assert p.returncode and 'Unknown Job Id' in p.stderr,'A previous job still exists; inspect instead of duplicating'
+    if p.returncode:
+        assert 'Unknown Job Id' in p.stderr,'Cannot establish previous job state'
+    else:live.add(old['shard'])
+assert not live if selected is None else not live.intersection(selected),'A selected previous job still exists; inspect instead of duplicating'
 allrows=json.loads((root/'equilibrium_transitions/status.json').read_text())['entries']
 keys=sorted(k for k,r in allrows.items() if r['order']==5)
 assert len(keys)==992
@@ -17,6 +23,7 @@ nodes={0:'cu14',1:'cu31',2:'cu15',3:'cu16',4:'cu19',5:'cu30',6:'cu20',7:'cu15'}
 stamp=int(time.time());(root/('job-before-tail-'+str(stamp)+'.json')).write_bytes(path.read_bytes())
 allocations=[]
 for old in job['jobs']:
+    if selected is not None and old['shard'] not in selected:continue
     shard=old['shard'];pending=[]
     for k in keys[shard::8]:
         certificate=root/'equilibrium_transitions/certificates'/(k+'.json')
@@ -33,8 +40,10 @@ for old in job['jobs']:
     assert rounds,'No round checkpoint marker for shard '+str(shard)
     start=old.get('start_round',0)+old.get('rounds',4) if completed else max(old.get('start_round',0),int(rounds[-1])-1)
     allocations.append((old,shard,pending,cpus,start,completed))
-assert sum(x[3] for x in allocations)<=150
+assert sum(x.get('workers',8) for x in job['jobs'] if x['shard'] in live)+sum(x[3] for x in allocations)<=150
 for old,shard,pending,cpus,start,completed in allocations:
+    check=subprocess.run([qstat,'-f',old['job_id']],stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
+    assert check.returncode and 'Unknown Job Id' in check.stderr,'Selected previous job must remain absent before submission'
     ident=subprocess.check_output([qsub,'-N','pend5-tail-'+str(shard),'-l','nodes='+nodes[shard]+':ppn='+str(cpus)+',mem='+('64gb' if cpus>8 else '32gb')+',walltime=08:00:00',
         '-o',str(root/('pbs-tail-'+str(shard)+'-'+str(stamp)+'.log')),'-d',str(root),
         '-v','PENDULUM_SHARD_INDEX='+str(shard)+',PENDULUM_SHARDS=8,PENDULUM_START_ROUND='+str(start)+',PENDULUM_WORKERS='+str(cpus)+',TMPDIR='+str(root/'tmp'),str(root/'fifth-order-tail.pbs')],cwd=str(root),universal_newlines=True).strip()
