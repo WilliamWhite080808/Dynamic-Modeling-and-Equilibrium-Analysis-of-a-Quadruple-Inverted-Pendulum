@@ -8,7 +8,14 @@ def test_tail_search_varies_reference_margin_inside_the_same_actuator_limit():
     assert fractions=={.66,.8,.9} and max(fractions)<1
     assert search_duration(5,0,32,0)==7
     assert search_duration(5,7,32,0)<=11
-    assert search_duration(5,7,32,17)==13
+    assert search_duration(5,7,32,17)==15
+
+
+def test_persistent_fifth_order_failures_get_longer_horizons_without_changing_early_search():
+    from triple_pendulum.precompute_equilibria import search_duration
+    assert {search_duration(5,7,32,r) for r in (12,16,20)}=={13.,15.,17.}
+    assert all(search_duration(5,a,32,r)<=11 for r in range(40) for a in range(6))
+    assert all(search_duration(n,7,32,r)<=13 for n in range(1,5) for r in range(40))
 
 
 @pytest.mark.parametrize('changed',range(1,7))

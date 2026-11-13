@@ -20,6 +20,8 @@ def force_fraction_for(attempt,round_index):
 
 def search_duration(n,attempt,windings,round_index):
     limit=13. if round_index>=4 and attempt>=6 else 11.
+    if n>=5 and round_index>=12 and attempt>=6:
+        limit=(13.,15.,17.)[(round_index//4)%3]
     return min(n+2.+2*(attempt//windings)+round_index,limit)
 
 def winding_for(windings,attempt,round_index):
