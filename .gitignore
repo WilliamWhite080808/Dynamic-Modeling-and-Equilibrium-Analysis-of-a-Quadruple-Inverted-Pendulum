@@ -47,6 +47,7 @@ Thumbs.db
 !/results/fifth-order-complete.json
 !/results/certified-bank-manifest.json
 !/results/desktop-share-acceptance.json
+!/results/dependency-prune-acceptance.json
 !/results/recovery-audit.json
 !/results/recovery-stress-audit.json
 !/results/recovery-worker-audit.json

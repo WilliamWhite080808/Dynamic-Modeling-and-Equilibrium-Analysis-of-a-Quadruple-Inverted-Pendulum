@@ -1,0 +1,259 @@
+{
+  "passed": true,
+  "variant": "isolated SciPy 1.11.4 application fork",
+  "share": {
+    "file": "dist\\极简实验\\桌面分享包.zip",
+    "bytes": 88546072,
+    "sha256": "6cb7d6fcb301da63ef964b9d415f2159940dd5f87eb00ec78f08ca49a5cadf9d",
+    "crc_passed": true
+  },
+  "baseline_share_bytes": 97185619,
+  "share_saved_bytes": 8639547,
+  "runtime_before_bytes": 39569611,
+  "runtime_after_bytes": 30932317,
+  "runtime_sha256": "dc902f86d6b62cd61d3354b28521e51af5d91924fea235f8778be1e03d1c5d6a",
+  "removed_module_level_definitions": 102,
+  "removed_files": 785,
+  "removed_file_bytes": 45639493,
+  "retained_ast_check": {
+    "application": "PendulumLab",
+    "upstream": "SciPy 1.11.4",
+    "variant": "dependency-closure-1",
+    "functions_removed": 102,
+    "retained_definition_asts_checked": 151,
+    "retained_numerical_bodies_unchanged": true,
+    "report_sha256": "7504424b31282a14571f8016739c2f54d46cf956a7ecaa74cf292930cda6ac79",
+    "license": "Original SciPy BSD license retained in scipy dist-info"
+  },
+  "numeric_probes": {
+    "probe-baseline": {
+      "passed": true,
+      "designs": 124,
+      "observer_cases": 36,
+      "actual_sparse_planner": true,
+      "fresh_ipopt_hanging_swingup": true,
+      "verification": {
+        "final_state": [
+          -1.1207554562524627e-08,
+          6.283185305358311,
+          1.3835182388567993e-08,
+          2.1898813542997852e-09
+        ],
+        "final_angle_deg": 1.043514037661979e-07,
+        "max_cart": 0.9010960518483229,
+        "max_force": 26.454942658242782,
+        "max_force_rate": 287.18258032404225,
+        "settled_at": 4.984000000000001,
+        "final_stable": true,
+        "max_tracking_error": 3.39535674006879e-05
+      },
+      "numeric_sha256": "a8d30d3ed2f938bcf29005699432f81fb8c0d1e37f022aff7af043197636e8e2",
+      "seconds": 10.687000000005355,
+      "interpreter": "E:\\倒立摆\\results\\dependency-prune\\baseline\\runtime\\python.exe"
+    },
+    "probe-reduced": {
+      "passed": true,
+      "designs": 124,
+      "observer_cases": 36,
+      "actual_sparse_planner": true,
+      "fresh_ipopt_hanging_swingup": true,
+      "verification": {
+        "final_state": [
+          -1.1207554562524627e-08,
+          6.283185305358311,
+          1.3835182388567993e-08,
+          2.1898813542997852e-09
+        ],
+        "final_angle_deg": 1.043514037661979e-07,
+        "max_cart": 0.9010960518483229,
+        "max_force": 26.454942658242782,
+        "max_force_rate": 287.18258032404225,
+        "settled_at": 4.984000000000001,
+        "final_stable": true,
+        "max_tracking_error": 3.39535674006879e-05
+      },
+      "numeric_sha256": "a8d30d3ed2f938bcf29005699432f81fb8c0d1e37f022aff7af043197636e8e2",
+      "seconds": 10.610000000000582,
+      "interpreter": "E:\\倒立摆\\results\\dependency-prune\\runtime\\python.exe"
+    },
+    "probe-closure": {
+      "passed": true,
+      "designs": 124,
+      "observer_cases": 36,
+      "actual_sparse_planner": true,
+      "fresh_ipopt_hanging_swingup": true,
+      "verification": {
+        "final_state": [
+          -1.1207554562524627e-08,
+          6.283185305358311,
+          1.3835182388567993e-08,
+          2.1898813542997852e-09
+        ],
+        "final_angle_deg": 1.043514037661979e-07,
+        "max_cart": 0.9010960518483229,
+        "max_force": 26.454942658242782,
+        "max_force_rate": 287.18258032404225,
+        "settled_at": 4.984000000000001,
+        "final_stable": true,
+        "max_tracking_error": 3.39535674006879e-05
+      },
+      "numeric_sha256": "a8d30d3ed2f938bcf29005699432f81fb8c0d1e37f022aff7af043197636e8e2",
+      "seconds": 10.280999999988126,
+      "interpreter": "E:\\倒立摆\\results\\dependency-prune\\runtime\\python.exe"
+    },
+    "probe-trimmed": {
+      "passed": true,
+      "designs": 124,
+      "observer_cases": 36,
+      "actual_sparse_planner": true,
+      "fresh_ipopt_hanging_swingup": true,
+      "verification": {
+        "final_state": [
+          -1.1207554562524627e-08,
+          6.283185305358311,
+          1.3835182388567993e-08,
+          2.1898813542997852e-09
+        ],
+        "final_angle_deg": 1.043514037661979e-07,
+        "max_cart": 0.9010960518483229,
+        "max_force": 26.454942658242782,
+        "max_force_rate": 287.18258032404225,
+        "settled_at": 4.984000000000001,
+        "final_stable": true,
+        "max_tracking_error": 3.39535674006879e-05
+      },
+      "numeric_sha256": "a8d30d3ed2f938bcf29005699432f81fb8c0d1e37f022aff7af043197636e8e2",
+      "seconds": 10.156000000002678,
+      "interpreter": "E:\\倒立摆\\results\\dependency-prune\\runtime\\python.exe"
+    }
+  },
+  "full_bank": {
+    "passed": true,
+    "pairs": 651,
+    "directions": 1302,
+    "original_hashes_unchanged": true,
+    "seconds": 121.03100000000268
+  },
+  "full_bank_report_sha256": "7f221830957e9324ccd4f16a534853c391d629f413fb61a7cf3bbbb52e5923be",
+  "native": {
+    "passed": true,
+    "archive_bytes": 88546072,
+    "archive_sha256": "6cb7d6fcb301da63ef964b9d415f2159940dd5f87eb00ec78f08ca49a5cadf9d",
+    "crc_and_all_member_bytes_passed": true,
+    "folder": "E:\\倒立摆\\results\\dependency-prune\\acceptance\\中文 空格\\桌面版",
+    "cold_start_seconds": 8.422000000005937,
+    "url": "http://127.0.0.1:8766",
+    "ordinary_exe": true,
+    "driver_navigation": false,
+    "window": {
+      "pid": 74360,
+      "title": "倒立摆实验室",
+      "visible": true,
+      "hwnd": 336408
+    },
+    "actual_page_navigation_completed": true,
+    "runtime_auto_expanded": true,
+    "isolated_path_and_pythonhome": true,
+    "requires_installation": false,
+    "close_stops_own_backend": true
+  },
+  "browser": {
+    "passed": true,
+    "entry": "E:\\倒立摆\\results\\dependency-prune\\acceptance\\中文 空格\\桌面版\\倒立摆.exe",
+    "browser": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+    "url": "http://127.0.0.1:8766",
+    "real_exe_opened_page_without_driver_navigation": true,
+    "orders_tested": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "proxy_isolated": true,
+    "order_above_scene": true,
+    "poses_below_scene": true,
+    "lower_pose_real_pointer_click": true,
+    "default_speed": 1,
+    "refresh_resets_speed_to_one": true,
+    "startup_seconds": 7.671999999991385
+  },
+  "early_close": {
+    "closed_before_page_navigation": true,
+    "own_backend_exited": true,
+    "actual_exe": "E:\\倒立摆\\results\\dependency-prune\\early-app",
+    "host_exited": true,
+    "passed": true
+  },
+  "custom_api": {
+    "passed": true,
+    "initial": [
+      0.0,
+      0.05,
+      0.0,
+      0.0
+    ],
+    "verification": {
+      "final_state": [
+        -2.05750477782296e-16,
+        -2.2201444609339166e-16,
+        1.3849938452067376e-16,
+        -1.5123139155616943e-16
+      ],
+      "final_angle_deg": 0.0,
+      "max_cart": 0.06269466137009314,
+      "max_force": 5.533529193687889,
+      "max_force_rate": 500.0,
+      "settled_at": 2.242,
+      "final_stable": true,
+      "max_tracking_error": 0.0
+    },
+    "source": "耗散恢复 + 轨迹接入",
+    "repository_id": "d18107b9324aeb194006bb2b",
+    "seconds": 1.2039999999979045,
+    "app": "E:\\倒立摆\\results\\dependency-prune\\acceptance\\中文 空格\\桌面版\\程序文件"
+  },
+  "packed_solver": {
+    "passed": true,
+    "interpreter": "E:\\倒立摆\\results\\dependency-prune\\acceptance\\隔离缓存\\runtime-dc902f86d6b62cd61d3354b28521e51af5d91924fea235f8778be1e03d1c5d6a\\runtime\\python.exe",
+    "numba_imported": false,
+    "rhs_random_cases": 10,
+    "max_absolute_rhs_difference": 7.815970093361102e-14,
+    "orders_analyzed": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "fresh_ipopt_hanging_swingup": true,
+    "solver_seconds": 1.9679999999934807,
+    "verification": {
+      "final_state": [
+        -1.1207554562524627e-08,
+        6.283185305358311,
+        1.3835182388567993e-08,
+        2.1898813542997852e-09
+      ],
+      "final_angle_deg": 1.043514037661979e-07,
+      "max_cart": 0.9010960518483229,
+      "max_force": 26.454942658242782,
+      "max_force_rate": 287.18258032404225,
+      "settled_at": 4.984000000000001,
+      "final_stable": true,
+      "max_tracking_error": 3.39535674006879e-05
+    },
+    "v4_first_index_rebuilt": true,
+    "v4_manual_activation": true,
+    "v4_broken_index_rebuilt": true
+  },
+  "baseline_all_files_unchanged": true,
+  "baseline_file_count": 716,
+  "scope_limits": [
+    "Windows machine under test, not every Windows release",
+    "Numeric probes and retained definitions do not prove all possible inputs",
+    "Opaque native math binaries retained intact; no function-level native relinking"
+  ],
+  "evidence": "results/dependency-prune",
+  "source_report_sha256": "7504424b31282a14571f8016739c2f54d46cf956a7ecaa74cf292930cda6ac79"
+}
