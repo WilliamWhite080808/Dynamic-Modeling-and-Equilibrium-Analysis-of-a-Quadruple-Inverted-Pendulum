@@ -53,7 +53,8 @@ def unpack(data,n,source,target,parameters):
     if not p.get('final_stable') or p['max_cart']>=parameters['rail']*.96 or p['max_force']>parameters['max_force']+1e-6 or p['max_force_rate']>500+1e-6 or p.get('max_tracking_error',float('inf'))>=3:raise ValueError('物理验收未通过')
     if worker and (not worker.get('individual') or worker.get('rail_contacts')!=0 or worker.get('live_planner_requests')!=0):raise ValueError('Worker 验收未通过')
     if data.get('direct',{}).get('passed') is False:raise ValueError('直达验收未通过')
-    plan.update(success=True,parameters=parameters,verification=p,pattern=target,transition=dict(order=n,source=source,target=target),force_rate=500.,strict_rest=True,wall_seconds=0.,source='双向轨迹插件 · 无损控制参考')
+    plan.update(success=True,parameters=parameters,verification=p,pattern=target,transition=dict(order=n,source=source,target=target),force_rate=500.,strict_rest=True,wall_seconds=0.,source='精简控制参考 · 已重新验收' if data.get('lossy') else '双向轨迹插件 · 无损控制参考')
+    if data.get('lossy'):plan['lossy']=True
     if worker:plan['worker_verification']=worker
     if 'direct' in data:plan['direct_quality']=data['direct']
     return plan
@@ -146,7 +147,7 @@ class MotionStore:
                         self.cached_document(previous);files[path.name]=previous;continue
                     if unchanged:doc=self.cached_document(previous);params=previous['parameters']
                     else:doc,params=self.validate(raw,model)
-                    compact=read_toml(raw).get('v') in (3,4) if not raw.lstrip().startswith(b'{') else False
+                    compact=read_toml(raw).get('v') in (3,4,5) if not raw.lstrip().startswith(b'{') else False
                     cached=raw if compact else gzip.compress(encoded(doc),compresslevel=3,mtime=0);cache_sha=hashlib.sha256(cached).hexdigest();ext='.toml' if compact else '.json.gz';target=self.cache/(cache_sha+ext)
                     if not target.exists() or hashlib.sha256(target.read_bytes()).hexdigest()!=cache_sha:target.write_bytes(cached)
                     directions={k:{x:doc[k][x] for x in ('runtime_sha256','T','proof')} for k in ('ab','ba')}

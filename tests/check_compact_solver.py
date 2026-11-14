@@ -34,7 +34,8 @@ def main():
     assert store.refresh()['orders']==[1,2]
     store.index.write_text('{broken');rebuilt=MotionStore(test);assert rebuilt.orders()==[1,2]
     assert list((test/'.cache').glob('trajectory-index.bad-*.json'))
-    result.update(v4_first_index_rebuilt=True,v4_manual_activation=True,v4_broken_index_rebuilt=True)
+    from triple_pendulum.motion_text import loads
+    result.update(plugin_format_version=loads((app/'motions/1_D_U.toml').read_bytes())['v'],first_index_rebuilt=True,manual_activation=True,broken_index_rebuilt=True)
     assert not result['numba_imported'];output.write_text(json.dumps(result,indent=2),encoding='utf8');print(json.dumps(result),flush=True)
 
 if __name__=='__main__':main()

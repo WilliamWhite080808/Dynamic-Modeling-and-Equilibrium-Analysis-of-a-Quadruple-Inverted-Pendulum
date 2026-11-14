@@ -55,6 +55,9 @@ def read_motion(raw):
     text=raw.decode('utf-8-sig') if isinstance(raw,bytes) else raw
     if text.lstrip().startswith('{'):return json.loads(text)
     doc=loads(text)
+    if doc.get('v')==5:
+        from .motion_lossy import expand
+        return expand(doc)
     if doc.get('v')==4:
         from .motion_recipe import expand
         return expand(doc)

@@ -48,6 +48,8 @@ Thumbs.db
 !/results/certified-bank-manifest.json
 !/results/desktop-share-acceptance.json
 !/results/dependency-prune-acceptance.json
+!/results/supercompact-acceptance.json
+!/results/supercompact-sequence.json
 !/results/recovery-audit.json
 !/results/recovery-stress-audit.json
 !/results/recovery-worker-audit.json

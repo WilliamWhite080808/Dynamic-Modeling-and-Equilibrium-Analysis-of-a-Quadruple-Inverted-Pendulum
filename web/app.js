@@ -458,7 +458,7 @@ async function startTransfer(destination){
     if(!response.ok)throw Error((await response.json()).detail||'无法加载转场');
     const result=await response.json();if(gen!==generation||token!==transferToken)return;
     pendingTransfer={...result,target:destination,source,request_id:token};
-    worker.postMessage({type:'transition',design:result.design,plan:result.plan,request_id:token,loop:!cruise});
+    worker.postMessage({type:'transition',design:result.design,plan:result.plan,request_id:token,loop:!cruise,sequence:!!cruise});
   }catch(error){if(gen===generation&&token===transferToken){transferBusy=false;pendingTransfer=null;cruise=null;goalOptions(n,source);setNotice(String(error.message||error),true);}}
 }
 async function playTransfer(source,destination,{tour=false}={}){
@@ -476,7 +476,7 @@ async function playTransfer(source,destination,{tour=false}={}){
     const response=await fetch('/api/transition',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({parameters,source,target:destination,jump_to_start:true})});
     if(!response.ok)throw Error((await response.json()).detail||'路径加载失败');
     const result=await response.json();if(gen!==generation||token!==transferToken)return;
-    pendingTransfer={...result,target:destination,source,request_id:token};worker.postMessage({type:'play-transition',design:result.design,plan:result.plan,request_id:token,loop:!tour});
+    pendingTransfer={...result,target:destination,source,request_id:token};worker.postMessage({type:'play-transition',design:result.design,plan:result.plan,request_id:token,loop:!tour,sequence:!!tour});
   }catch(error){if(gen===generation&&token===transferToken){transferBusy=false;pendingTransfer=null;cruise=null;setNotice(error.message,true);}}
 }
 function updateTransferUI(s){

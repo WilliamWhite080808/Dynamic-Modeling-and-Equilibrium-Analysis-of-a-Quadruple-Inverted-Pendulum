@@ -109,7 +109,11 @@ function advance(){
   time+=stepSize;ticks++;
   if(ticks%recordingStride===0){recording.push([time,...state,applied]);if(recording.length>6000){recording=recording.filter((_,i)=>i%2===0);recordingStride*=2;}}
   const maxAngle=Math.max(...state.slice(1,model.d).map((v,i)=>Math.abs(wrap(v-model.target_angles[i]))));
-  if(maxAngle<0.5*Math.PI/180&&Math.max(...state.slice(model.d).map(Math.abs))<0.03&&Math.abs(state[0]-target)<0.03)stable+=stepSize;else stable=0;
+  // A five-link hot hand-off needs a much tighter capture basin than the
+  // display's ordinary 0.5-degree balance indicator. Count its same five
+  // simulation seconds only after real integrated motion enters that basin.
+  const strictCapture=transitionInfo?.strict_capture===true;
+  if(maxAngle<(strictCapture?1e-5:0.5*Math.PI/180)&&Math.max(...state.slice(model.d).map(Math.abs))<(strictCapture?1e-4:0.03)&&Math.abs(state[0]-target)<(strictCapture?2e-4:0.03))stable+=stepSize;else stable=0;
   if(stable>=2&&!successSent){successSent=true;if(!seeking)postMessage({type:'success-captured',epoch,parameters:model.p,target_angles:model.target_angles,frames:recording.map(r=>[...r]),sample_dt:stepSize*recordingStride,settled_at:time-stable,target});}
   if(stable===0&&successSent){successSent=false;}
   if(ticks%50===0){history.push([time,state[0],...state.slice(1,model.d),applied,model.energy(state),Math.hypot(...state.map((v,i)=>v-observer.x[i]))]);if(history.length>2400)history.shift();}
@@ -137,6 +141,7 @@ onmessage=e=>{
     sensor='full_state';mode='auto';noise=0;reset(m.design,m.plan.initial);
     observer.x=[...state];plan=m.plan;forceRate=plan.force_rate||0;planStart=0;
     stage='swing';running=true;stable=0;transitionInfo={...plan.transition,start_time:0,duration:plan.duration};
+    if(m.sequence&&plan.lossy&&model.n>=5)transitionInfo.strict_capture=true;
     rememberTrajectory(m.design,plan,!!m.loop);
     lastReason=`已跳转到起点 ${plan.transition.source.replaceAll('U','↑').replaceAll('D','↓')}，正在执行稳态转换`;
     postMessage({type:'transition-started',transition:transitionInfo,jumped:true,request_id:m.request_id,epoch,time});
@@ -153,6 +158,7 @@ onmessage=e=>{
     model=new Physics(m.design);sensor='full_state';observer=new Estimate(model,sensor,kind);observer.x=[...state];
     mode='auto';noise=0;target=0;plan=m.plan;forceRate=plan.force_rate||0;planStart=time;stage='swing';planning=false;settling=false;running=true;stable=0;
     transitionInfo={...plan.transition,start_time:time,duration:plan.duration};maxForceRate=0;
+    if(m.sequence&&plan.lossy&&model.n>=5)transitionInfo.strict_capture=true;
     rememberTrajectory(m.design,plan,!!m.loop);
     successSent=false;recordingStride=10;recording=[[time,...state,force]];
     lastReason=`稳态直接转场 ${source.replaceAll('U','↑').replaceAll('D','↓')} → ${plan.transition.target.replaceAll('U','↑').replaceAll('D','↓')} · 不复位`;
