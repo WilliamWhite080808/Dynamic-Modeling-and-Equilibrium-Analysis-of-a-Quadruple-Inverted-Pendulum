@@ -255,5 +255,10 @@
     "Opaque native math binaries retained intact; no function-level native relinking"
   ],
   "evidence": "results/dependency-prune",
-  "source_report_sha256": "7504424b31282a14571f8016739c2f54d46cf956a7ecaa74cf292930cda6ac79"
+  "source_report_sha256": "7504424b31282a14571f8016739c2f54d46cf956a7ecaa74cf292930cda6ac79",
+  "qa_cleanup": {
+    "duplicate_bytes_removed": 1173017885,
+    "test_records_preserved": true,
+    "retained_runtime_archive": "results/dependency-prune/runtime-pruned.7z"
+  }
 }
