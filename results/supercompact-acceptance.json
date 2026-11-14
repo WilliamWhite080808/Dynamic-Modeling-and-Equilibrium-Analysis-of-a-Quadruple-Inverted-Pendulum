@@ -10600,5 +10600,47 @@
     "synthetic_qa_recordings_preserved": true,
     "original_user_records_untouched": true,
     "public_folder_contains_no_extra_zip": true
-  }
+  },
+  "clean_cache_regeneration": {
+    "passed": true,
+    "cases": [
+      {
+        "file": "1_D_U",
+        "direction": "ab",
+        "sha256": "b06381cbcea7a3f4d5410b9bf44f8e5401f2bff7917a5732e41afd2bec3892ca"
+      },
+      {
+        "file": "1_D_U",
+        "direction": "ba",
+        "sha256": "ff44bd9ec160c91bfa7932e0bdfc9b505bd2fba0adccdb9280dcee89391bf6e7"
+      },
+      {
+        "file": "3_UDD_UDU",
+        "direction": "ab",
+        "sha256": "4e1f1325922b942b3e37fc33d2143cff6fc5cc291a937f3d6af54c8fecc57e96"
+      },
+      {
+        "file": "3_UDD_UDU",
+        "direction": "ba",
+        "sha256": "1dc7e309af851a8782e100cb2ad5046743e37336e88dcebb0bad26d1f19f4bbd"
+      },
+      {
+        "file": "5_DDDDD_UUUUU",
+        "direction": "ab",
+        "sha256": "cd82fc5d9ec2d88fe0a2cd40bd236f2db741bf5ef4cfc4534c396c6c794987c3"
+      },
+      {
+        "file": "5_DDDDD_UUUUU",
+        "direction": "ba",
+        "sha256": "42ea616b650fd94b5cac6570f709b2c407aee1bebf5bd27d699239457f580ce4"
+      }
+    ],
+    "original_cache_missing": true
+  },
+  "git_source_sha256_lf": {
+    "triple_pendulum/motion_lossy.py": "4cd617200b7ab9abc590b3af9d8cab10ff3234bcfc017c89bf86db321267100d",
+    "web/sim-worker.js": "0f528335322cc1a5fc4c0a13f512f5cdc3ef2464f38ee48f7e63c6ccf187f572",
+    "web/app.js": "1836e82d7dd96968309eafd91e3d5c5a69d7990fb1b03c7af52229b00f2f7475"
+  },
+  "git_sources_equal_after_line_endings": true
 }
